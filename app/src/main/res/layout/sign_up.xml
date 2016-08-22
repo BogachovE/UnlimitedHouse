@@ -1,45 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@drawable/background">
 
     <ImageView
-        android:layout_width="265dp"
-        android:layout_height="123.3dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/imageView"
-        android:background="@drawable/house"
+        android:src="@drawable/house"
+        android:adjustViewBounds="true"
         android:contentDescription="@string/deck"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50.7dp"
-        android:layout_marginLeft="37.7dp"
-        android:layout_marginRight="57.7dp"/>
+        android:layout_marginTop="74dp"
+        android:layout_marginLeft="46dp"
+        android:layout_marginRight="46dp"
+        />
 
 
 
     <EditText
-        android:layout_width="83.3dp"
-        android:layout_height="17dp"
+        android:layout_width="78dp"
+        android:layout_height="22dp"
         android:id="@+id/phonenum"
         android:inputType="phone"
         android:drawableLeft="@drawable/mline"
+        android:layout_centerHorizontal="true"
         android:layout_below="@+id/imageView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="63.7dp"
-        android:layout_marginLeft="133.7dp"
-        android:layout_marginRight="143dp"
+        android:layout_marginTop="54dp"
         android:background="@drawable/artboard"
         />
     <ImageButton
         android:background="@drawable/login"
-        android:layout_width="109dp"
-        android:layout_height="133dp"
-        android:layout_marginLeft="129.7dp"
-        android:layout_marginTop="69.7dp"
+        android:layout_width="63dp"
+        android:layout_height="105dp"
+        android:layout_marginTop="66dp"
         android:id="@+id/imageButton2"
         android:layout_below="@id/phonenum"
-        android:layout_marginRight="152.3dp"
-        android:layout_marginBottom="85.3dp"/>
+        android:layout_centerHorizontal="true"
+
+        />
 
 </RelativeLayout>
