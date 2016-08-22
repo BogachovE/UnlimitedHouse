@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">"UnlmitedHouse "</string>
+    <string name="app_name">"UnlimitedHouse "</string>
+    <string name="deck">sdasd</string>
+    <string name="deck2" />
 </resources>
