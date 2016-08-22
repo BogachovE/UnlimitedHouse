@@ -1,65 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.e.bogachov.unlimitedhouse.MainActivity"
+    android:layout_width="269dp"
+    android:layout_height="448dp"
+    tools:context="com.e.bogachov.unlmitedhouse.MainActivity"
     android:background="@drawable/background">
 
 
 
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="287dp"
+        android:layout_height="124dp"
         android:id="@+id/imageView"
         android:background="@drawable/house"
         android:contentDescription="@string/deck"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="70dp"
-        android:layout_marginLeft="98dp"
-        android:layout_marginRight="94dp"/>
+        android:layout_marginTop="60dp"
+        android:layout_marginLeft="33dp"
+        android:layout_marginRight="33dp"/>
 
     <Button
         android:background="@drawable/backbuttoneng"
-        android:layout_width="215dp"
-        android:layout_height="66dp"
+        android:layout_width="95dp"
+        android:layout_height="28dp"
         android:id="@+id/BtnLogin"
         android:layout_below="@+id/imageView"
-        android:layout_marginLeft="57dp"
-        android:layout_marginTop="75dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="29dp"
        />
 
     <Button
         android:background="@drawable/butnarab"
-        android:layout_width="215dp"
-        android:layout_height="66dp"
+        android:layout_width="95dp"
+        android:layout_height="28dp"
         android:id="@+id/button"
         android:layout_below="@+id/imageView"
         android:layout_alignTop="@+id/BtnLogin"
-        android:layout_alignLeft="@id/BtnLogin"
-        android:layout_marginLeft="326dp"
+
+        android:layout_marginLeft="146dp"
         />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageView2"
-        android:layout_below="@+id/BtnLogin"
-        android:layout_marginTop="21dp"
-        android:layout_marginRight="37dp"
-        android:layout_marginLeft="52dp"
-        android:layout_alignLeft="@id/BtnLogin"
         android:contentDescription="@string/deck2"
-        android:src="@drawable/mline" />
+        android:src="@drawable/mline"
+        android:layout_below="@+id/BtnLogin"
+        android:layout_alignLeft="@+id/imageButton"
+        android:layout_alignStart="@+id/imageButton" />
 
     <ImageButton
         android:background="@drawable/siginup"
-        android:layout_width="225dp"
-        android:layout_height="225dp"
+        android:layout_width="107dp"
+        android:layout_height="107dp"
         android:id="@+id/imageButton"
-        android:layout_alignRight="@+id/BtnLogin"
-        android:layout_alignTop="@id/imageView2"
-        android:layout_marginTop="140dp"/>
+        android:layout_below="@id/imageView2"
+        android:layout_marginTop="64dp"
+        android:layout_marginLeft="17dp"/>
+
+    <ImageButton
+        android:background="@drawable/login"
+        android:layout_width="107dp"
+        android:layout_height="107dp"
+        android:layout_alignTop="@+id/imageButton"
+        android:layout_marginLeft="147dp"/>
 
 
 
