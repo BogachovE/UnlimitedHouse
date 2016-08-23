@@ -24,11 +24,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/phonenum"
         android:inputType="phone"
-        android:text="Phone nomber"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/imageView"
-        android:layout_marginTop="54dp"
-        />
+        android:text="Location"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/imageView"
+        android:layout_alignStart="@+id/imageView" />
 
 
     <ImageButton
@@ -36,11 +35,20 @@
         android:layout_width="63dp"
         android:layout_height="105dp"
         android:layout_marginTop="66dp"
-        android:id="@+id/loginbtn"
+        android:id="@+id/loginBtn"
         android:layout_below="@id/phonenum"
         android:layout_centerHorizontal="true"
 
         />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText"
+        android:text="Hose"
+        android:layout_below="@+id/phonenum"
+        android:layout_alignLeft="@+id/phonenum"
+        android:layout_alignStart="@+id/phonenum" />
 
 
 </RelativeLayout>

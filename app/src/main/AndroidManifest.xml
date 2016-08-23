@@ -15,6 +15,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Signup"
+            android:label="@string/title_activity_signup"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Login" />
+        <activity android:name=".Sms_activity" />
+        <activity android:name=".RegLocation" />
+        <activity android:name=".MainMenu"></activity>
+        <activity android:name=".ShopMenu"></activity>
     </application>
 
 </manifest>

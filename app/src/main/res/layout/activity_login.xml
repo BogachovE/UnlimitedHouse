@@ -36,7 +36,7 @@
         android:layout_width="63dp"
         android:layout_height="105dp"
         android:layout_marginTop="66dp"
-        android:id="@+id/loginbtn"
+        android:id="@+id/loginBtn"
         android:layout_below="@id/phonenum"
         android:layout_centerHorizontal="true"
 
