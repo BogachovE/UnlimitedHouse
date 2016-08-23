@@ -3,7 +3,7 @@ package com.e.bogachov.unlmitedhouse;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainMenu extends AppCompatActivity {
+public class MainMenu extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

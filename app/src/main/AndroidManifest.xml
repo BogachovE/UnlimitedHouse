@@ -22,8 +22,9 @@
         <activity android:name=".Login" />
         <activity android:name=".Sms_activity" />
         <activity android:name=".RegLocation" />
-        <activity android:name=".MainMenu"></activity>
-        <activity android:name=".ShopMenu"></activity>
+        <activity android:name=".MainMenu" />
+        <activity android:name=".ShopMenu" />
+        <activity android:name=".SlideMenu"></activity>
     </application>
 
 </manifest>
