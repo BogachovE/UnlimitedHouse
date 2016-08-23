@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:text="PROFILE"
             android:layout_weight="1"
-            />
+            android:id="@+id/profilebtn" />
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:text="MY ORDERS"
             android:layout_weight="1"
-            />
+            android:id="@+id/ordersbtn" />
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -90,7 +90,7 @@
             android:layout_height="wrap_content"
             android:text="ADD YOUR SERVICE"
             android:layout_weight="1"
-            />
+            android:id="@+id/addservicebtn" />
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -110,7 +110,7 @@
             android:layout_height="wrap_content"
             android:text="CONTACT US"
             android:layout_weight="1"
-            />
+            android:id="@+id/contactbtn" />
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -123,13 +123,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="100dp"
         android:id="@+id/logout">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="LOG OUT"
             android:layout_weight="1"
-            />
+            android:id="@+id/logoutbtn" />
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"

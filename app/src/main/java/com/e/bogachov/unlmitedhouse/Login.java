@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 public class Login extends AppCompatActivity implements View.OnClickListener{
 String personType;
@@ -20,7 +21,12 @@ String personType;
         //Dlia proverki!!!
         //personType = "User";
         personType = "Shop";
+
+
     }
+
+
+
 
     @Override
     public void onClick(View view) {

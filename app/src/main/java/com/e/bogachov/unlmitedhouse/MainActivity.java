@@ -12,7 +12,9 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
@@ -39,15 +41,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         menu.setMenu(R.layout.sidemenu);
         menu.setBehindWidthRes(R.dimen.slidingmenu_behind_width);
 
-        /*String[] items = {"Первый фрагмент","Второй фрагмент"};
-        ((ListView) findViewById(R.id.sidemenu)).setAdapter(
-                new ArrayAdapter<Object>(
-                        this,
-                        R.layout.sidemenu_item,
-                        R.id.text,
-                        items
-                )
-        );*/
+
+
+        //Find View Slide Bar
+        TextView profilebtn = (TextView) findViewById(R.id.profilebtn);
+        TextView ordersbtn = (TextView) findViewById(R.id.ordersbtn);
+        TextView addservicebtn = (TextView) findViewById(R.id.addservicebtn);
+        TextView contactbtn = (TextView) findViewById(R.id.contactbtn);
+        TextView logoutbtn = (TextView) findViewById(R.id.logoutbtn);
+        profilebtn.setOnClickListener(this);
+        ordersbtn.setOnClickListener(this);
+        addservicebtn.setOnClickListener(this);
+        contactbtn.setOnClickListener(this);
+        logoutbtn.setOnClickListener(this);
+
 
         //find view
         ImageButton signbtn = (ImageButton) findViewById(R.id.signbtn);
@@ -86,6 +93,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.arablang:{
 
+                break;
+            }
+    //Slide Menu Buttons
+            case R.id.profile:{
+                Intent goToProfile = new Intent(MainActivity.this,Profile.class);
+                startActivity(goToProfile);
+                break;
+            }
+            case R.id.ordersbtn:{
+                Intent goToOrders = new Intent(MainActivity.this,Orders.class);
+                startActivity(goToOrders);
+                break;
+            }
+            case R.id.addservicebtn:{
+                Intent goToAddservice = new Intent(MainActivity.this,AddService.class);
+                startActivity(goToAddservice);
+                break;
+            }
+            case R.id.contactbtn:{
+                Intent goToContactUs = new Intent(MainActivity.this,ContactUs.class);
+                startActivity(goToContactUs);
+                break;
+            }
+            case R.id.logoutbtn:{
+                // НУЖНО ЗАКОДИТЬ
                 break;
             }
         }

@@ -24,7 +24,11 @@
         <activity android:name=".RegLocation" />
         <activity android:name=".MainMenu" />
         <activity android:name=".ShopMenu" />
-        <activity android:name=".SlideMenu"></activity>
+        <activity android:name=".SlideMenu" />
+        <activity android:name=".Profile" />
+        <activity android:name=".Orders" />
+        <activity android:name=".AddService" />
+        <activity android:name=".ContactUs"></activity>
     </application>
 
 </manifest>
