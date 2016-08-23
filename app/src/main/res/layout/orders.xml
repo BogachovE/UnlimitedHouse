@@ -7,13 +7,14 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.e.bogachov.unlmitedhouse.Orders">
+    tools:context="com.e.bogachov.unlmitedhouse.Orders"
+    android:background="@drawable/background">
 
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/profile_profeile"
+        android:id="@+id/orders_myorders"
         android:text="MY ORDERS"
         android:layout_marginTop="15dp"/>
 
@@ -21,14 +22,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/mline"
-        android:layout_below="@id/profile_profeile"
+        android:layout_below="@id/orders_myorders"
         android:layout_marginTop="5dp"
-        android:id="@+id/profile_line" />
+        android:id="@+id/orders_line" />
 
     <ListView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        
+        android:layout_height="wrap_content"
+        android:layout_below="@id/orders_line">
+
     </ListView>
 
 </RelativeLayout>

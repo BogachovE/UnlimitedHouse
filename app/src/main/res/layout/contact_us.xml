@@ -7,6 +7,86 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.e.bogachov.unlmitedhouse.ContactUs">
+    tools:context="com.e.bogachov.unlmitedhouse.ContactUs"
+    android:background="@drawable/background">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/contact_us_top"
+        android:text="CONTACT US"
+        android:layout_marginTop="15dp"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/mline"
+        android:layout_below="@id/contact_us_top"
+        android:layout_marginTop="5dp"
+        android:id="@+id/contact_us_line" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/contact_us_layout"
+        android:layout_below="@id/contact_us_line"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/contact_us_text"
+            android:text="Bla bla bal blaBla bla bal blaBla bla bal blaBla bla bal blaBla bla ba blaBla bla bal blaBla bla bal blaBla bla bal blaBla bla bal bla Bla bla bal bla Bla bla bal bla Bla bla bal bla Bla bla bal bla Bla bla bal bla Bla bla bal bla"
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/mline"
+            android:layout_marginTop="5dp"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:id="@+id/contact_us_name_layout"
+
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="YOURE NAME"
+                android:id="@+id/contact_us_name_text"
+                />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="   NAME"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/contact_us_name_edit"
+                />
+        </LinearLayout>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/backbuttoneng"
+            android:text="sdsdasdasasdasdasdasdasdasdasdasdas"
+             />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="25dp"/>
+
+
+    </LinearLayout>
+
+
 
 </RelativeLayout>

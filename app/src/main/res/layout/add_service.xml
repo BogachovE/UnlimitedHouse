@@ -3,10 +3,126 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.e.bogachov.unlmitedhouse.AddService">
+    tools:context="com.e.bogachov.unlmitedhouse.Profile"
+    android:background="@drawable/background">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/add_addyourservice"
+        android:text="ADD YOUR SERVICE"
+        android:layout_marginTop="15dp"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/mline"
+        android:layout_below="@id/add_addyourservice"
+        android:layout_marginTop="5dp"
+        android:id="@+id/add_line" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/add_line"
+        android:layout_centerHorizontal="true"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:id="@+id/add_name_layout"
+
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="YOURE NAME"
+                android:id="@+id/add_name_text"
+                />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="   NAME"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/add_name_edit"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:id="@+id/profile_email_layout">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="EMAIL"
+                android:id="@+id/add_email_text"/>
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="   EMAIL@EMAIL.COM"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/add_email_edit"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:id="@+id/add_category_layout">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CHOOSE CATEGORY"
+                android:id="@+id/add_category_text"/>
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="   XXXX-XX"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/add_category_edit"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:id="@+id/add_shop_location_layout">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ENTER SHOP LOCATION"
+                android:id="@+id/add_shop_location_text"/>
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="   XXX"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/add_shop_location_edit"
+                />
+        </LinearLayout>
+        <ImageButton
+            android:background="@drawable/siginup"
+            android:layout_width="107dp"
+            android:layout_height="107dp"
+            android:id="@+id/add_shop_location_btn"
+            android:layout_below="@id/imageView2"
+            android:layout_marginTop="64dp"
+            android:layout_marginLeft="17dp"/>
+    </LinearLayout>
 
 </RelativeLayout>
