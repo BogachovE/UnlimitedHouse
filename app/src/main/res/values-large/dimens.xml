@@ -14,7 +14,7 @@
     <dimen name="liner">59dp</dimen>
     <dimen name="house_width">400dp</dimen>
     <dimen name="house_height">300dp</dimen>
-    <dimen name="house_margin_top">0dp</dimen>
+    <dimen name="house_margin_top">15dp</dimen>
     <dimen name="liner_width">300dp</dimen>
       <!--House-->
 
@@ -53,6 +53,13 @@
     <dimen name="login_btn_width">120dp</dimen>
     <dimen name="login_btn_height">120dp</dimen>
     <!--Login Button-->
+
+    <!-- Sigin Activity-->
+    <dimen name="sign_house_margin_top">300dp</dimen>
+    <dimen name="nextbtn">120dp</dimen>
+    <dimen name="sign_btn_margin_top">60dp</dimen>
+    <dimen name="sign_phonetxt_margin_top">20dp</dimen>
+    <!--Sigin Activity-->
 
 
 

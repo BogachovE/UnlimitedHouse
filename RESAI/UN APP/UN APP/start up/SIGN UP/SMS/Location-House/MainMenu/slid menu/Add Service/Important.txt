@@ -1,0 +1,1 @@
+IF user click on "CHOOSE CATEGORY" Then flow the flow in other pic "1,2,If user select Other's category"

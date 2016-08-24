@@ -116,7 +116,7 @@
                 />
         </LinearLayout>
         <ImageButton
-            android:background="@drawable/siginup"
+            android:background="@drawable/sigin_up"
             android:layout_width="107dp"
             android:layout_height="107dp"
             android:id="@+id/signbtn"

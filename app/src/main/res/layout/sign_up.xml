@@ -5,16 +5,14 @@
     android:background="@drawable/background">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView"
-        android:src="@drawable/house"
-        android:adjustViewBounds="true"
+        android:layout_width="@dimen/house_width"
+        android:layout_height="@dimen/house_height"
+        android:id="@+id/house"
+        android:background="@drawable/house"
         android:contentDescription="@string/deck"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="74dp"
-        android:layout_marginLeft="46dp"
-        android:layout_marginRight="46dp"
+        android:layout_marginTop="@dimen/sign_btn_margin_top"
+
         />
 
 
@@ -22,25 +20,31 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/phonenum"
+        android:id="@+id/phonetxt"
         android:inputType="phone"
-        android:text="Phone nomber"
+        android:text="  PHONE NUMBER"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/imageView"
-        android:layout_marginTop="54dp"
+        android:layout_below="@+id/house"
+        android:layout_marginTop="@dimen/sign_btn_margin_top"
+        android:drawableLeft="@drawable/phone_number"
+        android:textColor="#BBBCBE"
+        android:textColorHint="#BBBCBE"
+        android:backgroundTint="#BBBCBE"
+
+
+
         />
 
 
     <ImageButton
-        android:background="@drawable/login"
-        android:layout_width="63dp"
-        android:layout_height="105dp"
-        android:layout_marginTop="66dp"
-        android:id="@+id/loginbtn"
-        android:layout_below="@id/phonenum"
+        android:background="@drawable/nextbtn"
+        android:layout_width="@dimen/nextbtn"
+        android:layout_height="@dimen/nextbtn"
+        android:id="@+id/nextbtn"
+        android:contentDescription=""
+        android:layout_below="@id/phonetxt"
         android:layout_centerHorizontal="true"
-
-        />
+        android:layout_marginTop="@dimen/sign_btn_margin_top"/>
 
 
 </RelativeLayout>

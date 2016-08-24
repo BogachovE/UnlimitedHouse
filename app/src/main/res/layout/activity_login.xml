@@ -5,16 +5,13 @@
     android:background="@drawable/background">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/house_width"
+        android:layout_height="@dimen/house_height"
         android:id="@+id/imageView"
-        android:src="@drawable/house"
-        android:adjustViewBounds="true"
+        android:background="@drawable/house"
         android:contentDescription="@string/deck"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="74dp"
-        android:layout_marginLeft="46dp"
-        android:layout_marginRight="46dp"
+        android:layout_marginTop="@dimen/house_margin_top"
         />
 
 
