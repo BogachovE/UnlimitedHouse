@@ -1,73 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="269dp"
-    android:layout_height="448dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     tools:context="com.e.bogachov.unlmitedhouse.MainActivity"
     android:background="@drawable/background">
 
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:gravity="center">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="124dp"
-        android:id="@+id/imageView"
-        android:background="@drawable/house"
-        android:contentDescription="@string/deck"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"
-        android:layout_marginLeft="33dp"
-        android:layout_marginRight="33dp"/>
+        <ImageView
+            android:layout_width="@dimen/house_width"
+            android:layout_height="@dimen/house_height"
+            android:id="@+id/imageView"
+            android:background="@drawable/house"
+            android:contentDescription="@string/deck"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/house_margin_top"
 
-    <Button
-        android:background="@drawable/backbuttoneng"
-        android:layout_width="95dp"
-        android:layout_height="28dp"
-        android:id="@+id/englang"
-        android:layout_below="@+id/imageView"
-        android:layout_marginLeft="28dp"
-        android:layout_marginTop="29dp"
-       />
+            />
 
-    <Button
-        android:background="@drawable/butnarab"
-        android:layout_width="95dp"
-        android:layout_height="28dp"
-        android:id="@+id/arablang"
-        android:layout_below="@+id/imageView"
-        android:layout_alignTop="@+id/englang"
+        <ImageView
+            android:layout_width="@dimen/line_width"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView2"
+            android:contentDescription="@string/deck2"
+            android:src="@drawable/mline"
+            android:layout_below="@+id/liner"
+            android:layout_marginTop="@dimen/line_margin_top"
+            android:layout_centerHorizontal="true"/>
 
-        android:layout_marginLeft="146dp"
-        />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/Local_layout_width"
+            android:layout_below="@id/imageView"
+            android:layout_marginTop="@dimen/Local_layout_margin_top"
+            android:gravity="center"
+            android:id="@+id/liner">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView2"
-        android:contentDescription="@string/deck2"
-        android:src="@drawable/mline"
-        android:layout_below="@+id/englang"
-        android:layout_alignLeft="@+id/signbtn"
-        android:layout_alignStart="@+id/signbtn"
-        android:layout_marginTop="30dp"/>
 
-    <ImageButton
-        android:background="@drawable/siginup"
-        android:layout_width="107dp"
-        android:layout_height="107dp"
-        android:id="@+id/signbtn"
-        android:layout_below="@id/imageView2"
-        android:layout_marginTop="64dp"
-        android:layout_marginLeft="17dp"/>
+            <Button
+                android:background="@drawable/butnarab"
+                android:id="@+id/arablang"
+                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/btn_arab_margin_left"
+                android:layout_marginRight="@dimen/btn_arab_margin_right"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
 
-    <ImageButton
-        android:background="@drawable/login"
-        android:layout_width="107dp"
-        android:layout_height="107dp"
-        android:layout_alignTop="@+id/signbtn"
-        android:layout_marginLeft="147dp"
-        android:id="@+id/loginbtn" />
+                />
 
+            <Button
+                android:background="@drawable/backbuttoneng"
+                android:id="@+id/englang"
+                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/btn_eng_margin_left"
+                android:layout_marginRight="@dimen/btn_eng_margin_right"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/login_layout_width"
+            android:gravity="center_horizontal"
+            android:layout_below="@id/imageView2"
+            android:layout_marginTop="@dimen/login_layout_margin_top">
+
+            <ImageButton
+                android:background="@drawable/sigin_up"
+                android:layout_width="@dimen/sign_btn_width"
+                android:layout_height="@dimen/sign_btn_height"
+                android:id="@+id/signbtn"
+                android:layout_marginRight="@dimen/sign_btn_margin_right"
+                />
+
+            <ImageButton
+                android:background="@drawable/login"
+                android:layout_width="@dimen/login_btn_width"
+                android:layout_height="120dp"
+                android:id="@+id/loginbtn"
+                />
+
+        </LinearLayout>
+    </RelativeLayout>
 
 
 </RelativeLayout>

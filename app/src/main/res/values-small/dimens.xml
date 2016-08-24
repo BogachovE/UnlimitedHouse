@@ -1,0 +1,59 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="slidingmenu_behind_width">200dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="nav_header_vertical_spacing">16dp</dimen>
+    <dimen name="nav_header_height">160dp</dimen>
+
+    <!--MainActivity-->
+
+      <!--House-->
+    <dimen name="liner">45dp</dimen>
+    <dimen name="house_width">245dp</dimen>
+    <dimen name="house_height">180dp</dimen>
+    <dimen name="house_margin_top">15dp</dimen>
+    <dimen name="liner_width">300dp</dimen>
+      <!--House-->
+
+      <!-- Line -->
+    <dimen name="line_width">300dp</dimen>
+    <dimen name="line_margin_top">14dp</dimen>
+      <!--Line -->
+
+      <!--Localization Layout-->
+    <dimen name="Local_layout_width">35dp</dimen>
+    <dimen name="Local_layout_margin_top">45dp</dimen>
+      <!--Localization Layout-->
+
+    <!--Biutton localization on arabic-->
+    <dimen name="btn_arab_margin_left">40dp</dimen>
+    <dimen name="btn_arab_margin_right">15dp</dimen>
+    <!--Biutton localization on arabic-->
+
+    <!--Biutton localization on English-->
+    <dimen name="btn_eng_margin_left">15dp</dimen>
+    <dimen name="btn_eng_margin_right">40dp</dimen>
+    <!--Biutton localization on English-->
+
+    <!--Sign Login Layout-->
+    <dimen name="login_layout_width">130dp</dimen>
+    <dimen name="login_layout_margin_top">50dp</dimen>
+    <!--Sign Login Layout-->
+
+    <!--Sign Button-->
+    <dimen name="sign_btn_width">120dp</dimen>
+    <dimen name="sign_btn_height">120dp</dimen>
+    <dimen name="sign_btn_margin_right">30dp</dimen>
+    <!--Sign Button-->
+
+    <!--Login Button-->
+    <dimen name="login_btn_width">120dp</dimen>
+    <dimen name="login_btn_height">120dp</dimen>
+    <!--Login Button-->
+
+
+
+</resources>
