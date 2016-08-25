@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background">
 
+
     <ImageView
         android:layout_width="@dimen/house_width"
         android:layout_height="@dimen/house_height"
@@ -14,7 +15,6 @@
         android:layout_marginTop="@dimen/sign_btn_margin_top"
 
         />
-
 
 
     <EditText
@@ -35,16 +35,14 @@
 
         />
 
-
-    <ImageButton
-        android:background="@drawable/nextbtn"
-        android:layout_width="@dimen/nextbtn"
-        android:layout_height="@dimen/nextbtn"
-        android:id="@+id/nextbtn"
-        android:contentDescription=""
-        android:layout_below="@id/phonetxt"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/sign_btn_margin_top"/>
+<Button
+    android:layout_width="@dimen/sign_btn_width"
+    android:layout_height="@dimen/sign_btn_height"
+    android:background="@drawable/sigin_up"
+    android:layout_below="@id/phonetxt"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="@dimen/sign_btn_margin_top"
+    android:id="@+id/nextbtn"/>
 
 
 </RelativeLayout>

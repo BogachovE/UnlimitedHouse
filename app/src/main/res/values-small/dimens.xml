@@ -57,7 +57,7 @@
     <!-- Sigin Activity-->
     <dimen name="nextbtn">120dp</dimen>
     <dimen name="sign_house_margin_top">50dp</dimen>
-    <dimen name="sign_btn_margin_top">60dp</dimen>
+    <dimen name="sign_btn_margin_top">40dp</dimen>
     <dimen name="sign_phonetxt_margin_top">20dp</dimen>
     <!--Sigin Activity-->
 

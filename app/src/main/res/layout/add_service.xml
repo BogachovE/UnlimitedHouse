@@ -116,7 +116,7 @@
                 />
         </LinearLayout>
         <ImageButton
-            android:background="@drawable/siginup"
+            android:background="@drawable/login"
             android:layout_width="107dp"
             android:layout_height="107dp"
             android:id="@+id/add_shop_location_btn"
