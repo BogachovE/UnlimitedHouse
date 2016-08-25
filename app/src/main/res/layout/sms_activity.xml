@@ -41,7 +41,8 @@
         android:background="@drawable/sigin_up"
         android:layout_below="@id/phonetxt"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/sign_btn_margin_top"/>
+        android:layout_marginTop="@dimen/sign_btn_margin_top"
+        android:id="@+id/nextbtn"/>
 
 
 </RelativeLayout>

@@ -4,51 +4,58 @@
     android:layout_height="match_parent"
     android:background="@drawable/background">
 
+
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView"
-        android:src="@drawable/house"
-        android:adjustViewBounds="true"
+        android:layout_width="@dimen/house_width"
+        android:layout_height="@dimen/house_height"
+        android:id="@+id/house"
+        android:background="@drawable/house"
         android:contentDescription="@string/deck"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="74dp"
-        android:layout_marginLeft="46dp"
-        android:layout_marginRight="46dp"
-        />
+        android:layout_marginTop="@dimen/sign_btn_margin_top"
 
+        />
 
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/phonenum"
+        android:id="@+id/loc_editloc"
         android:inputType="phone"
-        android:text="Location"
-        android:layout_centerVertical="true"
-        android:layout_alignLeft="@+id/imageView"
-        android:layout_alignStart="@+id/imageView" />
-
-
-    <ImageButton
-        android:background="@drawable/login"
-        android:layout_width="63dp"
-        android:layout_height="105dp"
-        android:layout_marginTop="66dp"
-        android:id="@+id/loginBtn"
-        android:layout_below="@id/phonenum"
+        android:text="  PHONE NUMBER"
         android:layout_centerHorizontal="true"
-
-        />
+        android:layout_below="@+id/house"
+        android:layout_marginTop="0dp"
+        android:drawableLeft="@drawable/locationn"
+        android:textColor="#BBBCBE"
+        android:textColorHint="#BBBCBE"
+        android:backgroundTint="#BBBCBE"/>
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
-        android:text="Hose"
-        android:layout_below="@+id/phonenum"
-        android:layout_alignLeft="@+id/phonenum"
-        android:layout_alignStart="@+id/phonenum" />
+        android:id="@+id/loc_house"
+        android:text="  PHONE NUMBER"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/loc_editloc"
+        android:layout_marginTop="0dp"
+        android:drawableLeft="@drawable/house_iconn"
+        android:textColor="#BBBCBE"
+        android:textColorHint="#BBBCBE"
+        android:backgroundTint="#BBBCBE"
+
+
+
+        />
+
+    <Button
+        android:layout_width="@dimen/sign_btn_width"
+        android:layout_height="@dimen/sign_btn_height"
+        android:background="@drawable/sigin_up"
+        android:layout_below="@id/loc_house"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="0dp"
+        android:id="@+id/nextbtn"/>
 
 
 </RelativeLayout>

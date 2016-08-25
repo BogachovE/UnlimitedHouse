@@ -18,8 +18,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".Login" />
-        <activity android:name=".Sms_activity" />
-        <activity android:name=".RegLocation" />
+        <activity android:name=".Sms_activity"
+                  android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".RegLocation"
+                  android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".MainMenu" />
         <activity android:name=".ShopMenu" />
         <activity android:name=".SlideMenu" />
