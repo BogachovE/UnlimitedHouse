@@ -25,7 +25,7 @@
         android:text="  PHONE NUMBER"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/house"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="@dimen/loc_editloc_margin_top"
         android:drawableLeft="@drawable/locationn"
         android:textColor="#BBBCBE"
         android:textColorHint="#BBBCBE"
@@ -38,7 +38,7 @@
         android:text="  PHONE NUMBER"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/loc_editloc"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="@dimen/loc_edithousenum_margin_top"
         android:drawableLeft="@drawable/house_iconn"
         android:textColor="#BBBCBE"
         android:textColorHint="#BBBCBE"
@@ -54,7 +54,7 @@
         android:background="@drawable/sigin_up"
         android:layout_below="@id/loc_house"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="@dimen/loc_btn_margin_top"
         android:id="@+id/nextbtn"/>
 
 

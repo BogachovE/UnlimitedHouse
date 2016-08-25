@@ -61,6 +61,12 @@
     <dimen name="sign_phonetxt_margin_top">20dp</dimen>
     <!--Sigin Activity-->
 
+    <!--Location Activity-->
+    <dimen name="loc_editloc_margin_top">15dp</dimen>
+    <dimen name="loc_edithousenum_margin_top">15dp</dimen>
+    <dimen name="loc_btn_margin_top">20dp</dimen>
+    <!--Location Activity-->
+
 
 
 </resources>

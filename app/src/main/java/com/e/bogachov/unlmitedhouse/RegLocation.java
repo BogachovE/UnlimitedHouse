@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 public class RegLocation extends AppCompatActivity implements View.OnClickListener {
@@ -14,14 +15,14 @@ public class RegLocation extends AppCompatActivity implements View.OnClickListen
         setContentView(R.layout.reg_location);
 
         //find View
-        ImageButton loginBtn = (ImageButton)findViewById(R.id.loginBtn);
+        Button loginBtn = (Button)findViewById(R.id.nextbtn);
         loginBtn.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.loginBtn:{
+            case R.id.nextbtn:{
                 Intent goMainMenu = new Intent(RegLocation.this, MainMenu.class);
                 startActivity(goMainMenu);
             }

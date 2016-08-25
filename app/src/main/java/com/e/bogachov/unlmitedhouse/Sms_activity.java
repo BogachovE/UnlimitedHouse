@@ -22,7 +22,7 @@ public class Sms_activity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.loginbtn :{
+            case R.id.nextbtn :{
                 Intent regLocationIntent = new Intent(Sms_activity.this, RegLocation.class);
                 startActivity(regLocationIntent);
 
