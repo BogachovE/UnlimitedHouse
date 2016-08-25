@@ -1,75 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.e.bogachov.unlmitedhouse.MainMenu"
-    android:background="@drawable/background">
+    android:background="@drawable/background"
+    android:orientation="vertical"
+    >
+
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="100dp"
-        android:layout_height="350dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        >
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:layout_gravity="right">
 
         <ImageView
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/main_right_elements_width"
             android:layout_height="match_parent"
             android:id="@+id/imageView5"
             android:layout_weight="1"
-            android:src="@drawable/beautycateg"/>
+            android:background="@drawable/beautycateg"
+            />
 
         <ImageView
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/main_right_elements_width"
             android:layout_height="match_parent"
             android:id="@+id/imageView6"
             android:layout_weight="1"
-            android:src="@drawable/productivecateg"/>
+            android:background="@drawable/beautycateg"/>
 
         <ImageView
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/main_right_elements_width"
             android:layout_height="match_parent"
             android:id="@+id/imageView7"
-            android:layout_below="@+id/imageView6"
-            android:layout_toLeftOf="@+id/imageView6"
-            android:layout_toStartOf="@+id/imageView6"
             android:layout_weight="1"
-            android:src="@drawable/candycateg"/>
+            android:background="@drawable/productivecateg"/>
+
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="horizontal"
-        android:layout_width="350dp"
-        android:layout_height="100dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true">
+        android:layout_width="match_parent"
+        android:layout_height="135dp"
+        android:id="@+id/down_menu"
+        android:layout_weight="1">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/imageView3"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_weight="1"
-            android:src="@drawable/otherscateg"/>
+            android:background="@drawable/otherscateg"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentRight="false"
+            android:layout_toLeftOf="@+id/imageView4"/>
 
         <ImageView
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/main_right_elements_width"
             android:layout_height="match_parent"
             android:id="@+id/imageView4"
-            android:layout_below="@+id/imageView3"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_weight="2"
-            android:src="@drawable/housecateg"/>
-    </LinearLayout>
-</RelativeLayout>
+            android:background="@drawable/housecateg"
+            android:layout_alignParentRight="true"
+            />
+    </RelativeLayout>
+
+</LinearLayout>

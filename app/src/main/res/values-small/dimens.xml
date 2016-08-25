@@ -67,6 +67,11 @@
     <dimen name="loc_btn_margin_top">20dp</dimen>
     <!--Location Activity-->
 
+    <!--MainMenu-->
+    <dimen name="main_right_elements_width">120dp</dimen>
+
+    <!--MainMenu-->
+
 
 
 </resources>
