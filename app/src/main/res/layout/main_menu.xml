@@ -30,7 +30,7 @@
             android:layout_height="match_parent"
             android:id="@+id/imageView6"
             android:layout_weight="1"
-            android:background="@drawable/beautycateg"/>
+            android:background="@drawable/candycateg"/>
 
         <ImageView
             android:layout_width="@dimen/main_right_elements_width"

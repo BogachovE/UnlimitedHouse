@@ -67,6 +67,31 @@
     <dimen name="loc_btn_margin_top">20dp</dimen>
     <!--Location Activity-->
 
+    <!--Slide Menu-->
+    <dimen name="slide_house_width">190dp</dimen>
+    <dimen name="Slide_house_height">120dp</dimen>
+    <dimen name="Slide_house_margin_top">20dp</dimen>
+    <dimen name="slide_hardline_margin_top">20dp</dimen>
+    <dimen name="slide_hardline_width">300dp</dimen>
+    <dimen name="slide_hardline_margin_left">10dp</dimen>
+    <dimen name="slide_hardline_margin_right">30dp</dimen>
+    <dimen name="slide_liner_lay_margin_left">20dp</dimen>
+    <dimen name="slide_liner_lay_margin_top">10dp</dimen>
+    <dimen name="slider_text_margin_left">2dp</dimen>
+    <dimen name="slider_text_size">18sp</dimen>
+    <dimen name="slider_icon_width">30dp</dimen>
+    <dimen name="slider_icon_height">30dp</dimen>
+    <dimen name="slider_icon_margin_right">20dp</dimen>
+    <dimen name="slider_soft_line_width">325dp</dimen>
+    <dimen name="slider_soft_line_margin_top">5dp</dimen>
+    <dimen name="slider_soft_line_margin_left">20dp</dimen>
+    <dimen name="slider_contact_margin_bottom">10dp</dimen>
+    <dimen name="slider_logout_margin_bottom">70dp</dimen>
+
+
+    <!--Slide Menu-->
+
+
 
 
 </resources>
