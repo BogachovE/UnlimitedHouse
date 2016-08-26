@@ -101,7 +101,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="YOURE LOCATION"
+                android:text="CHOOSE CATEGORY"
                 android:id="@+id/profile_location_text"
                 android:textColor="#00aeef"
                 android:textSize="@dimen/profile_text_size"/>
@@ -128,7 +128,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="HOUSE/APARTAMENT NO."
+                android:text="ENTER YOUR LOCATION"
                 android:id="@+id/profile_adress_text"
                 android:textColor="#00aeef"
                 android:textSize="@dimen/profile_text_size"
