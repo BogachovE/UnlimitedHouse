@@ -30,7 +30,8 @@
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".Orders" />
         <activity android:name=".AddService" />
-        <activity android:name=".ContactUs" />
+        <activity android:name=".ContactUs"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".SiginUp"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
