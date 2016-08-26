@@ -20,7 +20,7 @@
         <ImageView
             android:layout_width="@dimen/main_right_elements_width"
             android:layout_height="match_parent"
-            android:id="@+id/imageView5"
+            android:id="@+id/beauty"
             android:layout_weight="1"
             android:background="@drawable/beautycateg"
             />
@@ -28,14 +28,14 @@
         <ImageView
             android:layout_width="@dimen/main_right_elements_width"
             android:layout_height="match_parent"
-            android:id="@+id/imageView6"
+            android:id="@+id/candy"
             android:layout_weight="1"
             android:background="@drawable/candycateg"/>
 
         <ImageView
             android:layout_width="@dimen/main_right_elements_width"
             android:layout_height="match_parent"
-            android:id="@+id/imageView7"
+            android:id="@+id/product"
             android:layout_weight="1"
             android:background="@drawable/productivecateg"/>
 
@@ -51,16 +51,16 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/imageView3"
+            android:id="@+id/other"
             android:background="@drawable/otherscateg"
             android:layout_alignParentLeft="false"
             android:layout_alignParentRight="false"
-            android:layout_toLeftOf="@+id/imageView4"/>
+            android:layout_toLeftOf="@+id/house"/>
 
         <ImageView
             android:layout_width="@dimen/main_right_elements_width"
             android:layout_height="match_parent"
-            android:id="@+id/imageView4"
+            android:id="@+id/house"
             android:background="@drawable/housecateg"
             android:layout_alignParentRight="true"
             />

@@ -18,22 +18,33 @@
             </intent-filter>
         </activity>
         <activity android:name=".Login" />
-        <activity android:name=".Sms_activity"
-                  android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".RegLocation"
-                  android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Sms_activity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".RegLocation"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".MainMenu" />
         <activity android:name=".ShopMenu" />
-        <activity android:name=".SlideMenu"
-                  android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".Profile"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".SlideMenu"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Profile"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Orders" />
         <activity android:name=".AddService" />
-        <activity android:name=".ContactUs"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".SiginUp"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".ContactUs"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SiginUp"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".BeautyCateg" />
+        <activity android:name=".CandyCateg" />
+        <activity android:name=".ProductCateg" />
+        <activity android:name=".HouseCateg" />
+        <activity android:name=".OtherCateg"></activity>
     </application>
 
 </manifest>
