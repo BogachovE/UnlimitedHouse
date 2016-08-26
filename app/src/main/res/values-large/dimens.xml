@@ -89,7 +89,14 @@
     <dimen name="slider_logout_margin_bottom">70dp</dimen>
 
 
-    <!--Slide Menu-->
+    <!--Profile-->
+    <dimen name="profile_titel_margin_left">20dp</dimen>
+    <dimen name="profile_btn_width">90dp</dimen>
+    <dimen name="profile_btn_height">90dp</dimen>
+    <dimen name="profile_btn_margin_top">5dp</dimen>
+    <!--Profile-->
+
+
 
 
 

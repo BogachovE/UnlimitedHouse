@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             }
     //Slide Menu Buttons
-            case R.id.profile:{
+            case R.id.profilebtn:{
                 Intent goToProfile = new Intent(MainActivity.this,Profile.class);
                 startActivity(goToProfile);
                 break;

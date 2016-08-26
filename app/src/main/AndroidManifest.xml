@@ -26,7 +26,8 @@
         <activity android:name=".ShopMenu" />
         <activity android:name=".SlideMenu"
                   android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".Profile" />
+        <activity android:name=".Profile"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".Orders" />
         <activity android:name=".AddService" />
         <activity android:name=".ContactUs" />

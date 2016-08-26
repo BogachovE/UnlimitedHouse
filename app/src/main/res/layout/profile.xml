@@ -11,29 +11,34 @@
         android:layout_height="wrap_content"
         android:id="@+id/profile_profeile"
         android:text="PROFILE"
-        android:layout_marginTop="15dp"/>
+        android:layout_marginTop="15dp"
+        android:textColor="#00aeef"
+        android:textSize="@dimen/profile_text_size"
+        android:layout_marginLeft="@dimen/profile_titel_margin_left"
+        />
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/mline"
+        android:src="@drawable/lineh"
         android:layout_below="@id/profile_profeile"
         android:layout_marginTop="5dp"
-        android:id="@+id/profile_line" />
+        android:id="@+id/profile_line"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"/>
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_below="@id/profile_line"
-        android:layout_centerHorizontal="true"
-        >
+        android:layout_centerHorizontal="true">
         
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/profile_lay_margin_top"
             android:id="@+id/profile_name_layout"
 
             >
@@ -43,6 +48,8 @@
                 android:layout_height="wrap_content"
                 android:text="YOURE NAME"
                 android:id="@+id/profile_name_text"
+                android:textColor="#00aeef"
+                android:textSize="@dimen/profile_text_size"
                 />
             <EditText
                 android:layout_width="wrap_content"
@@ -50,6 +57,10 @@
                 android:text="   NAME"
                 android:layout_marginLeft="10dp"
                 android:id="@+id/profile_name_edit"
+                android:textColor="#BBBCBE"
+                android:textColorHint="#BBBCBE"
+                android:backgroundTint="#BBBCBE"
+
                 />
         </LinearLayout>
 
@@ -57,20 +68,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/profile_lay_margin_top"
             android:id="@+id/profile_email_layout">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="EMAIL"
-                android:id="@+id/profile_email_text"/>
+                android:id="@+id/profile_email_text"
+                android:textColor="#00aeef"
+                android:textSize="@dimen/profile_text_size"/>
+
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="   EMAIL@EMAIL.COM"
                 android:layout_marginLeft="10dp"
                 android:id="@+id/profile_email_edit"
+                android:textColor="#BBBCBE"
+                android:textColorHint="#BBBCBE"
+                android:backgroundTint="#BBBCBE"
                 />
         </LinearLayout>
 
@@ -78,20 +95,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/profile_lay_margin_top"
             android:id="@+id/profile_location_layout">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="YOURE LOCATION"
-                android:id="@+id/profile_location_text"/>
+                android:id="@+id/profile_location_text"
+                android:textColor="#00aeef"
+                android:textSize="@dimen/profile_text_size"/>
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="   SAUDI ARABIA"
                 android:layout_marginLeft="10dp"
                 android:id="@+id/profile_location_edit"
+                android:textColor="#BBBCBE"
+                android:textColorHint="#BBBCBE"
+                android:backgroundTint="#BBBCBE"
                 />
         </LinearLayout>
 
@@ -99,30 +121,37 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="10dp"
-            android:id="@+id/profile_adress_layout">
+            android:layout_marginTop="@dimen/profile_lay_margin_top"
+            android:id="@+id/profile_adress_layout"
+           >
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="HOUSE/APARTAMENT NO."
-                android:id="@+id/profile_adress_text"/>
+                android:id="@+id/profile_adress_text"
+                android:textColor="#00aeef"
+                android:textSize="@dimen/profile_text_size"
+                />
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="   XX"
                 android:layout_marginLeft="10dp"
                 android:id="@+id/profile_adress_edit"
+                android:textColor="#BBBCBE"
+                android:textColorHint="#BBBCBE"
+                android:backgroundTint="#BBBCBE"
                 />
         </LinearLayout>
         <ImageButton
             android:background="@drawable/sigin_up"
-            android:layout_width="107dp"
-            android:layout_height="107dp"
+            android:layout_width="@dimen/profile_btn_width"
+            android:layout_height="@dimen/profile_btn_height"
             android:id="@+id/signbtn"
-            android:layout_below="@id/imageView2"
-            android:layout_marginTop="64dp"
-            android:layout_marginLeft="17dp"/>
+            android:layout_below="@id/profile_adress_edit"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/profile_btn_margin_top"/>
     </LinearLayout>
 
 </RelativeLayout>
