@@ -151,7 +151,7 @@
             android:id="@+id/signbtn"
             android:layout_below="@id/profile_adress_edit"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/profile_btn_margin_top"/>
+            />
     </LinearLayout>
 
 </RelativeLayout>
