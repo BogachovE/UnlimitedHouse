@@ -158,7 +158,7 @@
             android:id="@+id/visting_req_btn"
             android:background="@drawable/yes"
             android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@id/visting_req_btn2"/>
+            android:layout_toLeftOf="@+id/visting_req_btn2"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -199,7 +199,7 @@
     android:layout_height="wrap_content"
     android:id="@+id/custom_order"
     android:layout_marginTop="10dp"
-    android:layout_above="@id/add_to_basket"
+    android:layout_above="@+id/add_to_basket"
     >
 
     <ImageView
