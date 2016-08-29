@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".BeautyCateg"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,11 +40,17 @@
         <activity
             android:name=".SiginUp"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".BeautyCateg" />
+        <!-- <activity android:name=".BeautyCateg" /> -->
         <activity android:name=".CandyCateg" />
         <activity android:name=".ProductCateg" />
         <activity android:name=".HouseCateg" />
-        <activity android:name=".OtherCateg"></activity>
+        <activity android:name=".OtherCateg" />
+        <activity android:name=".BeautyShop" />
+        <activity android:name=".BeautyShop2" />
+        <activity android:name=".ProductMenu" />
+        <activity android:name=".Product2Menu" />
+        <activity android:name=".BuyProduct" />
+        <activity android:name=".BuyProduct2"></activity>
     </application>
 
 </manifest>

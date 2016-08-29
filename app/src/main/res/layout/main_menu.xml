@@ -5,9 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.e.bogachov.unlmitedhouse.MainMenu"
-    android:background="@drawable/background"
     android:orientation="vertical"
+
     >
+    <!--android:background="@drawable/background"-->
+
+
 
 
     <LinearLayout
@@ -22,22 +25,27 @@
             android:layout_height="match_parent"
             android:id="@+id/beauty"
             android:layout_weight="1"
-            android:background="@drawable/beautycateg"
+
             />
+        <!--android:background="@drawable/beautycateg"-->
 
         <ImageView
             android:layout_width="@dimen/main_right_elements_width"
             android:layout_height="match_parent"
             android:id="@+id/candy"
             android:layout_weight="1"
-            android:background="@drawable/candycateg"/>
+           />
+
+        <!--android:background="@drawable/candycateg"-->
+
 
         <ImageView
             android:layout_width="@dimen/main_right_elements_width"
             android:layout_height="match_parent"
             android:id="@+id/product"
             android:layout_weight="1"
-            android:background="@drawable/productivecateg"/>
+            />
+        <!--android:background="@drawable/productivecateg"-->
 
     </LinearLayout>
 
@@ -53,8 +61,6 @@
             android:layout_height="match_parent"
             android:id="@+id/other"
             android:background="@drawable/otherscateg"
-            android:layout_alignParentLeft="false"
-            android:layout_alignParentRight="false"
             android:layout_toLeftOf="@+id/house"/>
 
         <ImageView

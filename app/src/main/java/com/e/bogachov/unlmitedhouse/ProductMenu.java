@@ -1,19 +1,14 @@
 package com.e.bogachov.unlmitedhouse;
 
-import android.app.Activity;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.widget.AdapterView;
-import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BeautyCateg extends Activity {
+public class ProductMenu extends AppCompatActivity {
 
     private List<Shops> shops;
     private RecyclerView rv;
@@ -24,7 +19,7 @@ public class BeautyCateg extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.beauty_categ);
 
-       rv=(RecyclerView)findViewById(R.id.rv);
+        rv=(RecyclerView)findViewById(R.id.rv);
 
         StaggeredGridLayoutManager gm = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
         rv.setLayoutManager(gm);
@@ -37,19 +32,19 @@ public class BeautyCateg extends Activity {
 
 
 
-  }
+    }
 
     private void initializeAdapter() {
-        RVAdapter adapter = new  RVAdapter(shops);
+        RVAdapterProduct adapter = new RVAdapterProduct(shops);
         rv.setAdapter(adapter);
 
     }
 
     private void initializeData() {
         shops = new ArrayList<>();
-        shops.add(new Shops("Lasunia",R.drawable.cace));
-        shops.add(new Shops("Lasunia",R.drawable.lasunia));
-        shops.add(new Shops("Lasunia",R.drawable.lasunia));
+        shops.add(new Shops("product",R.drawable.cace));
+        shops.add(new Shops("product2",R.drawable.lasunia));
+        shops.add(new Shops("product3",R.drawable.lasunia));
 
     }
 
