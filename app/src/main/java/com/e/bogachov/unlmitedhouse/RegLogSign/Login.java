@@ -1,11 +1,14 @@
-package com.e.bogachov.unlmitedhouse;
+package com.e.bogachov.unlmitedhouse.RegLogSign;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.TextView;
+
+import com.e.bogachov.unlmitedhouse.MainMenu;
+import com.e.bogachov.unlmitedhouse.R;
+import com.e.bogachov.unlmitedhouse.ShopMenu;
 
 public class Login extends AppCompatActivity implements View.OnClickListener{
 String personType;

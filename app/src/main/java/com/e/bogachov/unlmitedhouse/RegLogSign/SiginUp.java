@@ -1,31 +1,34 @@
-package com.e.bogachov.unlmitedhouse;
+package com.e.bogachov.unlmitedhouse.RegLogSign;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 
-public class Sms_activity extends AppCompatActivity implements View.OnClickListener {
+import com.e.bogachov.unlmitedhouse.R;
+
+public class SiginUp extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.sms_activity);
+        setContentView(R.layout.sign_up);
 
-        //finf View
+        //find View
         Button nextbtn = (Button)findViewById(R.id.nextbtn);
         nextbtn.setOnClickListener(this);
+
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.nextbtn :{
-                Intent regLocationIntent = new Intent(Sms_activity.this, RegLocation.class);
-                startActivity(regLocationIntent);
 
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.nextbtn :{
+                Intent goTOSms = new Intent(SiginUp.this,Sms_activity.class);
+                startActivity(goTOSms);
             }
         }
     }

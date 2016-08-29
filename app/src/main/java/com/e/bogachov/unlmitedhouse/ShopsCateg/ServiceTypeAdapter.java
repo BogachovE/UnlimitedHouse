@@ -1,23 +1,23 @@
-package com.e.bogachov.unlmitedhouse;
+package com.e.bogachov.unlmitedhouse.ShopsCateg;
 
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebChromeClient;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.e.bogachov.unlmitedhouse.R;
+
 import java.util.List;
 
-public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ShopsViewHolder> {
+public class ServiceTypeAdapter extends RecyclerView.Adapter<ServiceTypeAdapter.ShopsViewHolder> {
 
     ColorDrawable  cn = new ColorDrawable(Color.parseColor("#FAFAFA"));
     ColorDrawable cdn = new ColorDrawable(Color.parseColor("#FFFFFF"));
@@ -54,19 +54,13 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ShopsViewHolder> {
             Intent intent=null ;
             switch (getAdapterPosition()){
                 case 0:{
-                    intent = new Intent(context,BeautyShop.class);
+                    intent = new Intent(context,ProductMenu.class);
                     break;
 
 
 
                 }
-                case 1:{
-                    intent = new Intent(context,BeautyShop2.class);
-                    break;
 
-
-
-                }
 
             }
 
@@ -77,7 +71,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ShopsViewHolder> {
 
     List<Shops> shops;
 
-    RVAdapter (List<Shops> shops){this.shops = shops;}
+    ServiceTypeAdapter(List<Shops> shops){this.shops = shops;}
 
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {

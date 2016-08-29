@@ -1,24 +1,18 @@
-package com.e.bogachov.unlmitedhouse;
+package com.e.bogachov.unlmitedhouse.RegLogSign;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.content.res.Resources;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.view.Menu;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
+import com.e.bogachov.unlmitedhouse.Slide.AddService;
+import com.e.bogachov.unlmitedhouse.Slide.ContactUs;
+import com.e.bogachov.unlmitedhouse.Slide.Orders;
+import com.e.bogachov.unlmitedhouse.Slide.Profile;
+import com.e.bogachov.unlmitedhouse.R;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 import java.util.Locale;

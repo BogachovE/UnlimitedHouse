@@ -1,5 +1,9 @@
 [
     {
+        "merged": "/Users/livingroomadmin/UnlimitedHouse/lib/SlidingMenu/build/intermediates/res/merged/androidTest/debug/layout/slidingmenumain.xml",
+        "source": "/Users/livingroomadmin/UnlimitedHouse/lib/SlidingMenu/build/intermediates/bundles/debug/res/layout/slidingmenumain.xml"
+    },
+    {
         "merged": "/Users/fructus/Documents/UnlimitedHouse/lib/SlidingMenu/build/intermediates/res/merged/androidTest/debug/layout/slidingmenumain.xml",
         "source": "/Users/fructus/Documents/UnlimitedHouse/lib/SlidingMenu/build/intermediates/bundles/debug/res/layout/slidingmenumain.xml"
     }

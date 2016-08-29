@@ -1,4 +1,4 @@
-package com.e.bogachov.unlmitedhouse;
+package com.e.bogachov.unlmitedhouse.ShopsCateg;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,9 +13,11 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.e.bogachov.unlmitedhouse.R;
+
 import java.util.List;
 
-public class RVAdapterProduct extends RecyclerView.Adapter<RVAdapterProduct.ShopsViewHolder> {
+public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ShopsViewHolder> {
 
     ColorDrawable  cn = new ColorDrawable(Color.parseColor("#FAFAFA"));
     ColorDrawable cdn = new ColorDrawable(Color.parseColor("#FFFFFF"));
@@ -51,17 +53,9 @@ public class RVAdapterProduct extends RecyclerView.Adapter<RVAdapterProduct.Shop
 
             Intent intent=null ;
             switch (getAdapterPosition()){
-                case 0:{
-                    intent = new Intent(context,BuyProduct.class);
+                case 0: {
+                    intent = new Intent(context, BuyProduct.class);
                     break;
-
-
-
-                }
-                case 1:{
-                    intent = new Intent(context,BuyProduct2.class);
-                    break;
-
 
 
                 }
@@ -75,7 +69,7 @@ public class RVAdapterProduct extends RecyclerView.Adapter<RVAdapterProduct.Shop
 
     List<Shops> shops;
 
-    RVAdapterProduct(List<Shops> shops){this.shops = shops;}
+    ProductAdapter(List<Shops> shops){this.shops = shops;}
 
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {

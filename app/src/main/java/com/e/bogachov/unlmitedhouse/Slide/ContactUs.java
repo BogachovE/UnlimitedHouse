@@ -1,13 +1,15 @@
-package com.e.bogachov.unlmitedhouse;
+package com.e.bogachov.unlmitedhouse.Slide;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class OtherCateg extends AppCompatActivity {
+import com.e.bogachov.unlmitedhouse.R;
+
+public class ContactUs extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.other_categ);
+        setContentView(R.layout.contact_us);
     }
 }

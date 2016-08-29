@@ -8,49 +8,40 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".BeautyCateg"
-            android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".ShopsCateg.ShopsMenu">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Login" />
+        <activity android:name=".RegLogSign.Login" />
         <activity
-            android:name=".Sms_activity"
+            android:name=".RegLogSign.Sms_activity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".RegLocation"
+            android:name=".RegLogSign.RegLocation"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".MainMenu" />
-        <activity android:name=".ShopMenu" />
         <activity
-            android:name=".SlideMenu"
+            android:name=".Slide.SlideMenu"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Profile"
+            android:name=".Slide.Profile"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Orders" />
-        <activity android:name=".AddService" />
+        <activity android:name=".Slide.Orders" />
+        <activity android:name=".Slide.AddService" />
         <activity
-            android:name=".ContactUs"
+            android:name=".Slide.ContactUs"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".SiginUp"
+            android:name=".RegLogSign.SiginUp"
             android:theme="@style/AppTheme.NoActionBar" />
         <!-- <activity android:name=".BeautyCateg" /> -->
-        <activity android:name=".CandyCateg" />
-        <activity android:name=".ProductCateg" />
-        <activity android:name=".HouseCateg" />
-        <activity android:name=".OtherCateg" />
-        <activity android:name=".BeautyShop" />
-        <activity android:name=".BeautyShop2" />
-        <activity android:name=".ProductMenu" />
-        <activity android:name=".Product2Menu" />
-        <activity android:name=".BuyProduct" />
-        <activity android:name=".BuyProduct2"></activity>
+        <activity android:name=".ShopsCateg.ProductMenu" />
+        <activity android:name=".ShopsCateg.BuyProduct" />
+        <activity android:name=".ShopsCateg.ServiceTypeMenu" />
+        <activity android:name=".ShopMenu"></activity>
     </application>
 
 </manifest>

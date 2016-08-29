@@ -1,14 +1,17 @@
-package com.e.bogachov.unlmitedhouse;
+package com.e.bogachov.unlmitedhouse.ShopsCateg;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+
+import com.e.bogachov.unlmitedhouse.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Product2Menu extends AppCompatActivity {
+public class ShopsMenu extends Activity {
 
     private List<Shops> shops;
     private RecyclerView rv;
@@ -35,16 +38,16 @@ public class Product2Menu extends AppCompatActivity {
     }
 
     private void initializeAdapter() {
-        RVAdapterProduct adapter = new RVAdapterProduct(shops);
+        ShopsAdapter adapter = new ShopsAdapter(shops);
         rv.setAdapter(adapter);
 
     }
 
     private void initializeData() {
         shops = new ArrayList<>();
-        shops.add(new Shops("product1",R.drawable.cace));
-        shops.add(new Shops("product2",R.drawable.lasunia));
-        shops.add(new Shops("product3",R.drawable.lasunia));
+        shops.add(new Shops("Lasunia",R.drawable.cace));
+        shops.add(new Shops("Lasunia",R.drawable.lasunia));
+        shops.add(new Shops("Lasunia",R.drawable.lasunia));
 
     }
 

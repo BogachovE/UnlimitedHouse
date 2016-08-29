@@ -1,14 +1,16 @@
-package com.e.bogachov.unlmitedhouse;
+package com.e.bogachov.unlmitedhouse.ShopsCateg;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 
+import com.e.bogachov.unlmitedhouse.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class BeautyShop2 extends AppCompatActivity {
+public class ProductMenu extends AppCompatActivity {
 
     private List<Shops> shops;
     private RecyclerView rv;
@@ -35,16 +37,16 @@ public class BeautyShop2 extends AppCompatActivity {
     }
 
     private void initializeAdapter() {
-        RVAdapterShop adapter = new RVAdapterShop(shops);
+        ProductAdapter adapter = new ProductAdapter(shops);
         rv.setAdapter(adapter);
 
     }
 
     private void initializeData() {
         shops = new ArrayList<>();
-        shops.add(new Shops("Milk",R.drawable.cace));
-        shops.add(new Shops("Kefir",R.drawable.lasunia));
-        shops.add(new Shops("Yogurt",R.drawable.lasunia));
+        shops.add(new Shops("Milk 20%",R.drawable.cace));
+        shops.add(new Shops("Milk 30%",R.drawable.lasunia));
+        shops.add(new Shops("Milk 40%",R.drawable.lasunia));
 
     }
 

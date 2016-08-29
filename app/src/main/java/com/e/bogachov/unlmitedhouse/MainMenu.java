@@ -3,11 +3,10 @@ package com.e.bogachov.unlmitedhouse;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+
+import com.e.bogachov.unlmitedhouse.ShopsCateg.ShopsMenu;
 
 
 public class MainMenu extends AppCompatActivity implements View.OnClickListener{
@@ -38,36 +37,36 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener{
 
             case R.id.beauty:{
 
-                Intent goToBeauty = new Intent(MainMenu.this,BeautyCateg.class);
-                startActivity(goToBeauty);
+                Intent goToShopsMenu = new Intent(MainMenu.this,ShopsMenu.class);
+                startActivity(goToShopsMenu);
 
             }
 
             case R.id.product:{
 
-                Intent goToProduct = new Intent(MainMenu.this,ProductCateg.class);
-                startActivity(goToProduct);
+                Intent goToShopsMenu = new Intent(MainMenu.this,ShopsMenu.class);
+                startActivity(goToShopsMenu);
 
 
             }
 
             case R.id.candy:{
 
-                Intent goToCandy = new Intent(MainMenu.this,CandyCateg.class);
-                startActivity(goToCandy);
+                Intent goToShopsMenu = new Intent(MainMenu.this,ShopsMenu.class);
+                startActivity(goToShopsMenu);
 
             }
 
             case R.id.house:{
 
-                Intent goToHouse = new Intent(MainMenu.this,HouseCateg.class);
-                startActivity(goToHouse);
+                Intent goToShopsMenu = new Intent(MainMenu.this,ShopsMenu.class);
+                startActivity(goToShopsMenu);
 
             }
             case R.id.other:{
 
-                Intent goToOther = new Intent(MainMenu.this,OtherCateg.class);
-                startActivity(goToOther);
+                Intent goToShopsMenu = new Intent(MainMenu.this,ShopsMenu.class);
+                startActivity(goToShopsMenu);
 
             }
 
