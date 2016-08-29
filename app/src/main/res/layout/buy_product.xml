@@ -14,13 +14,12 @@
         android:id="@+id/product_image"/>
 
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_below="@id/product_image"
         android:id="@+id/service_desc_title"
         android:layout_marginTop="25dp"
-        android:layout_marginLeft="10dp"
         android:layout_alignWithParentIfMissing="false"
         android:layout_alignParentRight="false"
         android:layout_alignParentBottom="false">
@@ -32,16 +31,18 @@
             android:textStyle="bold"
             android:textColor="#000000"
             android:textSize="21sp"
-            android:id="@+id/service_desc_title_title"/>
+            android:id="@+id/service_desc_title_title"
+            android:layout_marginLeft="10dp"/>
 
 
         <ImageView
             android:layout_width="80dp"
             android:layout_height="30dp"
             android:background="@drawable/price_img"
-            android:layout_marginLeft="100dp"
+            android:layout_alignParentRight="true"
             android:id="@+id/price_img"
-            android:layout_toRightOf="@id/service_desc_title_title"/>
+            android:layout_marginRight="10dp"
+       />
 
         <TextView
             android:layout_width="wrap_content"
@@ -62,9 +63,10 @@
         android:layout_below="@+id/service_desc_title"
         android:text="This servise blablabalThis servise blablabalThis servise blablabalThis servise This servise blablabalThis servise blablabaThis servise blablaballThis servise This servise blablabal"
         android:id="@+id/service_desc"
-        android:layout_marginLeft="10dp"
+
         android:layout_marginTop="20dp"
-       />
+        android:layout_marginLeft="20dp"
+         />
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -90,35 +92,41 @@
             android:layout_centerVertical="true"
             android:textColor="#000000"
             android:textStyle="bold"
-            android:textSize="18sp" />
-        <Button
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@drawable/less"
-            android:layout_toRightOf="@id/person_numb_txt"
-            android:id="@+id/person_numb_btn_less"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="60dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1"
-            android:layout_toRightOf="@id/person_numb_btn_less"
-            android:id="@+id/person_numb_count"
-            android:layout_centerVertical="true"
-            android:textColor="#000000"
-            android:textStyle="bold"
             android:textSize="18sp"
             android:layout_marginLeft="10dp"/>
 
         <Button
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:background="@drawable/more"
-            android:layout_toRightOf="@id/person_numb_count"
+            android:background="@drawable/less"
+            android:id="@+id/person_numb_btn_less"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"/>
+            android:layout_toLeftOf="@+id/person_numb_count"
+            android:layout_marginRight="2dp"
+           />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:id="@+id/person_numb_count"
+            android:layout_centerVertical="true"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_toLeftOf="@+id/btn_more"
+            android:layout_marginRight="3dp"
+           />
+
+        <Button
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/more"
+            android:id="@+id/btn_more"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+
+         />
 
     </RelativeLayout>
 
@@ -129,7 +137,8 @@
         android:id="@+id/visting_req"
         android:layout_below="@id/person_numb"
         android:layout_marginTop="10dp"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -140,15 +149,16 @@
             android:layout_centerVertical="true"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="#000000" />
+            android:textColor="#000000"
+            android:layout_marginLeft="10dp" />
 
         <ImageView
             android:layout_height="20dp"
             android:layout_width="40dp"
             android:id="@+id/visting_req_btn"
-            android:layout_toRightOf="@id/visting_req_txt"
             android:background="@drawable/yes"
-            android:layout_marginLeft="65dp"/>
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/visting_req_btn2"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -165,22 +175,22 @@
             android:layout_height="20dp"
             android:layout_width="40dp"
             android:id="@+id/visting_req_btn2"
-            android:layout_toRightOf="@id/visting_req_btn"
             android:background="@drawable/yes"
-            android:layout_marginLeft="30dp"/>
+            android:layout_marginRight="5dp"
+            android:layout_alignParentRight="true"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/visting_req_btn_no"
             android:text="No"
-            android:layout_alignLeft="@+id/visting_req_btn2"
+            android:layout_alignParentRight="true"
             android:textColor="#000000"
-            android:layout_centerVertical="true"
             android:textStyle="bold"
-            android:layout_marginLeft="12dp"
 
-        />
+            android:layout_alignLeft="@+id/visting_req_btn2"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp" />
 
     </RelativeLayout>
 
@@ -236,8 +246,9 @@
         android:layout_width="40dp"
         android:layout_height="30dp"
         android:background="@drawable/basket"
-        android:layout_marginLeft="25dp"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/add_to_basket_txt"
+        android:layout_marginLeft="20dp" />
 
     </RelativeLayout>
 
