@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ShopsCateg.BuyProduct"
-    android:background="#F2F2F2"
+    android:background="#F3F2F2"
     android:clickable="true">
 
     <ImageView
@@ -70,7 +70,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/line"
         android:layout_below="@id/service_desc"
-        android:layout_marginTop="10dp"
         android:src="@drawable/line" />
 
     <RelativeLayout
@@ -79,8 +78,9 @@
         android:orientation="horizontal"
         android:id="@+id/person_numb"
         android:layout_below="@id/line"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="20dp"
+        android:layout_alignWithParentIfMissing="false"
+        android:layout_alignLeft="@+id/visting_req">
 
         <TextView
             android:layout_width="wrap_content"
@@ -98,7 +98,7 @@
             android:layout_toRightOf="@id/person_numb_txt"
             android:id="@+id/person_numb_btn_less"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="50dp"/>
+            android:layout_marginLeft="60dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -128,9 +128,8 @@
         android:orientation="horizontal"
         android:id="@+id/visting_req"
         android:layout_below="@id/person_numb"
-        android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        >
+        android:layout_centerHorizontal="true">
 
         <TextView
             android:layout_width="wrap_content"
@@ -184,34 +183,63 @@
         />
 
     </RelativeLayout>
+
 <FrameLayout
-    android:layout_below="@id/visting_req"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/custom_order"
+    android:layout_marginTop="10dp"
+    android:layout_above="@id/add_to_basket"
     >
 
-    <Button
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:id="@+id/custom_order"
+        android:id="@+id/custom_order_back"
         android:background="@android:color/black"
-        android:clickable="true" />
+        android:clickable="true"
+    />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Click to customize order"
-        android:textColor="@android:color/holo_red_light"
-        android:textStyle="bold"
-        android:layout_gravity="center" />
+        android:textColor="@android:color/white"
+        android:layout_gravity="center"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
 </FrameLayout>
 
-    <ImageView
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
         android:id="@+id/add_to_basket"
-        android:layout_below="@id/custom_order"/>
+        >
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/add_to_basket_txt"
+        android:text="Add To Basket"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:layout_marginTop="5dp"
+        android:layout_centerVertical="true" />
+
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:background="@drawable/basket"
+        android:layout_marginLeft="25dp"
+        android:layout_centerVertical="true" />
+
+    </RelativeLayout>
 
 
 </RelativeLayout>
