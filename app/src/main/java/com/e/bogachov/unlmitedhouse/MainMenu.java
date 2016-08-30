@@ -11,8 +11,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.e.bogachov.unlmitedhouse.ShopsCateg.ShopsMenu;
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 
 public class MainMenu extends Activity implements View.OnClickListener {
@@ -21,6 +23,8 @@ public class MainMenu extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_menu);
+
+
 
         //Find View
         ImageView beauty = (ImageView) findViewById(R.id.beauty);
@@ -46,8 +50,34 @@ public class MainMenu extends Activity implements View.OnClickListener {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:
-                startActivity(new Intent(this, ShopsMenu.class));
+            case android.R.id.home:{
+                //SlidingMenu
+                SlidingMenu menu = new SlidingMenu(this);
+                menu.setMode(SlidingMenu.LEFT);
+                menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+                menu.setFadeDegree(0.35f);
+                menu.attachToActivity(this, SlidingMenu.SLIDING_WINDOW);
+                menu.setMenu(R.layout.sidemenu);
+                menu.setBehindWidthRes(R.dimen.slidingmenu_behind_width);
+
+
+
+                //Find View Slide Bar
+                TextView profilebtn = (TextView) findViewById(R.id.profilebtn);
+                TextView ordersbtn = (TextView) findViewById(R.id.ordersbtn);
+                TextView addservicebtn = (TextView) findViewById(R.id.addservicebtn);
+                TextView contactbtn = (TextView) findViewById(R.id.contactbtn);
+                TextView logoutbtn = (TextView) findViewById(R.id.logoutbtn);
+                profilebtn.setOnClickListener(this);
+                ordersbtn.setOnClickListener(this);
+                addservicebtn.setOnClickListener(this);
+                contactbtn.setOnClickListener(this);
+                logoutbtn.setOnClickListener(this);
+                menu.toggle(true);
+
+
+            }
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
