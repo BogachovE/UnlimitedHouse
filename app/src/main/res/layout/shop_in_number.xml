@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.e.bogachov.unlmitedhouse.ShopInNumber"
+    android:background="@drawable/background">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@drawable/shop_in_number_titlee"
+        android:layout_marginTop="20dp"
+        android:id="@+id/shop_in_number_title"/>
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="350dp"
+        android:background="@drawable/sub_back"
+        android:layout_below="@+id/shop_in_number_title"
+        android:id="@+id/rl"
+        android:layout_marginTop="30dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Number of orders"
+            android:layout_marginLeft="15dp"
+            android:textSize="21dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="40dp"
+            android:id="@+id/numb_of_ord"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="XX"
+            android:layout_alignParentRight="true"
+            android:textSize="21dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_alignTop="@+id/numb_of_ord"
+            android:layout_marginRight="40dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Comblished orders"
+            android:layout_marginLeft="15dp"
+            android:textSize="21dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="20dp"
+            android:id="@+id/comb_ord"
+            android:layout_below="@id/numb_of_ord"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="XX"
+            android:layout_alignParentRight="true"
+            android:textSize="21dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_alignTop="@+id/comb_ord"
+            android:layout_marginRight="40dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Canceled orders"
+            android:layout_marginLeft="15dp"
+            android:textSize="21dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="20dp"
+            android:id="@+id/canc_ord"
+            android:layout_below="@id/comb_ord"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="XX"
+            android:layout_alignParentRight="true"
+            android:textSize="21dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_alignTop="@+id/canc_ord"
+            android:layout_marginRight="40dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Most ordered item"
+            android:layout_marginLeft="15dp"
+            android:textSize="21dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="20dp"
+            android:id="@+id/most_ord"
+            android:layout_below="@id/canc_ord"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="XX"
+            android:layout_alignParentRight="true"
+            android:textSize="21dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_alignTop="@+id/most_ord"
+            android:layout_marginRight="40dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Most time for orders"
+            android:layout_marginLeft="15dp"
+            android:textSize="21dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="20dp"
+            android:id="@+id/most_time_ord"
+            android:layout_below="@id/most_ord"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="XX"
+            android:layout_alignParentRight="true"
+            android:textSize="21dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_alignTop="@+id/most_time_ord"
+            android:layout_marginRight="40dp"/>
+
+
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/back_btn"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        />
+</RelativeLayout>

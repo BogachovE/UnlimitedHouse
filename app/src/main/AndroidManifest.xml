@@ -41,7 +41,11 @@
         <activity android:name=".ShopsCateg.ProductMenu" />
         <activity android:name=".ShopsCateg.BuyProduct" />
         <activity android:name=".ShopsCateg.ServiceTypeMenu" />
-        <activity android:name=".ShopMenu"></activity>
+        <activity android:name=".ShopMenu" />
+        <activity android:name=".MySchedule" />
+        <activity android:name=".ShopOrders" />
+        <activity android:name=".ShopInNumber" />
+        <activity android:name=".Rating"></activity>
     </application>
 
 </manifest>
