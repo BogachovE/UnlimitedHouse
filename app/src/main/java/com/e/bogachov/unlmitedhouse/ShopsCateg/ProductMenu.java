@@ -1,5 +1,6 @@
 package com.e.bogachov.unlmitedhouse.ShopsCateg;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -10,7 +11,7 @@ import com.e.bogachov.unlmitedhouse.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductMenu extends AppCompatActivity {
+public class ProductMenu extends Activity {
 
     private List<Shops> shops;
     private RecyclerView rv;
@@ -19,7 +20,7 @@ public class ProductMenu extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.beauty_categ);
+        setContentView(R.layout.product_menu);
 
         rv=(RecyclerView)findViewById(R.id.rv);
 

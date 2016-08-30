@@ -144,7 +144,7 @@
     <ImageView
         android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/back_btn"
+        android:src="@drawable/back_btnn"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"

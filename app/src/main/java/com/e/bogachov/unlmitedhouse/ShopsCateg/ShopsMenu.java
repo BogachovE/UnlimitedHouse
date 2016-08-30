@@ -20,7 +20,7 @@ public class ShopsMenu extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.beauty_categ);
+        setContentView(R.layout.shops_menu);
 
         rv=(RecyclerView)findViewById(R.id.rv);
 
