@@ -41,7 +41,6 @@ public class ShopsAdapter extends RecyclerView.Adapter<ShopsAdapter.ShopsViewHol
             shopName = (TextView)itemView.findViewById(R.id.shop_name);
             shopPhoto = (ImageView)itemView.findViewById(R.id.shop_photo);
             rl =(RelativeLayout)itemView.findViewById(R.id.rl);
-
             rl.setOnClickListener(this);
 
 
