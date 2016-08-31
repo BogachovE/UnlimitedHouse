@@ -1,10 +1,12 @@
 package com.e.bogachov.unlmitedhouse.ShopsCateg;
 
+import android.app.ActionBar;
 import android.os.Bundle;
 
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.view.Menu;
 
 import com.e.bogachov.unlmitedhouse.R;
 
@@ -32,9 +34,20 @@ public class ShopsMenu extends Activity {
         initializeData();
         initializeAdapter();
 
+        getActionBar().setHomeAsUpIndicator(R.drawable.btn_aaact);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getActionBar().setHomeAsUpIndicator(R.drawable.btn_aaact);
+        getActionBar().setCustomView(R.layout.abs_layout);
 
 
 
+
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
     }
 
     private void initializeAdapter() {

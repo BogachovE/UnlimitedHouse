@@ -48,7 +48,9 @@
         <activity android:name=".ShopOrders" />
         <activity android:name=".ShopInNumber" />
         <activity android:name=".Rating"></activity>
-        <activity android:name=".ShopsCateg.ShopsMenu"></activity>
+        <activity android:name=".ShopsCateg.ShopsMenu"
+            android:theme="@style/Beauty"
+            android:label="          Beauty"></activity>
     </application>
 
 </manifest>

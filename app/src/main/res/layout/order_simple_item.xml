@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/cv"
+    android:focusableInTouchMode="true">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="190dp"
+            android:layout_height="255dp"
+            android:padding="16dp"
+            android:id="@+id/rl"
+            android:contextClickable="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:id="@+id/shop_photo"
+                android:layout_alignParentTop="false"
+                android:layout_marginRight="16dp"
+                android:src="@drawable/cace"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentBottom="false"
+                android:layout_alignParentRight="false"
+                android:layout_alignWithParentIfMissing="false"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"/>
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:id="@+id/shop_name"
+                android:textSize="20sp"
+                android:text="Cake market"
+                android:layout_marginTop="15dp"
+
+                android:layout_alignRight="@+id/shop_photo"
+                android:layout_alignEnd="@+id/shop_photo"
+                android:layout_alignLeft="@+id/shop_photo"
+                android:layout_alignStart="@+id/shop_photo"
+                android:textAlignment="center"
+                android:layout_below="@+id/shop_photo" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
