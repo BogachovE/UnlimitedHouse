@@ -1,6 +1,8 @@
 package com.e.bogachov.unlmitedhouse.ShopsCateg;
 
 import android.app.ActionBar;
+import android.content.ClipData;
+import android.content.Context;
 import android.os.Bundle;
 
 import android.app.Activity;
@@ -10,6 +12,10 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.e.bogachov.unlmitedhouse.Product;
@@ -35,19 +41,18 @@ public class ShopsMenu extends Activity implements View.OnClickListener{
         setContentView(R.layout.shops_menu);
 
 
-        LayoutInflater inflater = getLayoutInflater();
-        View myView = inflater.inflate(R.layout.sidemenu_right, null);
+
         rv=(RecyclerView)findViewById(R.id.rv);
-        rv2=(RecyclerView)findViewById(R.id.rv2);
-        TextView myTextView = (TextView) findViewById(R.id.myTextViewInXml);
+
+
+
+
 
         StaggeredGridLayoutManager gm = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
-        StaggeredGridLayoutManager gm2 = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
 
         rv.setLayoutManager(gm);
         rv.setHasFixedSize(true);
-        rv2.setLayoutManager(gm2);
-        rv2.setHasFixedSize(true);
+
 
 
         initializeData();
@@ -63,6 +68,8 @@ public class ShopsMenu extends Activity implements View.OnClickListener{
         curtBtn.setOnClickListener(this);
 
 
+
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -74,22 +81,16 @@ public class ShopsMenu extends Activity implements View.OnClickListener{
         ShopsAdapter adapter = new ShopsAdapter(shops);
         rv.setAdapter(adapter);
 
-        RightAdapter rightAdapter = new RightAdapter(product);
-        rv2.setAdapter(rightAdapter);
-
-
-
-
     }
 
     private void initializeData() {
         shops = new ArrayList<>();
         shops.add(new Shops("Lasunia",R.drawable.cace));
         shops.add(new Shops("Lasunia",R.drawable.lasunia));
-        shops.add(new Shops("Lasunia",R.drawable.lasunia));
-        product.add(new Product("Susi",4));
+
 
     }
+
 
 
     @Override
