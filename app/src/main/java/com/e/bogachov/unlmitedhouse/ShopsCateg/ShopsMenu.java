@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -77,6 +78,43 @@ public class ShopsMenu extends Activity implements View.OnClickListener{
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.item4:{
+                SlidingMenu menu2 = new SlidingMenu(this);
+                menu2.setMode(SlidingMenu.RIGHT);
+                menu2.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+                menu2.setFadeDegree(0.35f);
+                menu2.attachToActivity(this, SlidingMenu.SLIDING_WINDOW);
+                menu2.setMenu(R.layout.sidemenu_right);
+                menu2.setBehindWidthRes(R.dimen.slidingmenu_behind_width);
+
+
+
+                //Find View Slide Bar
+                TextView profilebtn = (TextView) findViewById(R.id.profilebtn);
+                TextView ordersbtn = (TextView) findViewById(R.id.ordersbtn);
+                TextView addservicebtn = (TextView) findViewById(R.id.addservicebtn);
+                TextView contactbtn = (TextView) findViewById(R.id.contactbtn);
+                TextView logoutbtn = (TextView) findViewById(R.id.logoutbtn);
+                profilebtn.setOnClickListener(this);
+                ordersbtn.setOnClickListener(this);
+                addservicebtn.setOnClickListener(this);
+                contactbtn.setOnClickListener(this);
+                logoutbtn.setOnClickListener(this);
+                menu2.toggle(true);
+
+
+            }
+
+
+            return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     private void initializeAdapter() {
         ShopsAdapter adapter = new ShopsAdapter(shops);
         rv.setAdapter(adapter);
@@ -99,11 +137,11 @@ public class ShopsMenu extends Activity implements View.OnClickListener{
 
             case R.id.curtBtn:{
                 SlidingMenu menu = new SlidingMenu(this);
-                menu.setMode(SlidingMenu.RIGHT);
+                menu.setMode(SlidingMenu.LEFT);
                 menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
                 menu.setFadeDegree(0.35f);
                 menu.attachToActivity(this, SlidingMenu.SLIDING_WINDOW);
-                menu.setMenu(R.layout.sidemenu_right);
+                menu.setMenu(R.layout.sidemenu);
                 menu.setBehindWidthRes(R.dimen.slidingmenu_behind_width);
 
 
@@ -121,6 +159,8 @@ public class ShopsMenu extends Activity implements View.OnClickListener{
                 logoutbtn.setOnClickListener(this);
                 menu.toggle(true);
             }
+
+
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.e.bogachov.unlmitedhouse;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +16,9 @@ public class ShopMenu extends AppCompatActivity implements View.OnClickListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ActionBar actionBar = getActionBar();
+        actionBar.hide();
 
         FrameLayout my_shop = (FrameLayout)findViewById(R.id.my_shop);
         my_shop.setOnClickListener(this);

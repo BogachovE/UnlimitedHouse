@@ -1,5 +1,6 @@
 package com.e.bogachov.unlmitedhouse.RegLogSign;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +17,9 @@ String personType;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        ActionBar actionBar = getActionBar();
+        actionBar.hide();
 
         //Find View
         ImageButton loginBtn = (ImageButton)findViewById(R.id.loginBtn);

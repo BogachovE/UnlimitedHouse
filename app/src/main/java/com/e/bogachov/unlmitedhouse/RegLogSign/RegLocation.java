@@ -1,5 +1,6 @@
 package com.e.bogachov.unlmitedhouse.RegLogSign;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +16,9 @@ public class RegLocation extends AppCompatActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.reg_location);
+
+        ActionBar actionBar = getActionBar();
+        actionBar.hide();
 
         //find View
         Button loginBtn = (Button)findViewById(R.id.nextbtn);

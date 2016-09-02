@@ -75,8 +75,8 @@ public class MainMenu extends Activity implements View.OnClickListener {
                 logoutbtn.setOnClickListener(this);
                 menu.toggle(true);
 
-
             }
+
 
                 return true;
             default:

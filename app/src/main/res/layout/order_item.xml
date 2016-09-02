@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/data_back"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/data_back"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/order_data_big"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_alignLeft="@id/data_back"
+            android:layout_alignTop="@id/data_back"
+            android:text="MAR
+   5"
+            android:textColor="@android:color/white" />
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_toRightOf="@id/data_back"
+    android:layout_centerVertical="true"
+    android:layout_marginLeft="10dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ORDER NO"
+        android:id="@+id/order_numb_title"
+        android:textColor="@android:color/white"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="XX"
+        android:id="@+id/order_numb"
+        android:layout_toRightOf="@id/order_numb_title"
+        android:textColor="@android:color/white"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/from_shop_title"
+        android:text="FROM SHOP"
+        android:layout_toRightOf="@+id/order_numb"
+        android:textColor="@android:color/white"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="XX"
+        android:id="@+id/from_shop"
+        android:layout_toRightOf="@id/from_shop_title"
+        android:textColor="@android:color/white"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AT DATE"
+        android:layout_below="@id/order_numb"
+        android:textColor="@android:color/white"
+        android:id="@+id/at_data_title"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="XX/XX/XX XXPM/AM"
+        android:id="@+id/orde_data"
+        android:textColor="@android:color/white"
+        android:layout_below="@+id/order_numb_title"
+        android:layout_toRightOf="@+id/at_data_title"
+        android:layout_toEndOf="@+id/at_data_title"
+        />
+    
+
+
+
+
+</RelativeLayout>
+        <ImageView
+            android:layout_width="250dp"
+            android:layout_height="1dp"
+            android:background="@android:color/white"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/imageView3" />
+
+        <Button
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:background="@drawable/order_btn"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/imageView3"
+            android:layout_toEndOf="@+id/imageView3"
+            android:layout_marginLeft="17dp"
+            android:layout_marginStart="17dp" />
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

@@ -1,5 +1,6 @@
 package com.e.bogachov.unlmitedhouse.RegLogSign;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +15,9 @@ public class SiginUp extends AppCompatActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up);
+
+        ActionBar actionBar = getActionBar();
+        actionBar.hide();
 
         //find View
         Button nextbtn = (Button)findViewById(R.id.nextbtn);

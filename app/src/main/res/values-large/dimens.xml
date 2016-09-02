@@ -70,7 +70,7 @@
     <!--Slide Menu-->
     <dimen name="slide_house_width">190dp</dimen>
     <dimen name="Slide_house_height">120dp</dimen>
-    <dimen name="Slide_house_margin_top">20dp</dimen>
+    <dimen name="Slide_house_margin_top">35dp</dimen>
     <dimen name="slide_hardline_margin_top">20dp</dimen>
     <dimen name="slide_hardline_width">300dp</dimen>
     <dimen name="slide_hardline_margin_left">10dp</dimen>
