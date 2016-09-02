@@ -7,10 +7,10 @@
         android:icon="@mipmap/ic_launcher"
         android:label="  UNLIMITED HOUSE"
         android:supportsRtl="true"
-
         android:theme="@style/AppTheme">
-      <activity android:name=".RegLogSign.MainActivity"
-          android:theme="@style/AppTheme.NoActionBar">
+        <activity
+            android:name=".RegLogSign.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,8 +24,9 @@
         <activity
             android:name=".RegLogSign.RegLocation"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".MainMenu"
-                  android:theme="@style/AppTheme" />
+        <activity
+            android:name=".MainMenu"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".Slide.SlideMenu"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -47,10 +48,12 @@
         <activity android:name=".MySchedule" />
         <activity android:name=".ShopOrders" />
         <activity android:name=".ShopInNumber" />
-        <activity android:name=".Rating"></activity>
-        <activity android:name=".ShopsCateg.ShopsMenu"
-            android:theme="@style/Beauty"
-            android:label="          Beauty"></activity>
+        <activity android:name=".Rating" />
+        <activity
+            android:name=".ShopsCateg.ShopsMenu"
+            android:label="          Beauty"
+            android:theme="@style/Beauty" />
+        <activity android:name=".OrderStatus"></activity>
     </application>
 
 </manifest>
