@@ -1,6 +1,7 @@
 package com.e.bogachov.unlmitedhouse;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,11 +12,12 @@ import android.widget.ImageView;
 
 import com.e.bogachov.unlmitedhouse.ShopsCateg.ShopsMenu;
 
-public class ShopMenu extends AppCompatActivity implements View.OnClickListener {
+public class ShopMenu extends Activity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.shop_menu);
 
         ActionBar actionBar = getActionBar();
         actionBar.hide();
@@ -24,7 +26,7 @@ public class ShopMenu extends AppCompatActivity implements View.OnClickListener 
         my_shop.setOnClickListener(this);
         FrameLayout my_schedule = (FrameLayout)findViewById(R.id.my_schedule);
         my_schedule.setOnClickListener(this);
-        FrameLayout orders = (FrameLayout)findViewById(R.id.orders);
+        ImageView orders = (ImageView)findViewById(R.id.orders_btn);
         orders.setOnClickListener(this);
         FrameLayout shop_in_number = (FrameLayout)findViewById(R.id.shop_in_number);
         shop_in_number.setOnClickListener(this);
@@ -45,8 +47,9 @@ public class ShopMenu extends AppCompatActivity implements View.OnClickListener 
                 Intent goToMySchedule = new Intent(this,MySchedule.class);
             }
 
-            case R.id.orders:{
+            case R.id.orders_btn:{
                 Intent goToShopOrders = new Intent(this,ShopOrders.class);
+                startActivity(goToShopOrders);
             }
             case R.id.shop_in_number:{
                 Intent goToShopInNumber= new Intent(this,ShopInNumber.class);

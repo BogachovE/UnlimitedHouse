@@ -82,13 +82,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
             case R.id.loginbtn:{
-                Intent loginintent = new Intent(MainActivity.this, Login.class);
-                startActivity(loginintent);
+                Intent goToLogin = new Intent(MainActivity.this, Login.class);
+                startActivity(goToLogin);
                 break;
 
             }
 
             case R.id.englang:{
+
 
                 break;
             }
