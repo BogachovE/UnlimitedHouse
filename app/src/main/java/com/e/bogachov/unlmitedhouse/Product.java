@@ -8,17 +8,15 @@ import java.util.Date;
  * Created by livingroomadmin on 31.08.16.
  */
 public class Product {
-    String name;
-    int count;
+
     String orderNumb;
     String fromShop;
-    String orderData;
 
-    public Product(String name, int count,String orderNumb,String fromShop,String orderData){
-        this.name = name;
-        this.count = count;
+
+    public Product(String orderNumb,String fromShop){
+
         this.orderNumb = orderNumb;
         this.fromShop = fromShop;
-        this.orderData = orderData;
+
     }
 }

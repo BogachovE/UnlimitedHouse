@@ -48,7 +48,7 @@
         android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp"
         android:orientation="vertical"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="80dp"
         android:layout_marginTop="40dp">
 
         <FrameLayout

@@ -2,20 +2,21 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    android:foregroundGravity="center_vertical|center">
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/background">
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_marginTop="20dp"
-            android:id="@+id/linearLayout">
+            android:id="@+id/linearLayout"
+            android:layout_centerHorizontal="true">
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -26,7 +27,7 @@
 
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:text="XX/XX/XX
 XXPM/AM"
@@ -81,7 +82,7 @@ XXPM/AM"
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="10dp"
@@ -134,7 +135,7 @@ XXPM/AM"
                 android:layout_weight="1" >
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:text="XX/XX/XX
 XXPM/AM"
@@ -147,7 +148,7 @@ XXPM/AM"
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:id="@+id/linearLayout2"
@@ -165,7 +166,7 @@ XXPM/AM"
                 android:layout_weight="1" >
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:text="XX/XX/XX
 XXPM/AM"
@@ -212,7 +213,7 @@ XXPM/AM"
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="10dp"
@@ -266,7 +267,7 @@ XXPM/AM"
                 android:layout_weight="1" >
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:text="XX/XX/XX
 XXPM/AM"

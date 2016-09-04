@@ -1,6 +1,7 @@
 package com.e.bogachov.unlmitedhouse;
 
 import android.content.Context;
+import android.content.Intent;
 import android.provider.ContactsContract;
 import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.CardView;
@@ -37,6 +38,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrdersView
         Button oreder_btnss;
         RelativeLayout rv;
         RelativeLayout rvs;
+        Button check_btn;
 
 
         Context context = itemView.getContext();
@@ -51,6 +53,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrdersView
             oreder_btnss = (Button) itemView.findViewById(R.id.oreder_btnss);
             rv = (RelativeLayout)itemView.findViewById(R.id.rv);
             rvs = (RelativeLayout)itemView.findViewById(R.id.rvs);
+            check_btn = (Button)itemView.findViewById(R.id.check_btn);
 
 
         }
@@ -106,6 +109,15 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrdersView
 
             }
         });
+        ordersViewHolder.check_btn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+
+                Intent goToOrderStatus = new Intent(ordersViewHolder.context,OrderStatus.class);
+                ordersViewHolder.context.startActivity(goToOrderStatus);
+            }
+        });
+
 
     }
 

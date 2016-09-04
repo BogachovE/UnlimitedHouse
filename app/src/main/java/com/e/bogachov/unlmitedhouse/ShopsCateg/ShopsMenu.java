@@ -33,6 +33,7 @@ public class ShopsMenu extends Activity implements View.OnClickListener{
     private RecyclerView rv;
     private RecyclerView rv2;
     private List<Product> product;
+    SlidingMenu menu2;
 
 
 
@@ -42,22 +43,40 @@ public class ShopsMenu extends Activity implements View.OnClickListener{
         setContentView(R.layout.shops_menu);
 
 
+        SlidingMenu menu2 = new SlidingMenu(this);
+        menu2.setMode(SlidingMenu.RIGHT);
+        menu2.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+        menu2.setFadeDegree(0.35f);
+        menu2.attachToActivity(this, SlidingMenu.SLIDING_WINDOW);
+        menu2.setMenu(R.layout.sidemenu_right);
+        menu2.setBehindWidthRes(R.dimen.slidingmenu_behind_width);
+
 
         rv=(RecyclerView)findViewById(R.id.rv);
+
+
+        rv2 = (RecyclerView)findViewById(R.id.rv2);
+
 
 
 
 
 
         StaggeredGridLayoutManager gm = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
+       StaggeredGridLayoutManager gm2 = new StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.VERTICAL);
 
-        rv.setLayoutManager(gm);
-        rv.setHasFixedSize(true);
+         rv.setLayoutManager(gm);
+         rv.setHasFixedSize(true);
+
+        rv2.setLayoutManager(gm2);
+        rv2.setHasFixedSize(true);
 
 
 
         initializeData();
         initializeAdapter();
+        initializeData2();
+        initializeAdapter2();
 
         getActionBar().setHomeAsUpIndicator(R.drawable.btn_aaact);
         getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -65,8 +84,9 @@ public class ShopsMenu extends Activity implements View.OnClickListener{
         getActionBar().setHomeAsUpIndicator(R.drawable.btn_aaact);
         getActionBar().setCustomView(R.layout.abs_layout);
 
-        Button curtBtn = (Button)findViewById(R.id.curtBtn);
-        curtBtn.setOnClickListener(this);
+
+
+
 
 
 
@@ -82,28 +102,15 @@ public class ShopsMenu extends Activity implements View.OnClickListener{
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.item4:{
-                SlidingMenu menu2 = new SlidingMenu(this);
-                menu2.setMode(SlidingMenu.RIGHT);
-                menu2.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-                menu2.setFadeDegree(0.35f);
-                menu2.attachToActivity(this, SlidingMenu.SLIDING_WINDOW);
-                menu2.setMenu(R.layout.sidemenu_right);
-                menu2.setBehindWidthRes(R.dimen.slidingmenu_behind_width);
 
 
 
-                //Find View Slide Bar
-                TextView profilebtn = (TextView) findViewById(R.id.profilebtn);
-                TextView ordersbtn = (TextView) findViewById(R.id.ordersbtn);
-                TextView addservicebtn = (TextView) findViewById(R.id.addservicebtn);
-                TextView contactbtn = (TextView) findViewById(R.id.contactbtn);
-                TextView logoutbtn = (TextView) findViewById(R.id.logoutbtn);
-                profilebtn.setOnClickListener(this);
-                ordersbtn.setOnClickListener(this);
-                addservicebtn.setOnClickListener(this);
-                contactbtn.setOnClickListener(this);
-                logoutbtn.setOnClickListener(this);
+
+
                 menu2.toggle(true);
+
+
+
 
 
             }
@@ -118,6 +125,30 @@ public class ShopsMenu extends Activity implements View.OnClickListener{
     private void initializeAdapter() {
         ShopsAdapter adapter = new ShopsAdapter(shops);
         rv.setAdapter(adapter);
+        RightAdapter adapter2 = new RightAdapter(product);
+        rv2.setAdapter(adapter2);
+
+
+    }
+    private void initializeAdapter2() {
+        RightAdapter adapter2 = new RightAdapter(product);
+        rv2.setAdapter(adapter2);
+
+    }
+
+    private void initializeData2() {
+        product = new ArrayList<>();
+        product.add(new Product("sdasdas","sdasdasd"));
+        product.add(new Product("sdasdas","sdasdasd"));
+        product.add(new Product("sdasdas","sdasdasd"));
+        product.add(new Product("sdasdas","sdasdasd"));
+        product.add(new Product("sdasdas","sdasdasd"));
+        product.add(new Product("sdasdas","sdasdasd"));
+        product.add(new Product("sdasdas","sdasdasd"));
+        product.add(new Product("sdasdas","sdasdasd"));
+        product.add(new Product("sdasdas","sdasdasd"));
+        product.add(new Product("sdasdas","sdasdasd"));
+
 
     }
 
@@ -125,6 +156,17 @@ public class ShopsMenu extends Activity implements View.OnClickListener{
         shops = new ArrayList<>();
         shops.add(new Shops("Lasunia",R.drawable.cace));
         shops.add(new Shops("Lasunia",R.drawable.lasunia));
+        product = new ArrayList<>();
+        product.add(new Product("sdasdas","sdasdasd"));
+        product.add(new Product("sdasdas","sdasdasd"));
+        product.add(new Product("sdasdas","sdasdasd"));
+        product.add(new Product("sdasdas","sdasdasd"));
+        product.add(new Product("sdasdas","sdasdasd"));
+        product.add(new Product("sdasdas","sdasdasd"));
+        product.add(new Product("sdasdas","sdasdasd"));
+        product.add(new Product("sdasdas","sdasdasd"));
+        product.add(new Product("sdasdas","sdasdasd"));
+        product.add(new Product("sdasdas","sdasdasd"));
 
 
     }
@@ -158,6 +200,7 @@ public class ShopsMenu extends Activity implements View.OnClickListener{
                 contactbtn.setOnClickListener(this);
                 logoutbtn.setOnClickListener(this);
                 menu.toggle(true);
+
             }
 
 

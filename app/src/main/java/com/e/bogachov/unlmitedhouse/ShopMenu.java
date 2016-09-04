@@ -41,6 +41,7 @@ public class ShopMenu extends Activity implements View.OnClickListener {
             case R.id.my_shop:{
                 Intent goToShops = new Intent(this, ShopsMenu.class);
                 startActivity(goToShops);
+                break;
             }
 
             case R.id.my_schedule:{
@@ -50,6 +51,7 @@ public class ShopMenu extends Activity implements View.OnClickListener {
             case R.id.orders_btn:{
                 Intent goToShopOrders = new Intent(this,ShopOrders.class);
                 startActivity(goToShopOrders);
+                break;
             }
             case R.id.shop_in_number:{
                 Intent goToShopInNumber= new Intent(this,ShopInNumber.class);

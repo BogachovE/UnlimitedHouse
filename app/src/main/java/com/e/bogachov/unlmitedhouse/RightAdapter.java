@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.TextView;
 
+import com.e.bogachov.unlmitedhouse.ShopsCateg.Shops;
+
 import java.util.List;
 
 /**
@@ -17,11 +19,13 @@ import java.util.List;
  */
 public class RightAdapter extends RecyclerView.Adapter<RightAdapter.RightViewHolder> {
 
+
     public class RightViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         CardView cv;
         TextView productName;
         TextView productCount;
+
         Button btn;
 
         Context context = itemView.getContext();
@@ -39,6 +43,8 @@ public class RightAdapter extends RecyclerView.Adapter<RightAdapter.RightViewHol
         }
 
 
+
+
         @Override
         public void onClick(View view) {
 
@@ -47,7 +53,7 @@ public class RightAdapter extends RecyclerView.Adapter<RightAdapter.RightViewHol
 
     List<Product> product;
 
-    public RightAdapter(List<Product> product){this.product = product;}
+     public RightAdapter(List<Product> product){this.product = product;}
 
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
@@ -57,16 +63,17 @@ public class RightAdapter extends RecyclerView.Adapter<RightAdapter.RightViewHol
     @Override
     public RightViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_right, viewGroup, false);
-        RightViewHolder pvhh = new RightViewHolder(v);
-        return pvhh;
+        RightViewHolder pvh = new RightViewHolder(v);
+        return pvh;
 
     }
 
     @Override
     public void onBindViewHolder(RightViewHolder rightViewHolder, int i) {
 
-       rightViewHolder.productName.setText(product.get(i).name);
-        rightViewHolder.productCount.setText(product.get(i).count);
+       rightViewHolder.productName.setText(product.get(i).orderNumb);
+        rightViewHolder.productCount.setText(product.get(i).fromShop);
+
 
     }
 
@@ -75,4 +82,6 @@ public class RightAdapter extends RecyclerView.Adapter<RightAdapter.RightViewHol
 
         return product.size();
     }
+
+
 }

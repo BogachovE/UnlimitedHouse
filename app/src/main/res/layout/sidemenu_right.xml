@@ -4,11 +4,32 @@
     android:layout_height="match_parent">
 
 
-
-    <android.support.v7.widget.RecyclerVie
+    <android.support.v7.widget.RecyclerView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
         android:id="@+id/rv2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_weight="1"
+        >
 
-    </android.support.v7.widget.RecyclerVie>
+
+    </android.support.v7.widget.RecyclerView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/black"
+        android:layout_weight="5"
+        >
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Checkout"
+            android:id="@+id/textView7"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:layout_centerInParent="true"
+            android:textColor="#ffffff" />
+    </RelativeLayout>
 </LinearLayout>
