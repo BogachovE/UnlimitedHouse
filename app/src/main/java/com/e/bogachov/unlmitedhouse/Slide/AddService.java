@@ -1,11 +1,12 @@
 package com.e.bogachov.unlmitedhouse.Slide;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.e.bogachov.unlmitedhouse.R;
 
-public class AddService extends AppCompatActivity {
+public class AddService extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

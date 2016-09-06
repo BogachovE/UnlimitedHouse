@@ -26,7 +26,7 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/house"
         android:layout_marginTop="@dimen/sign_btn_margin_top"
-        android:drawableLeft="@drawable/phone_number"
+        android:drawableLeft="@drawable/phoneimag1xxhdpi"
         android:textColor="#BBBCBE"
         android:textColorHint="#BBBCBE"
         android:backgroundTint="#BBBCBE"
@@ -38,7 +38,7 @@
     <Button
         android:layout_width="@dimen/sign_btn_width"
         android:layout_height="@dimen/sign_btn_height"
-        android:background="@drawable/sigin_up"
+        android:background="@drawable/nextbtn"
         android:layout_below="@id/phonetxt"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/sign_btn_margin_top"

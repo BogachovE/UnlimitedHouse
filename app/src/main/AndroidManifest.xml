@@ -7,6 +7,7 @@
     android:targetSdkVersion="21" />
 
     <application
+        android:largeHeap="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="  UNLIMITED HOUSE"
@@ -37,7 +38,6 @@
         <activity
             android:name=".Slide.Profile"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Slide.Orders" />
         <activity android:name=".Slide.AddService" />
         <activity
             android:name=".Slide.ContactUs"

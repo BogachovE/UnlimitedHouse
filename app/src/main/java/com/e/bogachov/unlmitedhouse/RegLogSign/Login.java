@@ -22,7 +22,7 @@ public class Login extends Activity implements View.OnClickListener{
 
         ActionBar actionBar = getActionBar();
         actionBar.hide();
-        
+
         //Find View
         ImageButton loginBtn = (ImageButton)findViewById(R.id.loginBtn);
         loginBtn.setOnClickListener(this);

@@ -17,7 +17,7 @@
             android:layout_width="@dimen/house_width"
             android:layout_height="@dimen/house_height"
             android:id="@+id/imageView"
-            android:background="@drawable/house"
+            android:background="@drawable/house2"
             android:contentDescription="@string/deck"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/house_margin_top"
@@ -44,17 +44,37 @@
             android:id="@+id/liner">
 
 
-            <Button
-                android:background="@drawable/butnarab"
-                android:id="@+id/arablang"
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:layout_marginLeft="@dimen/btn_arab_margin_left"
                 android:layout_marginRight="@dimen/btn_arab_margin_right"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
+                android:id="@+id/arab_frame"
 
-                />
+                >
+
+                <Button
+                    android:background="@drawable/main"
+                    android:id="@+id/arablang"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/Local_layout_width"
+
+
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="العربية"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/white"
+                    android:textSize="30sp"
+                    android:id="@+id/arabtxt"
+                    android:layout_marginBottom="5dp" />
+            </FrameLayout>
 
             <Button
                 android:background="@drawable/backbuttoneng"
@@ -62,9 +82,10 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="@dimen/btn_eng_margin_left"
                 android:layout_marginRight="@dimen/btn_eng_margin_right"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"/>
+
         </LinearLayout>
 
         <LinearLayout
@@ -86,7 +107,7 @@
             <ImageButton
                 android:background="@drawable/login"
                 android:layout_width="@dimen/login_btn_width"
-                android:layout_height="120dp"
+                android:layout_height="@dimen/login_btn_width"
                 android:id="@+id/loginbtn"
                 />
 

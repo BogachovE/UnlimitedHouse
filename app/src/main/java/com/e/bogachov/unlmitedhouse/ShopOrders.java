@@ -2,15 +2,9 @@ package com.e.bogachov.unlmitedhouse;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.widget.Toast;
-
-import com.e.bogachov.unlmitedhouse.ShopsCateg.Shops;
-import com.e.bogachov.unlmitedhouse.ShopsCateg.ShopsAdapter;
-import com.e.bogachov.unlmitedhouse.Slide.Orders;
 
 import java.util.ArrayList;
 import java.util.List;

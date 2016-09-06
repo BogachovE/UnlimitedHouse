@@ -2,6 +2,7 @@ package com.e.bogachov.unlmitedhouse.RegLogSign;
 
 import android.app.ActionBar;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,9 +10,9 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.e.bogachov.unlmitedhouse.ShopOrders;
 import com.e.bogachov.unlmitedhouse.Slide.AddService;
 import com.e.bogachov.unlmitedhouse.Slide.ContactUs;
-import com.e.bogachov.unlmitedhouse.Slide.Orders;
 import com.e.bogachov.unlmitedhouse.Slide.Profile;
 import com.e.bogachov.unlmitedhouse.R;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
@@ -45,12 +46,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
+
+
+
         //Find View Slide Bar
-        TextView profilebtn = (TextView) findViewById(R.id.profilebtn);
+        TextView profilebtn = ((TextView) findViewById(R.id.profilebtn));
+        profilebtn.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/BebasNeueBook.otf"));
+
+
         TextView ordersbtn = (TextView) findViewById(R.id.ordersbtn);
+        ordersbtn.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/BebasNeueBook.otf"));
         TextView addservicebtn = (TextView) findViewById(R.id.addservicebtn);
+        addservicebtn.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/BebasNeueBook.otf"));
         TextView contactbtn = (TextView) findViewById(R.id.contactbtn);
+        contactbtn.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/BebasNeueBook.otf"));
         TextView logoutbtn = (TextView) findViewById(R.id.logoutbtn);
+        logoutbtn.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/BebasNeueBook.otf"));
         profilebtn.setOnClickListener(this);
         ordersbtn.setOnClickListener(this);
         addservicebtn.setOnClickListener(this);
@@ -65,6 +76,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         loginbtn.setOnClickListener(this);
         Button englang = (Button) findViewById(R.id.englang);
         englang.setOnClickListener(this);
+        TextView arabtxt = (TextView)findViewById(R.id.arabtxt);
+        arabtxt.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/droid-sans.ttf"));
         Button arablang = (Button) findViewById(R.id.arablang);
         arablang.setOnClickListener(this);
 
@@ -105,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             }
             case R.id.ordersbtn:{
-                Intent goToOrders = new Intent(MainActivity.this,Orders.class);
+                Intent goToOrders = new Intent(MainActivity.this,ShopOrders.class);
                 startActivity(goToOrders);
                 break;
             }
