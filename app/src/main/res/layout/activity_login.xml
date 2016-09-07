@@ -8,7 +8,7 @@
         android:layout_width="@dimen/house_width"
         android:layout_height="@dimen/house_height"
         android:id="@+id/imageView"
-        android:background="@drawable/house"
+        android:background="@drawable/house2"
         android:contentDescription="@string/deck"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/house_margin_top"

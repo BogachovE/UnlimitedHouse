@@ -1,13 +1,20 @@
 package com.e.bogachov.unlmitedhouse.ShopsCateg;
 
 import android.app.ActionBar;
+import android.app.ActivityManager;
 import android.content.ClipData;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.TypefaceSpan;
+import android.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,11 +43,47 @@ public class ShopsMenu extends Activity implements View.OnClickListener{
     SlidingMenu menu2;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Intent intent = getIntent();
+
+
+        String categ = intent.getStringExtra("categ");
+        switch (categ){
+            case "beauty":{
+                super.setTheme(R.style.Beauty);
+
+                break;
+            }
+
+            case "product":{
+                super.setTheme(R.style.Product);
+
+                break;
+            }
+
+            case "candy":{
+                super.setTheme(R.style.Candy);
+
+                break;
+            }
+
+            case "house":{
+                super.setTheme(R.style.House);
+
+                break;
+            }
+            case "other":{
+                super.setTheme(R.style.Other);
+
+                break;
+            }
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.shops_menu);
+
+
+
 
 
         SlidingMenu menu2 = new SlidingMenu(this);
@@ -78,11 +121,45 @@ public class ShopsMenu extends Activity implements View.OnClickListener{
         initializeData2();
         initializeAdapter2();
 
+
         getActionBar().setHomeAsUpIndicator(R.drawable.btn_aaact);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getActionBar().setHomeAsUpIndicator(R.drawable.btn_aaact);
-        getActionBar().setCustomView(R.layout.abs_layout);
+
+        switch (categ){
+            case "beauty":{
+                getActionBar().setCustomView(R.layout.abs_layout);
+
+                break;
+            }
+
+            case "product":{
+                getActionBar().setCustomView(R.layout.abs_product);
+
+                break;
+            }
+
+            case "candy":{
+                getActionBar().setCustomView(R.layout.abs_candy);
+
+                break;
+            }
+
+            case "house":{
+                getActionBar().setCustomView(R.layout.abs_house);
+
+                break;
+            }
+            case "other":{
+                getActionBar().setCustomView(R.layout.abs_other);
+
+                break;
+            }
+        }
+
+
+
 
 
 
@@ -94,7 +171,7 @@ public class ShopsMenu extends Activity implements View.OnClickListener{
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
+//        getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 

@@ -55,7 +55,6 @@
         <activity android:name=".Rating" />
         <activity
             android:name=".ShopsCateg.ShopsMenu"
-            android:label="          Beauty"
             android:theme="@style/Beauty" />
         <activity android:name=".OrderStatus"></activity>
     </application>

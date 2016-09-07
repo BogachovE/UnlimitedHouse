@@ -55,7 +55,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/mline"
+        android:src="@drawable/lineh"
         android:layout_below="@+id/profile"
         android:contentDescription=""
         android:layout_marginTop="@dimen/slider_soft_line_margin_top"
@@ -94,7 +94,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/mline"
+        android:src="@drawable/lineh"
         android:layout_below="@+id/myorders"
         android:contentDescription=""
         android:layout_marginTop="@dimen/slider_soft_line_margin_top"

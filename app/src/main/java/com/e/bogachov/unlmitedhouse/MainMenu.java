@@ -40,9 +40,11 @@ public class MainMenu extends Activity implements View.OnClickListener {
         house.setOnClickListener(this);
         other.setOnClickListener(this);
 
-       getActionBar().setHomeAsUpIndicator(R.drawable.btn_aaact);
+        getActionBar().setHomeAsUpIndicator(R.drawable.btn_aaact);
         getActionBar().setDisplayHomeAsUpEnabled(true);
-
+        getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getActionBar().setHomeAsUpIndicator(R.drawable.btn_aaact);
+        getActionBar().setCustomView(R.layout.abs_main);
         ActionBar actionBar = getActionBar();
 
     }
@@ -96,20 +98,25 @@ public class MainMenu extends Activity implements View.OnClickListener {
             case R.drawable.btn_aaact:{
                 Intent goToShopsMenu = new Intent(MainMenu.this,ShopsMenu.class);
                 startActivity(goToShopsMenu);
+                break;
 
             }
 
             case R.id.beauty:{
 
                 Intent goToShopsMenu = new Intent(MainMenu.this,ShopsMenu.class);
+                goToShopsMenu.putExtra("categ","beauty");
                 startActivity(goToShopsMenu);
+                break;
 
             }
 
             case R.id.product:{
 
                 Intent goToShopsMenu = new Intent(MainMenu.this,ShopsMenu.class);
+                goToShopsMenu.putExtra("categ","product");
                 startActivity(goToShopsMenu);
+                break;
 
 
             }
@@ -117,20 +124,26 @@ public class MainMenu extends Activity implements View.OnClickListener {
             case R.id.candy:{
 
                 Intent goToShopsMenu = new Intent(MainMenu.this,ShopsMenu.class);
+                goToShopsMenu.putExtra("categ","candy");
                 startActivity(goToShopsMenu);
+                break;
 
             }
 
             case R.id.house:{
 
                 Intent goToShopsMenu = new Intent(MainMenu.this,ShopsMenu.class);
+                goToShopsMenu.putExtra("categ","house");
                 startActivity(goToShopsMenu);
+                break;
 
             }
             case R.id.other:{
 
                 Intent goToShopsMenu = new Intent(MainMenu.this,ShopsMenu.class);
+                goToShopsMenu.putExtra("categ","other");
                 startActivity(goToShopsMenu);
+                break;
 
             }
 

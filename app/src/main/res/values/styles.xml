@@ -1,7 +1,5 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <!-- Base application theme. -->
     <style name="AppTheme" parent="@android:style/Theme.Holo.Light">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -15,7 +13,11 @@
 
         <item name="android:background">#8CC6E1</item>
     </style>
+    <style name="WhiteTitle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textColor">#ffffff</item>
 
+    </style>
+<!-- Beauty-->
     <style name="Beauty" parent="@android:style/Theme.Holo.Light">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -30,11 +32,78 @@
         <item name="android:background">#f8a11c</item>
         <item name="android:titleTextStyle">@style/WhiteTitle</item>
     </style>
+<!-- / Beauty-->
 
-    <style name="WhiteTitle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
-        <item name="android:textColor">#ffffff</item>
-
+<!--Candy-->
+    <style name="Candy" parent="@android:style/Theme.Holo.Light">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:actionBarStyle">@style/candyAction</item>
+        <item name="android:logo">@android:color/transparent</item>
     </style>
+
+    <style name="candyAction" parent="@android:style/Widget.Holo.Light.ActionBar">
+
+        <item name="android:background">#833F98</item>
+        <item name="android:titleTextStyle">@style/WhiteTitle</item>
+    </style>
+    <!--Candy-->
+
+    <!--Product-->
+    <style name="Product" parent="@android:style/Theme.Holo.Light">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:actionBarStyle">@style/ProductAction</item>
+        <item name="android:logo">@android:color/transparent</item>
+    </style>
+
+    <style name="ProductAction" parent="@android:style/Widget.Holo.Light.ActionBar">
+
+        <item name="android:background">#EE4897</item>
+        <item name="android:titleTextStyle">@style/WhiteTitle</item>
+    </style>
+    <!--Product-->
+
+    <!--House-->
+    <style name="House" parent="@android:style/Theme.Holo.Light">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:actionBarStyle">@style/houseAction</item>
+        <item name="android:logo">@android:color/transparent</item>
+    </style>
+
+    <style name="houseAction" parent="@android:style/Widget.Holo.Light.ActionBar">
+
+        <item name="android:background">#46C2C1</item>
+        <item name="android:titleTextStyle">@style/WhiteTitle</item>
+    </style>
+    <!--House-->
+
+    <!--Other-->
+    <style name="Other" parent="@android:style/Theme.Holo.Light">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:actionBarStyle">@style/otherAction</item>
+        <item name="android:logo">@android:color/transparent</item>
+    </style>
+
+    <style name="otherAction" parent="@android:style/Widget.Holo.Light.ActionBar">
+
+        <item name="android:background">#37B551</item>
+        <item name="android:titleTextStyle">@style/WhiteTitle</item>
+    </style>
+    <!--Other-->
+
+
+
 
 
 

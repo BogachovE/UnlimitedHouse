@@ -27,7 +27,7 @@
             android:layout_height="match_parent"
             android:id="@+id/beauty"
             android:layout_weight="1"
-            android:background="@drawable/beautycateg"
+            android:background="@drawable/beautyc"
 
             />
 
@@ -36,7 +36,7 @@
             android:layout_height="match_parent"
             android:id="@+id/candy"
             android:layout_weight="1"
-            android:background="@drawable/candycateg"
+            android:background="@drawable/candyc"
 
             />
 
@@ -47,7 +47,7 @@
             android:layout_height="match_parent"
             android:id="@+id/product"
             android:layout_weight="1"
-            android:background="@drawable/productivecateg"
+            android:background="@drawable/productivec"
 
             />
 
@@ -64,14 +64,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/other"
-            android:background="@drawable/otherscateg"
+            android:background="@drawable/otherc"
             android:layout_toLeftOf="@+id/house"/>
 
         <ImageView
             android:layout_width="@dimen/main_right_elements_width"
             android:layout_height="match_parent"
             android:id="@+id/house"
-            android:background="@drawable/housecateg"
+            android:background="@drawable/houseca"
             android:layout_alignParentRight="true"
             />
     </RelativeLayout>
