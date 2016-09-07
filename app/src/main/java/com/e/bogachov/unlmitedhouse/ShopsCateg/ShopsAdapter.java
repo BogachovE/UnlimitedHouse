@@ -1,5 +1,7 @@
 package com.e.bogachov.unlmitedhouse.ShopsCateg;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -10,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -49,11 +52,18 @@ public class ShopsAdapter extends RecyclerView.Adapter<ShopsAdapter.ShopsViewHol
 
         @Override
         public void onClick(View v) {
+           Integer last = shops.size()-1;
+            if (getAdapterPosition()==last){
+               Intent dialog = new Intent(context,ShopsMenu.class);
+                dialog.putExtra("click","true");
+
+            }
 
             Intent intent=null ;
             switch (getAdapterPosition()){
                 case 0:{
                     intent = new Intent(context,ServiceTypeMenu.class);
+                    context.startActivity(intent);
                     break;
 
 
@@ -61,9 +71,11 @@ public class ShopsAdapter extends RecyclerView.Adapter<ShopsAdapter.ShopsViewHol
                 }
 
 
+
+
             }
 
-            context.startActivity(intent);
+
 
         }
     }
@@ -104,6 +116,8 @@ public class ShopsAdapter extends RecyclerView.Adapter<ShopsAdapter.ShopsViewHol
 
         return shops.size();
     }
+
+
 }
 
 

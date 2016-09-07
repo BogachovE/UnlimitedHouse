@@ -2,6 +2,8 @@ package com.e.bogachov.unlmitedhouse.ShopsCateg;
 
 import android.app.ActionBar;
 import android.app.ActivityManager;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
@@ -41,6 +43,9 @@ public class ShopsMenu extends Activity implements View.OnClickListener{
     private RecyclerView rv2;
     private List<Product> product;
     SlidingMenu menu2;
+    String isItShop;
+    final int DIALOG = 1;
+
 
 
     @Override
@@ -48,35 +53,38 @@ public class ShopsMenu extends Activity implements View.OnClickListener{
         Intent intent = getIntent();
 
 
+        isItShop = intent.getStringExtra("isItShop");
         String categ = intent.getStringExtra("categ");
-        switch (categ){
-            case "beauty":{
-                super.setTheme(R.style.Beauty);
+        if (isItShop.equals("false")) {
+            switch (categ) {
+                case "beauty": {
+                    super.setTheme(R.style.Beauty);
 
-                break;
-            }
+                    break;
+                }
 
-            case "product":{
-                super.setTheme(R.style.Product);
+                case "product": {
+                    super.setTheme(R.style.Product);
 
-                break;
-            }
+                    break;
+                }
 
-            case "candy":{
-                super.setTheme(R.style.Candy);
+                case "candy": {
+                    super.setTheme(R.style.Candy);
 
-                break;
-            }
+                    break;
+                }
 
-            case "house":{
-                super.setTheme(R.style.House);
+                case "house": {
+                    super.setTheme(R.style.House);
 
-                break;
-            }
-            case "other":{
-                super.setTheme(R.style.Other);
+                    break;
+                }
+                case "other": {
+                    super.setTheme(R.style.Other);
 
-                break;
+                    break;
+                }
             }
         }
         super.onCreate(savedInstanceState);
@@ -118,8 +126,13 @@ public class ShopsMenu extends Activity implements View.OnClickListener{
 
         initializeData();
         initializeAdapter();
-        initializeData2();
-        initializeAdapter2();
+
+
+ //       String click;
+ //       click=intent.getStringExtra("click");
+
+
+
 
 
         getActionBar().setHomeAsUpIndicator(R.drawable.btn_aaact);
@@ -127,36 +140,43 @@ public class ShopsMenu extends Activity implements View.OnClickListener{
         getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getActionBar().setHomeAsUpIndicator(R.drawable.btn_aaact);
 
-        switch (categ){
-            case "beauty":{
-                getActionBar().setCustomView(R.layout.abs_layout);
 
-                break;
+        categ = intent.getStringExtra("categ");
+
+      if (isItShop.equals("false") ) {
+
+            switch (categ) {
+                case "beauty": {
+                    getActionBar().setCustomView(R.layout.abs_layout);
+
+                    break;
+                }
+
+                case "product": {
+                    getActionBar().setCustomView(R.layout.abs_product);
+
+                    break;
+                }
+
+                case "candy": {
+                    getActionBar().setCustomView(R.layout.abs_candy);
+
+                    break;
+                }
+
+                case "house": {
+                    getActionBar().setCustomView(R.layout.abs_house);
+
+                    break;
+                }
+                case "other": {
+                    getActionBar().setCustomView(R.layout.abs_other);
+
+                    break;
+                }
             }
-
-            case "product":{
-                getActionBar().setCustomView(R.layout.abs_product);
-
-                break;
-            }
-
-            case "candy":{
-                getActionBar().setCustomView(R.layout.abs_candy);
-
-                break;
-            }
-
-            case "house":{
-                getActionBar().setCustomView(R.layout.abs_house);
-
-                break;
-            }
-            case "other":{
-                getActionBar().setCustomView(R.layout.abs_other);
-
-                break;
-            }
-        }
+       }
+        
 
 
 
@@ -207,27 +227,8 @@ public class ShopsMenu extends Activity implements View.OnClickListener{
 
 
     }
-    private void initializeAdapter2() {
-        RightAdapter adapter2 = new RightAdapter(product);
-        rv2.setAdapter(adapter2);
-
-    }
-
-    private void initializeData2() {
-        product = new ArrayList<>();
-        product.add(new Product("sdasdas","sdasdasd"));
-        product.add(new Product("sdasdas","sdasdasd"));
-        product.add(new Product("sdasdas","sdasdasd"));
-        product.add(new Product("sdasdas","sdasdasd"));
-        product.add(new Product("sdasdas","sdasdasd"));
-        product.add(new Product("sdasdas","sdasdasd"));
-        product.add(new Product("sdasdas","sdasdasd"));
-        product.add(new Product("sdasdas","sdasdasd"));
-        product.add(new Product("sdasdas","sdasdasd"));
-        product.add(new Product("sdasdas","sdasdasd"));
 
 
-    }
 
     private void initializeData() {
         shops = new ArrayList<>();
@@ -244,6 +245,7 @@ public class ShopsMenu extends Activity implements View.OnClickListener{
         product.add(new Product("sdasdas","sdasdasd"));
         product.add(new Product("sdasdas","sdasdasd"));
         product.add(new Product("sdasdas","sdasdasd"));
+        if (isItShop.equals("true")){ shops.add(new Shops("Service type",R.drawable.plus));}
 
 
     }
@@ -280,6 +282,28 @@ public class ShopsMenu extends Activity implements View.OnClickListener{
 
             }
 
+
+        }
+    }
+
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        AlertDialog.Builder adb = new AlertDialog.Builder(this);
+//        adb.setTitle("Please write your preference");
+        // создаем view из dialog.xml
+       LinearLayout view = (LinearLayout) getLayoutInflater()
+                .inflate(R.layout.dialog, null);
+        // устанавливаем ее, как содержимое тела диалога
+        adb.setView(view);
+        // находим TexView для отображения кол-ва
+       TextView tvCount = (TextView) view.findViewById(R.id.tvCount);
+        return adb.create();
+    }
+
+    @Override
+    protected void onPrepareDialog(int id, Dialog dialog) {
+        super.onPrepareDialog(id, dialog);
+        if (id == DIALOG) {
 
         }
     }

@@ -106,6 +106,7 @@ public class MainMenu extends Activity implements View.OnClickListener {
 
                 Intent goToShopsMenu = new Intent(MainMenu.this,ShopsMenu.class);
                 goToShopsMenu.putExtra("categ","beauty");
+                goToShopsMenu.putExtra("isItShop","false");
                 startActivity(goToShopsMenu);
                 break;
 
@@ -115,6 +116,7 @@ public class MainMenu extends Activity implements View.OnClickListener {
 
                 Intent goToShopsMenu = new Intent(MainMenu.this,ShopsMenu.class);
                 goToShopsMenu.putExtra("categ","product");
+                goToShopsMenu.putExtra("isItShop","false");
                 startActivity(goToShopsMenu);
                 break;
 
@@ -125,6 +127,7 @@ public class MainMenu extends Activity implements View.OnClickListener {
 
                 Intent goToShopsMenu = new Intent(MainMenu.this,ShopsMenu.class);
                 goToShopsMenu.putExtra("categ","candy");
+                goToShopsMenu.putExtra("isItShop","false");
                 startActivity(goToShopsMenu);
                 break;
 
@@ -134,6 +137,7 @@ public class MainMenu extends Activity implements View.OnClickListener {
 
                 Intent goToShopsMenu = new Intent(MainMenu.this,ShopsMenu.class);
                 goToShopsMenu.putExtra("categ","house");
+                goToShopsMenu.putExtra("isItShop","false");
                 startActivity(goToShopsMenu);
                 break;
 
@@ -142,6 +146,7 @@ public class MainMenu extends Activity implements View.OnClickListener {
 
                 Intent goToShopsMenu = new Intent(MainMenu.this,ShopsMenu.class);
                 goToShopsMenu.putExtra("categ","other");
+                goToShopsMenu.putExtra("isItShop","false");
                 startActivity(goToShopsMenu);
                 break;
 
