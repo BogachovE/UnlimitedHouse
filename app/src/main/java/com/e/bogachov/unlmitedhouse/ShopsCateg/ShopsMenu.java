@@ -138,7 +138,7 @@ public class ShopsMenu extends Activity implements View.OnClickListener , Google
         rv2.setLayoutManager(gm2);
         rv2.setHasFixedSize(true);
 
-       /* // Set up FirebaseRecyclerAdapter with the Query
+        // Set up FirebaseRecyclerAdapter with the Query
         Query postsQuery = getQuery(mDatabase);
         mAdapter = new FirebaseRecyclerAdapter<Post, PostViewHolder>(Post.class, R.layout.item_post,
                 PostViewHolder.class, postsQuery) {
@@ -180,7 +180,7 @@ public class ShopsMenu extends Activity implements View.OnClickListener , Google
                 });
             }
         };
-*/
+
 
 
         initializeData();
