@@ -61,7 +61,7 @@ public class ShopsMenu extends Activity implements View.OnClickListener {
 
 
         rv = (RecyclerView)findViewById(R.id.rv);
-        rv.setHasFixedSize(true);
+
 
         isItShop = intent.getStringExtra("isItShop");
         String categ = intent.getStringExtra("categ");
