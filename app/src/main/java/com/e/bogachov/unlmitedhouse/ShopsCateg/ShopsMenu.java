@@ -1,6 +1,5 @@
 package com.e.bogachov.unlmitedhouse.ShopsCateg;
 
-import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
@@ -9,7 +8,6 @@ import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.os.Build;
 import android.os.Bundle;
 
 import android.app.Activity;
@@ -36,12 +34,18 @@ import android.widget.TextView;
 import com.e.bogachov.unlmitedhouse.Product;
 import com.e.bogachov.unlmitedhouse.R;
 import com.e.bogachov.unlmitedhouse.RightAdapter;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShopsMenu extends Activity implements View.OnClickListener {
+public class ShopsMenu extends Activity implements View.OnClickListener , GoogleApiClient.OnConnectionFailedListener{
 
     private List<Shops> shops;
     private RecyclerView rv;
@@ -51,14 +55,16 @@ public class ShopsMenu extends Activity implements View.OnClickListener {
     String isItShop;
     final int DIALOG = 1;
     private static final String TAG = "MainActivity";
+    private DatabaseReference mDatabase;
 
 
+    private FirebaseRecyclerAdapter<Shops, ShopsViewHolder> mAdapter;
 
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Intent intent = getIntent();
 
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         rv = (RecyclerView)findViewById(R.id.rv);
         rv.setHasFixedSize(true);
@@ -132,6 +138,48 @@ public class ShopsMenu extends Activity implements View.OnClickListener {
         rv2.setLayoutManager(gm2);
         rv2.setHasFixedSize(true);
 
+        // Set up FirebaseRecyclerAdapter with the Query
+        Query postsQuery = getQuery(mDatabase);
+        mAdapter = new FirebaseRecyclerAdapter<Post, PostViewHolder>(Post.class, R.layout.item_post,
+                PostViewHolder.class, postsQuery) {
+            @Override
+            protected void populateViewHolder(final PostViewHolder viewHolder, final Post model, final int position) {
+                final DatabaseReference postRef = getRef(position);
+
+                // Set click listener for the whole post view
+                final String postKey = postRef.getKey();
+                viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Launch PostDetailActivity
+                        Intent intent = new Intent(getActivity(), PostDetailActivity.class);
+                        intent.putExtra(PostDetailActivity.EXTRA_POST_KEY, postKey);
+                        startActivity(intent);
+                    }
+                });
+
+                // Determine if the current user has liked this post and set UI accordingly
+                if (model.stars.containsKey(getUid())) {
+                    viewHolder.starView.setImageResource(R.drawable.ic_toggle_star_24);
+                } else {
+                    viewHolder.starView.setImageResource(R.drawable.ic_toggle_star_outline_24);
+                }
+
+                // Bind Post to ViewHolder, setting OnClickListener for the star button
+                viewHolder.bindToPost(model, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View starView) {
+                        // Need to write to both places the post is stored
+                        DatabaseReference globalPostRef = mDatabase.child("posts").child(postRef.getKey());
+                        DatabaseReference userPostRef = mDatabase.child("user-posts").child(model.uid).child(postRef.getKey());
+
+                        // Run two transactions
+                        onStarClicked(globalPostRef);
+                        onStarClicked(userPostRef);
+                    }
+                });
+            }
+        };
 
 
 
@@ -319,7 +367,12 @@ public class ShopsMenu extends Activity implements View.OnClickListener {
         }
     }
 
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        Log.d(TAG, "onConnectionFailed:" + connectionResult);
+        Toast.makeText(this, "Google Play Services error.", Toast.LENGTH_SHORT).show();
 
+    }
 
 
 }
