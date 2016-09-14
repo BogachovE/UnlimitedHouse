@@ -163,7 +163,7 @@ public class ShopsMenu extends Activity implements  GoogleApiClient.OnConnection
          rv = (RecyclerView) findViewById(R.id.rv);
 
         rv.setLayoutManager(gm);
-       
+
 
 
         mAdapter = new FirebaseRecyclerAdapter<FriendlyMessage, MessageViewHolder >(
