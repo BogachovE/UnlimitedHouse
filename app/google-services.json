@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "290011517161-2hirgsgiccul18ruc4bdpjfo7pg6182g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.e.bogachov.unlmitedhouse",
+            "certificate_hash": "C68433728E5B0DBDC8BAD451B2566C7332AC106A"
+          }
+        },
+        {
           "client_id": "290011517161-4d51mhqdjv21amb04p62fccvjga4qcgj.apps.googleusercontent.com",
           "client_type": 3
         }

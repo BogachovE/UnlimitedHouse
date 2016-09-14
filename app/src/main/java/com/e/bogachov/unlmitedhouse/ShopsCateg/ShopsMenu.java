@@ -7,17 +7,25 @@ import android.app.Dialog;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.os.Bundle;
 
 import android.app.Activity;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.text.Layout;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.TypefaceSpan;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -41,33 +49,55 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShopsMenu extends Activity implements View.OnClickListener , GoogleApiClient.OnConnectionFailedListener{
+public class ShopsMenu extends Activity implements  GoogleApiClient.OnConnectionFailedListener{
+    public static class MessageViewHolder extends RecyclerView.ViewHolder {
+        CardView cv;
+        TextView shopName;
+        ImageView shopPhoto;
+        RelativeLayout rl;
 
-    private List<Shops> shops;
+        public MessageViewHolder(View v) {
+            super(v);
+            v = (CardView)itemView.findViewById(R.id.cv);
+            shopName = (TextView)itemView.findViewById(R.id.shop_name);
+            shopPhoto = (ImageView)itemView.findViewById(R.id.shop_photo);
+            rl =(RelativeLayout)itemView.findViewById(R.id.rl);
+
+
+        }
+    }
+
+
     private RecyclerView rv;
-    private RecyclerView rv2;
     private List<Product> product;
     SlidingMenu menu2;
     String isItShop;
     final int DIALOG = 1;
     private static final String TAG = "MainActivity";
-    private DatabaseReference mDatabase;
+    private DatabaseReference mData;
+    LinearLayoutManager mLiner;
+    SharedPreferences mSharedPreferences;
 
 
-    private FirebaseRecyclerAdapter<Shops, ShopsViewHolder> mAdapter;
+    private FirebaseRecyclerAdapter<FriendlyMessage, MessageViewHolder> mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Intent intent = getIntent();
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        rv = (RecyclerView)findViewById(R.id.rv);
-        rv.setHasFixedSize(true);
+        mData = FirebaseDatabase.getInstance().getReference();
+
+
 
         isItShop = intent.getStringExtra("isItShop");
         String categ = intent.getStringExtra("categ");
@@ -122,7 +152,6 @@ public class ShopsMenu extends Activity implements View.OnClickListener , Google
 
 
 
-        rv2 = (RecyclerView)findViewById(R.id.rv2);
 
 
 
@@ -130,61 +159,41 @@ public class ShopsMenu extends Activity implements View.OnClickListener , Google
 
 
         StaggeredGridLayoutManager gm = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
-       StaggeredGridLayoutManager gm2 = new StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.VERTICAL);
 
-         rv.setLayoutManager(gm);
-         rv.setHasFixedSize(true);
+         rv = (RecyclerView) findViewById(R.id.rv);
 
-        rv2.setLayoutManager(gm2);
-        rv2.setHasFixedSize(true);
+        rv.setLayoutManager(gm);
+       
 
-        // Set up FirebaseRecyclerAdapter with the Query
-        Query postsQuery = getQuery(mDatabase);
-        mAdapter = new FirebaseRecyclerAdapter<Post, PostViewHolder>(Post.class, R.layout.item_post,
-                PostViewHolder.class, postsQuery) {
+
+        mAdapter = new FirebaseRecyclerAdapter<FriendlyMessage, MessageViewHolder >(
+              FriendlyMessage.class, R.layout.item, MessageViewHolder.class, mData.child("shops") ){
+
+
             @Override
-            protected void populateViewHolder(final PostViewHolder viewHolder, final Post model, final int position) {
-                final DatabaseReference postRef = getRef(position);
+            protected void populateViewHolder(MessageViewHolder viewHolder, FriendlyMessage model, int position) {
+                viewHolder.shopName.setText(model.getName());
+                Picasso.with(getApplication()).load(model.getPhotoUrl()).into(viewHolder.shopPhoto);
 
-                // Set click listener for the whole post view
-                final String postKey = postRef.getKey();
-                viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        // Launch PostDetailActivity
-                        Intent intent = new Intent(getActivity(), PostDetailActivity.class);
-                        intent.putExtra(PostDetailActivity.EXTRA_POST_KEY, postKey);
-                        startActivity(intent);
-                    }
-                });
-
-                // Determine if the current user has liked this post and set UI accordingly
-                if (model.stars.containsKey(getUid())) {
-                    viewHolder.starView.setImageResource(R.drawable.ic_toggle_star_24);
-                } else {
-                    viewHolder.starView.setImageResource(R.drawable.ic_toggle_star_outline_24);
-                }
-
-                // Bind Post to ViewHolder, setting OnClickListener for the star button
-                viewHolder.bindToPost(model, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View starView) {
-                        // Need to write to both places the post is stored
-                        DatabaseReference globalPostRef = mDatabase.child("posts").child(postRef.getKey());
-                        DatabaseReference userPostRef = mDatabase.child("user-posts").child(model.uid).child(postRef.getKey());
-
-                        // Run two transactions
-                        onStarClicked(globalPostRef);
-                        onStarClicked(userPostRef);
-                    }
-                });
             }
         };
 
+        mAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onItemRangeInserted(int positionStart, int itemCount) {
+                super.onItemRangeInserted(positionStart, itemCount);
+                int friendlyMessageCount = mAdapter.getItemCount();
+
+            }
+        });
 
 
-        initializeData();
-        initializeAdapter();
+            rv.setAdapter(mAdapter);
+
+
+
+     //   initializeData();
+     //   initializeAdapter();
 
 
  //       String click;
@@ -279,10 +288,9 @@ public class ShopsMenu extends Activity implements View.OnClickListener , Google
     }
 
     private void initializeAdapter() {
-        ShopsAdapter adapter = new ShopsAdapter(shops);
-        rv.setAdapter(adapter);
-        RightAdapter adapter2 = new RightAdapter(product);
-        rv2.setAdapter(adapter2);
+       /* ShopsAdapter adapter = new ShopsAdapter(shops);
+        rv.setAdapter(adapter);*/
+
 
 
     }
@@ -290,9 +298,9 @@ public class ShopsMenu extends Activity implements View.OnClickListener , Google
 
 
     private void initializeData() {
-        shops = new ArrayList<>();
-        shops.add(new Shops("Lasunia",R.drawable.cace));
-        shops.add(new Shops("Lasunia",R.drawable.lasunia));
+        //shops = new ArrayList<>();
+        /*shops.add(new Shops("Lasunia",R.drawable.cace));
+        shops.add(new Shops("Lasunia",R.drawable.lasunia));*/
         product = new ArrayList<>();
         product.add(new Product("sdasdas","sdasdasd"));
         product.add(new Product("sdasdas","sdasdasd"));
@@ -304,14 +312,16 @@ public class ShopsMenu extends Activity implements View.OnClickListener , Google
         product.add(new Product("sdasdas","sdasdasd"));
         product.add(new Product("sdasdas","sdasdasd"));
         product.add(new Product("sdasdas","sdasdasd"));
+/*
         if (isItShop.equals("true")){ shops.add(new Shops("Service type",R.drawable.plus));}
+*/
 
 
     }
 
 
 
-    @Override
+    /*@Override
     public void onClick(View view) {
         switch (view.getId()){
 
@@ -343,7 +353,7 @@ public class ShopsMenu extends Activity implements View.OnClickListener , Google
 
 
         }
-    }
+    }*/
 
     @Override
     protected Dialog onCreateDialog(int id) {

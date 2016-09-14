@@ -45,9 +45,9 @@ public class ProductMenu extends Activity {
 
     private void initializeData() {
         shops = new ArrayList<>();
-        shops.add(new Shops("Milk 20%",R.drawable.cace));
+       /* shops.add(new Shops("Milk 20%",R.drawable.cace));
         shops.add(new Shops("Milk 30%",R.drawable.lasunia));
-        shops.add(new Shops("Milk 40%",R.drawable.lasunia));
+        shops.add(new Shops("Milk 40%",R.drawable.lasunia));*/
 
     }
 

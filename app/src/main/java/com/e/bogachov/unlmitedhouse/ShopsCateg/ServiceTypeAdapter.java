@@ -90,7 +90,6 @@ public class ServiceTypeAdapter extends RecyclerView.Adapter<ServiceTypeAdapter.
     public void onBindViewHolder(ShopsViewHolder shopsViewHolder, int i) {
 
         shopsViewHolder.shopName.setText(shops.get(i).name);
-        shopsViewHolder.shopPhoto.setImageResource(shops.get(i).photoId);
         if (i%2!=0){
         shopsViewHolder.cv.setBackground(cn);
         }

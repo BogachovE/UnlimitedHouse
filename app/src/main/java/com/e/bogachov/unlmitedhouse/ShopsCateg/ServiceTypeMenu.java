@@ -43,9 +43,9 @@ public class ServiceTypeMenu extends Activity {
 
     private void initializeData() {
         shops = new ArrayList<>();
-        shops.add(new Shops("Milk", R.drawable.cace));
+       /* shops.add(new Shops("Milk", R.drawable.cace));
         shops.add(new Shops("Yogurt", R.drawable.lasunia));
-        shops.add(new Shops("Kefir", R.drawable.lasunia));
+        shops.add(new Shops("Kefir", R.drawable.lasunia));*/
 
     }
 }

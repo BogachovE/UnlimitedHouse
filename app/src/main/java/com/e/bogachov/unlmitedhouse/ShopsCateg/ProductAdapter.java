@@ -88,13 +88,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ShopsVie
     public void onBindViewHolder(ShopsViewHolder shopsViewHolder, int i) {
 
         shopsViewHolder.shopName.setText(shops.get(i).name);
-        shopsViewHolder.shopPhoto.setImageResource(shops.get(i).photoId);
-        if (i%2!=0){
+      /*  if (i%2!=0){
         shopsViewHolder.cv.setBackground(cn);
         }
         else {shopsViewHolder.cv.setBackground(cdn);
 
-        }
+        }*/
 
     }
 
