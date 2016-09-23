@@ -3,8 +3,8 @@
     package="com.e.bogachov.unlmitedhouse">
 
     <uses-sdk
-        android:minSdkVersion="11"
-    android:targetSdkVersion="21" />
+        android:minSdkVersion="15"
+    android:targetSdkVersion="24" />
 
     !-- Automatically granted permissions PROTECTION_NORMAL -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>

@@ -42,7 +42,7 @@ dependencies {
     compile 'com.nexmo:verify:2.0.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.google.android.gms:play-services:9.4.0'
-
+    compile 'com.firebase:firebase-client-android:2.3.1'
 
 
 

@@ -10,7 +10,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import android.app.Activity;
@@ -58,19 +60,45 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShopsMenu extends Activity implements  GoogleApiClient.OnConnectionFailedListener{
-    public static class MessageViewHolder extends RecyclerView.ViewHolder {
+
+    ColorDrawable cn = new ColorDrawable(Color.parseColor("#FAFAFA"));
+    ColorDrawable cdn = new ColorDrawable(Color.parseColor("#FFFFFF"));
+    Long l;
+
+    public static class MessageViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         CardView cv;
         TextView shopName;
         ImageView shopPhoto;
         RelativeLayout rl;
+        Context context;
+        Long l;
+
 
         public MessageViewHolder(View v) {
             super(v);
-            v = (CardView)itemView.findViewById(R.id.cv);
+            cv = (CardView)itemView.findViewById(R.id.cv);
+            cv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent goToServiceType = new Intent(v.getContext(),ServiceTypeMenu.class);
+                    goToServiceType.putExtra("clickid",String.valueOf(getAdapterPosition()));
+                    v.getContext().startActivity(goToServiceType);
+                    Toast.makeText(v.getContext().getApplicationContext(), "clisk."+(getAdapterPosition()), Toast.LENGTH_SHORT).show();
+                    l =getItemId();
+
+
+
+                }
+            });
             shopName = (TextView)itemView.findViewById(R.id.shop_name);
             shopPhoto = (ImageView)itemView.findViewById(R.id.shop_photo);
             rl =(RelativeLayout)itemView.findViewById(R.id.rl);
 
+
+        }
+
+        @Override
+        public void onClick(View v) {
 
         }
     }
@@ -92,6 +120,7 @@ public class ShopsMenu extends Activity implements  GoogleApiClient.OnConnection
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Intent intent = getIntent();
+
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -173,7 +202,13 @@ public class ShopsMenu extends Activity implements  GoogleApiClient.OnConnection
             @Override
             protected void populateViewHolder(MessageViewHolder viewHolder, FriendlyMessage model, int position) {
                 viewHolder.shopName.setText(model.getName());
-                Picasso.with(getApplication()).load(model.getPhotoUrl()).into(viewHolder.shopPhoto);
+                Picasso.with(getApplication()).load(model.getphotourl()).into(viewHolder.shopPhoto);
+                if (position%2!=0){
+                    viewHolder.cv.setBackground(cn);
+                }
+                else {viewHolder.cv.setBackground(cdn);
+
+                }
 
             }
         };
@@ -297,27 +332,13 @@ public class ShopsMenu extends Activity implements  GoogleApiClient.OnConnection
 
 
 
-    private void initializeData() {
-        //shops = new ArrayList<>();
-        /*shops.add(new Shops("Lasunia",R.drawable.cace));
-        shops.add(new Shops("Lasunia",R.drawable.lasunia));*/
-        product = new ArrayList<>();
-        product.add(new Product("sdasdas","sdasdasd"));
-        product.add(new Product("sdasdas","sdasdasd"));
-        product.add(new Product("sdasdas","sdasdasd"));
-        product.add(new Product("sdasdas","sdasdasd"));
-        product.add(new Product("sdasdas","sdasdasd"));
-        product.add(new Product("sdasdas","sdasdasd"));
-        product.add(new Product("sdasdas","sdasdasd"));
-        product.add(new Product("sdasdas","sdasdasd"));
-        product.add(new Product("sdasdas","sdasdasd"));
-        product.add(new Product("sdasdas","sdasdasd"));
+
 /*
         if (isItShop.equals("true")){ shops.add(new Shops("Service type",R.drawable.plus));}
 */
 
 
-    }
+
 
 
 

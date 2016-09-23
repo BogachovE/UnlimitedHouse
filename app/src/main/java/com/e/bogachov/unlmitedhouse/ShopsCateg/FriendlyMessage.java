@@ -19,15 +19,15 @@ public class FriendlyMessage {
 
     private String text;
     private String name;
-    private String photoUrl;
+    private String photourl;
 
     public FriendlyMessage() {
     }
 
-    public FriendlyMessage(String text, String name, String photoUrl) {
+    public FriendlyMessage(String text, String name, String photourl) {
         this.text = text;
         this.name = name;
-        this.photoUrl = photoUrl;
+        this.photourl = photourl;
     }
 
     public String getText() {
@@ -46,11 +46,11 @@ public class FriendlyMessage {
         this.name = name;
     }
 
-    public String getPhotoUrl() {
-        return photoUrl;
+    public String getphotourl() {
+        return photourl;
     }
 
-    public void setPhotoUrl(String photoUrl) {
-        this.photoUrl = photoUrl;
+    public void setphotourl(String photoUrl) {
+        this.photourl = photoUrl;
     }
 }
