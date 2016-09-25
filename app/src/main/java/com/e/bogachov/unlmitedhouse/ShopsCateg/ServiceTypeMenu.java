@@ -25,6 +25,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.orhanobut.hawk.Hawk;
 import com.squareup.picasso.Picasso;
 
 import java.io.BufferedWriter;
@@ -114,20 +115,12 @@ public class ServiceTypeMenu extends Activity implements GoogleApiClient.OnConne
         Intent intent = getIntent();
         mShops=intent.getStringExtra("clickid");
 
-        try {
-            // отрываем поток для записи
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(
-                    openFileOutput("file", MODE_PRIVATE)));
-            // пишем данные
-            bw.write(mShops);
-            // закрываем поток
-            bw.close();
-            Toast.makeText(this, "Text saved", Toast.LENGTH_SHORT).show();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Hawk.init(this).build();
+        Hawk.put("shopid",mShops);
+        Toast.makeText(this, "shopid="+Hawk.get("shopid"), Toast.LENGTH_SHORT).show();
+
+
+       
 
 
 
