@@ -4,13 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    android:transitionGroup="false"
-    android:touchscreenBlocksFocus="false">
+    >
 
     <ImageView
         android:layout_width="@dimen/slide_house_width"
         android:layout_height="@dimen/Slide_house_height"
-        android:background="@drawable/housemini"
+        android:src="@drawable/housemini"
+        android:scaleType="fitXY"
         android:id="@+id/house"
         android:layout_marginTop="@dimen/Slide_house_margin_top"/>
 
@@ -19,7 +19,6 @@
         android:layout_height="wrap_content"
         android:src="@drawable/lineh"
         android:layout_below="@+id/house"
-        android:contentDescription=""
         android:layout_marginTop="@dimen/slide_hardline_margin_top"
         android:id="@+id/hardline"
         android:layout_marginLeft="@dimen/slide_hardline_margin_left"

@@ -3,11 +3,13 @@ package com.e.bogachov.unlmitedhouse.RegLogSign;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.e.bogachov.unlmitedhouse.ShopOrders;
@@ -68,17 +70,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         contactbtn.setOnClickListener(this);
         logoutbtn.setOnClickListener(this);
 
-
         //find view
-        ImageButton signbtn = (ImageButton) findViewById(R.id.signbtn);
+        ImageView signbtn = (ImageView) findViewById(R.id.signbtn);
         signbtn.setOnClickListener(this);
-        ImageButton loginbtn = (ImageButton) findViewById(R.id.loginbtn);
+        ImageView loginbtn = (ImageView) findViewById(R.id.loginbtn);
         loginbtn.setOnClickListener(this);
         Button englang = (Button) findViewById(R.id.englang);
         englang.setOnClickListener(this);
         TextView arabtxt = (TextView)findViewById(R.id.arabtxt);
         arabtxt.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/droid-sans.ttf"));
-        Button arablang = (Button) findViewById(R.id.arablang);
+        ImageView arablang = (ImageView) findViewById(R.id.arablang);
         arablang.setOnClickListener(this);
 
 
