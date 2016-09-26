@@ -70,7 +70,7 @@ public class ServiceTypeMenu extends Activity implements GoogleApiClient.OnConne
 
                     Intent goToProduct = new Intent(context,ProductMenu.class);
                     context.startActivity(goToProduct);
-                    goToProduct.putExtra("cardid",String.valueOf(getAdapterPosition()));
+                    Hawk.put("serviceid",String.valueOf(getAdapterPosition()));
 
 
                     Toast.makeText(context, "clisk."+(getItemId()+2), Toast.LENGTH_SHORT).show();
@@ -120,7 +120,7 @@ public class ServiceTypeMenu extends Activity implements GoogleApiClient.OnConne
         Toast.makeText(this, "shopid="+Hawk.get("shopid"), Toast.LENGTH_SHORT).show();
 
 
-       
+
 
 
 

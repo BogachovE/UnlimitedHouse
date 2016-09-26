@@ -23,6 +23,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.orhanobut.hawk.Hawk;
 import com.squareup.picasso.Picasso;
 
 import java.io.BufferedReader;
@@ -73,7 +74,7 @@ public class ProductMenu extends Activity implements GoogleApiClient.OnConnectio
                 public void onClick(View v) {
                     Intent goToByProduct = new Intent(context,BuyProduct.class);
                     context.startActivity(goToByProduct);
-                    goToByProduct.putExtra("cardid",(String.valueOf(getAdapterPosition())));
+                    Hawk.put("productid",(String.valueOf(getAdapterPosition())));
                     Toast.makeText(context, "clisk."+(getItemId()+2), Toast.LENGTH_SHORT).show();
 
 
@@ -94,29 +95,12 @@ public class ProductMenu extends Activity implements GoogleApiClient.OnConnectio
         super.onCreate(savedInstanceState);
         setContentView(R.layout.product_menu);
 
+
+        Hawk.init(this).build();
         toProduct = getIntent();
-
-
-            try {
-                // открываем поток для чтения
-                BufferedReader br = new BufferedReader(new InputStreamReader(
-                        openFileInput("file")));
-                String str = "";
-                // читаем содержимое
-                while ((str = br.readLine()) != null) {
-                    Toast.makeText(this, "Text saved", Toast.LENGTH_SHORT).show();
-                    mShops=str;
-                }
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
-
-        mService=toProduct.getStringExtra("cardid");
-        toProduct.putExtra("serviceid",mService);
+        mService=Hawk.get("serviceid");
+        Hawk.put("serviceid",mService);
+        mShops=Hawk.get("shopid");
 
         mData = FirebaseDatabase.getInstance().getReference();
 

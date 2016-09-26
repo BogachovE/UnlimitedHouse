@@ -26,6 +26,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.orhanobut.hawk.Hawk;
 import com.squareup.picasso.Picasso;
 import com.firebase.client.android.*;
 
@@ -34,9 +35,9 @@ public class BuyProduct extends Activity implements View.OnClickListener, Google
     LinearLayout view;
     ImageView custom_order_back;
     TextView tvCount;
-    Integer mShops;
-    Integer mService;
-    Integer mProduct;
+    String mShops;
+    String mService;
+    String mProduct;
     private DatabaseReference mData;
     private static final String TAG = "MainActivity";
     Firebase mRefProductPhoto;
@@ -61,10 +62,13 @@ public class BuyProduct extends Activity implements View.OnClickListener, Google
         super.onCreate(savedInstanceState);
         setContentView(R.layout.buy_product);
         Firebase.setAndroidContext(this);
+
         Intent intent = getIntent();
-        mShops=intent.getIntExtra("shopid",0);
-        mService=intent.getIntExtra("serviceid",0);
-        mProduct=intent.getIntExtra("cardid",0);
+        mProduct=Hawk.get("productid");
+
+        Hawk.init(this).build();
+        mShops=Hawk.get("shopid");
+        mService=Hawk.get("serviceid");
 
         context = getApplicationContext();
 

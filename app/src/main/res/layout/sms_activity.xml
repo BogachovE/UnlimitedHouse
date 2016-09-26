@@ -21,7 +21,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/phonetxt"
-        android:inputType="phone"
         android:text="ENTER SMS CODE"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/house"
