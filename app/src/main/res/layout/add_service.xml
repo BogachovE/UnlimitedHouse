@@ -105,7 +105,7 @@
                 android:id="@+id/profile_location_text"
                 android:textColor="#00aeef"
                 android:textSize="@dimen/profile_text_size"/>
-            <EditText
+            <Spinner
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="   SAUDI ARABIA"

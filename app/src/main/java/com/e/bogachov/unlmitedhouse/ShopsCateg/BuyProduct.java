@@ -88,10 +88,10 @@ public class BuyProduct extends Activity implements View.OnClickListener, Google
         custom_order_back =(ImageView) findViewById(R.id.custom_order_back);
         custom_order_back.setOnClickListener(this);
 
-        Button btn_more =(Button)findViewById(R.id.btn_more);
+        ImageView btn_more =(ImageView) findViewById(R.id.btn_more);
         btn_more.setOnClickListener(this);
 
-        Button person_numb_btn_less =(Button)findViewById(R.id.person_numb_btn_less);
+        ImageView person_numb_btn_less =(ImageView) findViewById(R.id.person_numb_btn_less);
         person_numb_btn_less.setOnClickListener(this);
 
         visting_req_btn = (ImageView)findViewById(R.id.visting_req_btn);

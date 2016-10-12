@@ -170,13 +170,14 @@ public class SiginUp extends Activity implements View.OnClickListener {
                             isItShop = Hawk.get("isitshop");
                             //Toast.makeText(getApplicationContext(),isItShop, Toast.LENGTH_SHORT).show();
 
-                            // String kostil = dataSnapshot.toString();
-                            ////  String kostil2 =kostil.substring(35);
-                            //     String resultStr = kostil2.substring(kostil2.indexOf('{') + 1, kostil2.indexOf('='));
-//                            Hawk.put("userid",resultStr);
+                            String kostil = dataSnapshot.toString();
+                            String kostil2 =kostil.substring(35);
+                            String resultStr = kostil2.substring(kostil2.indexOf('{') + 1, kostil2.indexOf('='));
+                            Hawk.put("userid",resultStr);
 
                         }
                         if(isItShop.equals("false")) {
+                            Hawk.put("isitshop","false");
                             Intent goToLocation = new Intent(getApplicationContext(), RegLocation.class);
                             startActivity(goToLocation);
                         }

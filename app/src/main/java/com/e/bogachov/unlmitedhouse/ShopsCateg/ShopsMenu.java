@@ -116,31 +116,16 @@ public class ShopsMenu extends Activity implements  GoogleApiClient.OnConnection
             String isItShop=Hawk.get("isitshop");
 
             switch (v.getId()){
-                case R.id.rl:{
-
-                    if (isItShop.equals("false")) {
-                        Intent goToServiceType = new Intent(v.getContext(), ServiceTypeMenu.class);
-                        goToServiceType.putExtra("clickid", String.valueOf(getAdapterPosition()+1));
-                        Hawk.put("fromShop", shopName.getText().toString());
-                        v.getContext().startActivity(goToServiceType);
-                        Toast.makeText(v.getContext().getApplicationContext(), "clisk." + (getAdapterPosition()), Toast.LENGTH_SHORT).show();
-
-                    }else if(isItShop.equals("true") & getAdapterPosition() != 0){
-                        Intent goToServiceType = new Intent(v.getContext(), ServiceTypeMenu.class);
-                        goToServiceType.putExtra("clickid", String.valueOf(getAdapterPosition()+1));
-                        Hawk.put("fromShop", shopName.getText().toString());
-                        v.getContext().startActivity(goToServiceType);
-                        Toast.makeText(v.getContext().getApplicationContext(), "clisk." + (getAdapterPosition()), Toast.LENGTH_SHORT).show();
-
-                    }
-                    else {
-                        FragmentManager fr = ((Activity) v.getContext()).getFragmentManager();
-                        dlg1 = new Dialog1();
-                        dlg1.show(fr, "dlg1");
+                case R.id.rl: {
 
 
-                    }
+                    Intent goToServiceType = new Intent(v.getContext(), ServiceTypeMenu.class);
+                    goToServiceType.putExtra("clickid", String.valueOf(getAdapterPosition() + 1));
+                    Hawk.put("fromShop", shopName.getText().toString());
+                    v.getContext().startActivity(goToServiceType);
+                    Toast.makeText(v.getContext().getApplicationContext(), "clisk." + (getAdapterPosition()), Toast.LENGTH_SHORT).show();
                 }
+
             }
 
 
@@ -221,7 +206,7 @@ public class ShopsMenu extends Activity implements  GoogleApiClient.OnConnection
          if(isItShop.equals("false")) {
              mQuery = mData.child("shops/category/" + categ).orderByKey().startAt("1");
          }
-        else mQuery = mData;
+        else mQuery = mData.child("shops/category/" + categ);
 
         mAdapter = new FirebaseRecyclerAdapter<FriendlyMessage, MessageViewHolder >(
                 FriendlyMessage.class, R.layout.item, MessageViewHolder.class, mQuery ){

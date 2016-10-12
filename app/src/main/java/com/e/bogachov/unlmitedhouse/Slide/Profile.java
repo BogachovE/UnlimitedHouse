@@ -34,6 +34,8 @@ public class Profile extends Activity implements View.OnClickListener{
         Firebase.setAndroidContext(this);
 
 
+        signbtn = (ImageView)findViewById(R.id.signbtn);
+        signbtn.setOnClickListener(this);
         profile_name_edit =(EditText)findViewById(R.id.profile_name_edit);
         profile_email_edit =(EditText)findViewById(R.id.profile_email_edit);
         profile_location_edit =(EditText)findViewById(R.id.profile_location_edit);

@@ -12,7 +12,7 @@
         android:layout_height="@dimen/Slide_house_height"
         android:src="@drawable/logo_inside"
         android:scaleType="fitXY"
-        android:id="@+id/house"
+        android:id="@+id/housee"
         android:layout_marginTop="@dimen/Slide_house_margin_top"
         android:layout_centerHorizontal="true" />
 
@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/lineh"
-        android:layout_below="@+id/house"
+        android:layout_below="@+id/housee"
         android:layout_marginTop="@dimen/slide_hardline_margin_top"
         android:id="@+id/hardline"
         android:layout_marginLeft="@dimen/slide_hardline_margin_left"

@@ -8,7 +8,7 @@
     <ImageView
         android:layout_width="@dimen/house_width"
         android:layout_height="@dimen/house_height"
-        android:id="@+id/house"
+        android:id="@+id/housee"
         android:background="@drawable/house2"
         android:contentDescription="@string/deck"
         android:layout_centerHorizontal="true"
@@ -23,7 +23,7 @@
         android:id="@+id/phonetxt"
         android:text="ENTER SMS CODE"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/house"
+        android:layout_below="@+id/housee"
         android:layout_marginTop="@dimen/sign_btn_margin_top"
         android:drawableLeft="@drawable/phoneimag1xxhdpi"
         android:textColor="#BBBCBE"

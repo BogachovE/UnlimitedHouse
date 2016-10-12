@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="Nifty"><attr format="string" name="typeface"/><attr format="string|reference" name="message"/><attr format="color" name="messageColor"/><attr format="string" name="messageTypeface"/><attr format="string|reference" name="background"/><attr format="string|reference" name="brandingLogo"/><attr format="string|reference" name="spinner"/></declare-styleable>
+    <string name="app_name">Nifty</string>
+    <string name="hello">Hello World, NiftyActivity!</string>
+    <style name="Nifty.Progress.Indeterminate" parent="@android:style/Theme">
+        <item name="android:src">@drawable/nifty_spinner_white_48</item>
+    </style>
+</resources>

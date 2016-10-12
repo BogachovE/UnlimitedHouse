@@ -21,6 +21,10 @@ import android.widget.Toast;
 import com.e.bogachov.unlmitedhouse.Dialog1;
 import com.e.bogachov.unlmitedhouse.Dialog2;
 import com.e.bogachov.unlmitedhouse.R;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -38,6 +42,8 @@ public class ServiceTypeMenu extends Activity implements GoogleApiClient.OnConne
     SharedPreferences sPref;
     String isItShop;
     Query mQuery;
+    String ownerid;
+    String userId;
 
 
 
@@ -48,6 +54,8 @@ public class ServiceTypeMenu extends Activity implements GoogleApiClient.OnConne
         ImageView shopPhoto;
         RelativeLayout rl;
         Context context = itemView.getContext();
+        String userId;
+        String ownerid;
 
 
         public MessageViewHolder(View v) {
@@ -67,6 +75,8 @@ public class ServiceTypeMenu extends Activity implements GoogleApiClient.OnConne
         public void onClick(View v) {
             DialogFragment dlg1;
             String isItShop = Hawk.get("isitshop");
+            userId=Hawk.get("userid");
+            ownerid=Hawk.get("ownerid");
 
             switch (v.getId()) {
                 case R.id.rl: {
@@ -85,10 +95,12 @@ public class ServiceTypeMenu extends Activity implements GoogleApiClient.OnConne
                         Toast.makeText(v.getContext().getApplicationContext(), "clisk." + (getAdapterPosition()), Toast.LENGTH_SHORT).show();
 
                     }
-                    else {
+                    else {  if(isItShop.equals("true") & getAdapterPosition()!= 0& userId.equals(ownerid)){
+
                         FragmentManager fr = ((Activity) v.getContext()).getFragmentManager();
                         dlg1 = new Dialog1();
                         dlg1.show(fr, "dlg1");
+                    }
 
 
                     }
@@ -108,6 +120,7 @@ public class ServiceTypeMenu extends Activity implements GoogleApiClient.OnConne
     private RecyclerView rv;
     private DatabaseReference mData;
     private FirebaseRecyclerAdapter<FriendlyMessage, MessageViewHolder> mAdapter;
+    Firebase ownerRef;
 
     String mChild;
 
@@ -118,7 +131,10 @@ public class ServiceTypeMenu extends Activity implements GoogleApiClient.OnConne
         setContentView(R.layout.service_type_menu);
 
 
+
+
         mData = FirebaseDatabase.getInstance().getReference();
+
 
         StaggeredGridLayoutManager gm = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         rv = (RecyclerView) findViewById(R.id.rv);
@@ -136,46 +152,55 @@ public class ServiceTypeMenu extends Activity implements GoogleApiClient.OnConne
         String categ = Hawk.get("categ");
         mChild="shops/category/"+categ+"/"+mShops.toString()+"/servicetype";
 
-        if(isItShop.equals("false")) {
-            mQuery = mData.child(mChild).orderByKey().startAt("1");
-        }
-        else mQuery = mData;
-
-
-
-
-        mAdapter = new FirebaseRecyclerAdapter<FriendlyMessage, MessageViewHolder >(
-                FriendlyMessage.class, R.layout.item, MessageViewHolder.class, mQuery ){
-
-
+        ownerRef = new Firebase("https://unlimeted-house.firebaseio.com/shops/category/"+categ+"/"+mShops+"/");
+        ownerRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            protected void populateViewHolder(MessageViewHolder viewHolder, FriendlyMessage model, int position) {
-                viewHolder.shopName.setText(model.getName());
-                Picasso.with(getApplication()).load(model.getphotourl()).into(viewHolder.shopPhoto);
-                Intent shopint = new Intent(getApplicationContext(),ProductMenu.class);
-                shopint.putExtra("shopid",mShops);
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ownerid = dataSnapshot.child("ownerid").getValue(String.class);
+                Hawk.put("ownerid", ownerid);
+                if (ownerid != null) {
+                    if (isItShop.equals("false")) {
+                        mQuery = mData.child(mChild).orderByKey().startAt("1");
+                    } else if (userId.equals(ownerid)) {
+                        mQuery = mData.child(mChild);
+                    } else mQuery = mData.child(mChild).orderByKey().startAt("1");
 
 
+                    mAdapter = new FirebaseRecyclerAdapter<FriendlyMessage, MessageViewHolder>(
+                            FriendlyMessage.class, R.layout.item, MessageViewHolder.class, mQuery) {
+
+
+                        @Override
+                        protected void populateViewHolder(MessageViewHolder viewHolder, FriendlyMessage model, int position) {
+                            viewHolder.shopName.setText(model.getName());
+                            Picasso.with(getApplication()).load(model.getphotourl()).into(viewHolder.shopPhoto);
+                            Intent shopint = new Intent(getApplicationContext(), ProductMenu.class);
+                            shopint.putExtra("shopid", mShops);
+
+
+                        }
+                    };
+
+                    mAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+                        @Override
+                        public void onItemRangeInserted(int positionStart, int itemCount) {
+                            super.onItemRangeInserted(positionStart, itemCount);
+                            int friendlyMessageCount = mAdapter.getItemCount();
+
+                        }
+                    });
+                    rv.setAdapter(mAdapter);
+
+                }
             }
-        };
 
-
-        mAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
-            public void onItemRangeInserted(int positionStart, int itemCount) {
-                super.onItemRangeInserted(positionStart, itemCount);
-                int friendlyMessageCount = mAdapter.getItemCount();
+            public void onCancelled(FirebaseError firebaseError) {
 
             }
         });
-
-
-        rv.setAdapter(mAdapter);
-
-
-
-
-
+        ownerid = Hawk.get("ownerid");
+        userId = Hawk.get("userid");
 
     }
 

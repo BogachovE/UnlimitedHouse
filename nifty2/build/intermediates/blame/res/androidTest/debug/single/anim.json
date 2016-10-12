@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "/Users/Bogachov/UnlimitedHouse/nifty2/build/intermediates/res/merged/androidTest/debug/anim/nifty_linear_interpolator.xml",
+        "source": "/Users/Bogachov/UnlimitedHouse/nifty2/build/intermediates/bundles/debug/res/anim/nifty_linear_interpolator.xml"
+    },
+    {
+        "merged": "/Users/Bogachov/UnlimitedHouse/nifty2/build/intermediates/res/merged/androidTest/debug/anim/nifty_slide_animation.xml",
+        "source": "/Users/Bogachov/UnlimitedHouse/nifty2/build/intermediates/bundles/debug/res/anim/nifty_slide_animation.xml"
+    },
+    {
+        "merged": "/Users/Bogachov/UnlimitedHouse/nifty2/build/intermediates/res/merged/androidTest/debug/anim/nifty_rotate_indefinitely.xml",
+        "source": "/Users/Bogachov/UnlimitedHouse/nifty2/build/intermediates/bundles/debug/res/anim/nifty_rotate_indefinitely.xml"
+    }
+]

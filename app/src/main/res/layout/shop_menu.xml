@@ -17,13 +17,13 @@
         android:layout_width="60dp"
         android:layout_height="40dp"
         android:background="@drawable/house"
-        android:id="@+id/house"/>
+        android:id="@+id/housee"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="SHOP NAME"
         android:layout_alignParentTop="false"
-        android:layout_toRightOf="@+id/house"
+        android:layout_toRightOf="@+id/housee"
         android:layout_centerVertical="true"
         android:textColor="@android:color/white"
         android:textStyle="bold|italic"
