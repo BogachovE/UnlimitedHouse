@@ -21,7 +21,7 @@
             android:contentDescription="@string/deck"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/house_margin_top"
-            android:src="@drawable/house2"
+            android:src="@drawable/logo_inside"
 
             android:scaleType="fitXY" />
 
@@ -72,12 +72,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="العربية"
-                    android:layout_gravity="center"
                     android:textStyle="bold"
                     android:textColor="@android:color/white"
-                    android:textSize="30sp"
+                    android:textSize="23sp"
                     android:id="@+id/arabtxt"
-                    android:layout_marginBottom="5dp" />
+                    android:layout_marginBottom="5dp"
+                    android:layout_gravity="center_horizontal"
+                    />
             </FrameLayout>
 
             <Button
@@ -104,20 +105,11 @@
                 android:layout_width="@dimen/sign_btn_width"
                 android:layout_height="@dimen/sign_btn_height"
                 android:id="@+id/signbtn"
-                android:src="@drawable/sigin_up"
-                android:layout_marginRight="@dimen/sign_btn_margin_right"
+                android:src="@drawable/login"
                 android:scaleType="fitXY" />
 
-            <ImageView
-
-                android:layout_width="@dimen/login_btn_width"
-                android:layout_height="@dimen/login_btn_width"
-                android:id="@+id/loginbtn"
-                android:src="@drawable/login"
-                android:scaleType="fitXY"
-                />
-
         </LinearLayout>
+
     </RelativeLayout>
 
 

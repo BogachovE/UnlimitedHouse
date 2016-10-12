@@ -1,11 +1,12 @@
 package com.e.bogachov.unlmitedhouse.ShopsCateg;
 
 import android.app.Activity;
+import android.app.DialogFragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -17,19 +18,20 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.e.bogachov.unlmitedhouse.Dialog1;
+import com.e.bogachov.unlmitedhouse.Dialog2;
+import com.e.bogachov.unlmitedhouse.Dialog3;
+import com.e.bogachov.unlmitedhouse.Product;
 import com.e.bogachov.unlmitedhouse.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.orhanobut.hawk.Hawk;
 import com.squareup.picasso.Picasso;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.List;
 
 public class ProductMenu extends Activity implements GoogleApiClient.OnConnectionFailedListener {
@@ -40,10 +42,12 @@ public class ProductMenu extends Activity implements GoogleApiClient.OnConnectio
     private DatabaseReference mData;
     private FirebaseRecyclerAdapter<FriendlyMessage, MessageViewHolder> mAdapter;
     String mChild;
-    String mService;
+    Integer mService;
     String mShops;
     Intent toProduct;
     SharedPreferences sPref;
+    String isItShop;
+    Query mQuery;
 
 
 
@@ -56,7 +60,7 @@ public class ProductMenu extends Activity implements GoogleApiClient.OnConnectio
 
     }
 
-    public static class MessageViewHolder extends RecyclerView.ViewHolder {
+    public static class MessageViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         CardView cv;
         TextView shopName;
         ImageView shopPhoto;
@@ -68,23 +72,47 @@ public class ProductMenu extends Activity implements GoogleApiClient.OnConnectio
 
         public MessageViewHolder(View v) {
             super(v);
-            cv = (CardView)itemView.findViewById(R.id.cv);
-            cv.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent goToByProduct = new Intent(context,BuyProduct.class);
-                    context.startActivity(goToByProduct);
-                    Hawk.put("productid",(String.valueOf(getAdapterPosition())));
-                    Toast.makeText(context, "clisk."+(getItemId()+2), Toast.LENGTH_SHORT).show();
-
-
-                }
-            });
             shopName = (TextView)itemView.findViewById(R.id.shop_name);
-            shopPhoto = (ImageView)itemView.findViewById(R.id.shop_photo);
+            shopPhoto = (ImageView)itemView.findViewById(R.id.plus);
             rl =(RelativeLayout)itemView.findViewById(R.id.rl);
+            rl.setOnClickListener(this);
 
 
+        }
+
+        @Override
+        public void onClick(View v) {
+            DialogFragment dlg1;
+            String isItShop = Hawk.get("isitshop");
+
+            switch (v.getId()){
+                case R.id.rl:{
+
+                    if (isItShop.equals("false")) {
+                        Intent goToServiceType = new Intent(v.getContext(), BuyProduct.class);
+                        goToServiceType.putExtra("clickid", String.valueOf(getAdapterPosition()+1));
+                        Hawk.put("fromShop", shopName.getText().toString());
+                        v.getContext().startActivity(goToServiceType);
+                        Toast.makeText(v.getContext().getApplicationContext(), "clisk." + (getAdapterPosition()), Toast.LENGTH_SHORT).show();
+
+                    }else if(isItShop.equals("true") & getAdapterPosition() != 0){
+                        Intent goToServiceType = new Intent(v.getContext(), BuyProduct.class);
+                        goToServiceType.putExtra("clickid", String.valueOf(getAdapterPosition()+1));
+                        Hawk.put("fromShop", shopName.getText().toString());
+                        v.getContext().startActivity(goToServiceType);
+                        Toast.makeText(v.getContext().getApplicationContext(), "clisk." + (getAdapterPosition()), Toast.LENGTH_SHORT).show();
+
+                    }
+                    else {
+                        FragmentManager fr = ((Activity) v.getContext()).getFragmentManager();
+                        dlg1 = new Dialog1();
+                        dlg1.show(fr, "dlg1");
+
+
+                    }
+                }
+
+            }
         }
     }
 
@@ -100,6 +128,7 @@ public class ProductMenu extends Activity implements GoogleApiClient.OnConnectio
         toProduct = getIntent();
         mService=Hawk.get("serviceid");
         Hawk.put("serviceid",mService);
+        isItShop = Hawk.get("isitshop");
         mShops=Hawk.get("shopid");
 
         mData = FirebaseDatabase.getInstance().getReference();
@@ -109,12 +138,17 @@ public class ProductMenu extends Activity implements GoogleApiClient.OnConnectio
         rv.setLayoutManager(gm);
         rv.setHasFixedSize(true);
 
+        String categ = Hawk.get("categ");
 
+        mChild="shops/"+"category/"+categ+"/"+mShops.toString()+"/servicetype/"+mService.toString()+"/products";
 
-        mChild="shops/"+mShops.toString()+"/servicetype/"+mService.toString()+"/products";
+        if(isItShop.equals("false")) {
+            mQuery = mData.child(mChild).orderByKey().startAt("1");
+        }
+        else mQuery = mData;
 
         mAdapter = new FirebaseRecyclerAdapter<FriendlyMessage, MessageViewHolder >(
-                FriendlyMessage.class, R.layout.item, MessageViewHolder.class, mData.child(mChild) ){
+                FriendlyMessage.class, R.layout.item, MessageViewHolder.class, mQuery ){
 
 
             @Override

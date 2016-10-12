@@ -61,7 +61,7 @@
                 android:textColorHint="#BBBCBE"
                 android:backgroundTint="#BBBCBE"
 
-                />
+                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -88,7 +88,7 @@
                 android:textColor="#BBBCBE"
                 android:textColorHint="#BBBCBE"
                 android:backgroundTint="#BBBCBE"
-                />
+                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -101,7 +101,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="YOURE LOCATION"
+                android:text="CHOOSE CATEGORY"
                 android:id="@+id/profile_location_text"
                 android:textColor="#00aeef"
                 android:textSize="@dimen/profile_text_size"/>
@@ -114,7 +114,7 @@
                 android:textColor="#BBBCBE"
                 android:textColorHint="#BBBCBE"
                 android:backgroundTint="#BBBCBE"
-                />
+                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -128,7 +128,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="HOUSE/APARTAMENT NO."
+                android:text="ENTER SHOP LOCATION"
                 android:id="@+id/profile_adress_text"
                 android:textColor="#00aeef"
                 android:textSize="@dimen/profile_text_size"
@@ -142,7 +142,35 @@
                 android:textColor="#BBBCBE"
                 android:textColorHint="#BBBCBE"
                 android:backgroundTint="#BBBCBE"
-                />
+                android:textSize="14sp" />
+
+        </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/profile_lay_margin_top"
+        android:id="@+id/profile_photo_layout"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ENTER YOUR LOGO URL"
+            android:id="@+id/profile_photo_text"
+            android:textColor="#00aeef"
+            android:textSize="@dimen/profile_text_size"
+            />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="   XX"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/profile_photo_edit"
+            android:textColor="#BBBCBE"
+            android:textColorHint="#BBBCBE"
+            android:backgroundTint="#BBBCBE"
+            android:textSize="14sp" />
         </LinearLayout>
         <ImageButton
             android:background="@drawable/sigin_up"

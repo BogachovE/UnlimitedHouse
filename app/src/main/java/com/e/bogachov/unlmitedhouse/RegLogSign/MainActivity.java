@@ -3,12 +3,10 @@ package com.e.bogachov.unlmitedhouse.RegLogSign;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,6 +16,7 @@ import com.e.bogachov.unlmitedhouse.Slide.ContactUs;
 import com.e.bogachov.unlmitedhouse.Slide.Profile;
 import com.e.bogachov.unlmitedhouse.R;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+import com.orhanobut.hawk.Hawk;
 
 import java.util.Locale;
 
@@ -73,8 +72,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //find view
         ImageView signbtn = (ImageView) findViewById(R.id.signbtn);
         signbtn.setOnClickListener(this);
-        ImageView loginbtn = (ImageView) findViewById(R.id.loginbtn);
-        loginbtn.setOnClickListener(this);
         Button englang = (Button) findViewById(R.id.englang);
         englang.setOnClickListener(this);
         TextView arabtxt = (TextView)findViewById(R.id.arabtxt);
@@ -95,12 +92,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
 
-            case R.id.loginbtn:{
-                Intent goToLogin = new Intent(MainActivity.this, Login.class);
-                startActivity(goToLogin);
-                break;
 
-            }
 
             case R.id.englang:{
 
@@ -134,7 +126,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             }
             case R.id.logoutbtn:{
-                // НУЖНО ЗАКОДИТЬ
+                Intent goToStart = new Intent(getApplicationContext(),MainActivity.class);
+                Hawk.deleteAll();
+                startActivity(goToStart);
                 break;
             }
         }

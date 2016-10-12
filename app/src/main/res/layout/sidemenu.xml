@@ -4,15 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
+    android:alpha="10"
     >
 
     <ImageView
         android:layout_width="@dimen/slide_house_width"
         android:layout_height="@dimen/Slide_house_height"
-        android:src="@drawable/housemini"
+        android:src="@drawable/logo_inside"
         android:scaleType="fitXY"
         android:id="@+id/house"
-        android:layout_marginTop="@dimen/Slide_house_margin_top"/>
+        android:layout_marginTop="@dimen/Slide_house_margin_top"
+        android:layout_centerHorizontal="true" />
 
     <ImageView
         android:layout_width="match_parent"
@@ -54,7 +56,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/lineh"
+        android:src="@drawable/mline"
         android:layout_below="@+id/profile"
         android:contentDescription=""
         android:layout_marginTop="@dimen/slider_soft_line_margin_top"
@@ -93,7 +95,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/lineh"
+        android:src="@drawable/mline"
         android:layout_below="@+id/myorders"
         android:contentDescription=""
         android:layout_marginTop="@dimen/slider_soft_line_margin_top"
@@ -112,7 +114,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ADD YOUR SERVICE"
+            android:text="ADD YOUR SERVICE!"
             android:layout_weight="1"
             android:id="@+id/addservicebtn"
             android:layout_gravity="bottom"
@@ -130,7 +132,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/lineh"
+        android:src="@drawable/mline"
         android:layout_below="@+id/addservice"
         android:contentDescription=""
         android:layout_marginTop="@dimen/slider_soft_line_margin_top"
@@ -167,13 +169,13 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/lineh"
+        android:src="@drawable/mline"
         android:layout_above="@id/logout"
         android:contentDescription=""
         android:layout_marginTop="@dimen/slider_soft_line_margin_top"
         android:layout_marginLeft="@dimen/slider_soft_line_margin_left"
         android:id="@+id/imageViewLine5"
-        android:layout_marginRight="@dimen/slide_hardline_margin_right"/>/>
+        android:layout_marginRight="@dimen/slide_hardline_margin_right"/>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -199,7 +201,22 @@
             android:layout_height="@dimen/slider_icon_height"
             android:layout_marginRight="@dimen/slider_icon_margin_right"
             android:src="@drawable/logout"
-            android:layout_marginLeft="@dimen/slider_text_margin_left"/>
+            android:layout_marginLeft="@dimen/slider_text_margin_left"
+            android:id="@+id/imagelog"/>
     </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/mline"
+        android:id="@+id/imageViewLine6"
+        android:layout_below="@+id/contact"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="41dp"
+        android:layout_marginLeft="@dimen/slider_soft_line_margin_left"
+        android:layout_marginRight="@dimen/slide_hardline_margin_right"
+
+        />
 
 </RelativeLayout>

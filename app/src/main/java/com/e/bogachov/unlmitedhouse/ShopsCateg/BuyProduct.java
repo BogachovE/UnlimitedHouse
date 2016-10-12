@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,20 +32,25 @@ import com.orhanobut.hawk.Hawk;
 import com.squareup.picasso.Picasso;
 import com.firebase.client.android.*;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class BuyProduct extends Activity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener{
     LinearLayout view;
     ImageView custom_order_back;
     TextView tvCount;
     String mShops;
-    String mService;
-    String mProduct;
+    Integer mService;
+    Integer mProduct;
     private DatabaseReference mData;
     private static final String TAG = "MainActivity";
     Firebase mRefProductPhoto;
     Firebase mRefProductPrice;
     Firebase mRefProductPricetype;
     Firebase mRefProductDecrip;
+    Firebase getmRefProductName;
     Integer p;
     Context context;
     Integer count;
@@ -51,7 +58,13 @@ public class BuyProduct extends Activity implements View.OnClickListener, Google
     Boolean visting;
     ImageView visting_req_btn;
     ImageView visting_req_btn2;
-
+    RelativeLayout add_to_basket;
+    TextView price_txt;
+    TextView price_t;
+    String mVisting;
+    TextView visting_req_btn_yes;
+    TextView visting_req_btn_no;
+    TextView service_desc;
 
 
 
@@ -87,11 +100,24 @@ public class BuyProduct extends Activity implements View.OnClickListener, Google
         visting_req_btn2 = (ImageView)findViewById(R.id.visting_req_btn2);
         visting_req_btn2.setOnClickListener(this);
 
+        add_to_basket = (RelativeLayout)findViewById(R.id.add_to_basket);
+        add_to_basket.setOnClickListener(this);
+
+        price_txt = (TextView)findViewById(R.id.price_txt);
+        price_t= (TextView)findViewById(R.id.price_t);
+        person_numb_count= (TextView)findViewById(R.id.person_numb_count);
+        visting_req_btn_yes = (TextView)findViewById(R.id.visting_req_btn_yes);
+        visting_req_btn_yes.setOnClickListener(this);
+        visting_req_btn_no = (TextView)findViewById(R.id.visting_req_btn_no);
+        visting_req_btn_no.setOnClickListener(this);
+        mVisting = "no";
+
 
         count=1;
+        String categ =Hawk.get("categ");
 
         mData = FirebaseDatabase.getInstance().getReference();
-        mRefProductPhoto = new Firebase("https://unlimeted-house.firebaseio.com/shops/"+mShops+"/servicetype/"+mService+"/products/"+mProduct+"/photourl");
+        mRefProductPhoto = new Firebase("https://unlimeted-house.firebaseio.com/shops/category/"+categ+"/"+mShops+"/servicetype/"+mService.toString()+"/products/"+mProduct+"/photourl");
         mRefProductPhoto.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -105,11 +131,11 @@ public class BuyProduct extends Activity implements View.OnClickListener, Google
             }
         });
 
-        mRefProductPrice = new Firebase("https://unlimeted-house.firebaseio.com/shops/"+mShops+"/servicetype/"+mService+"/products/"+mProduct+"/price/p");
+        mRefProductPrice = new Firebase("https://unlimeted-house.firebaseio.com/shops/category/"+categ+"/"+mShops+"/servicetype/"+mService.toString()+"/products/"+mProduct.toString()+"/price/p");
         mRefProductPrice.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Integer p = dataSnapshot.getValue(Integer.class);
+                String p = dataSnapshot.getValue(String.class);
                 TextView price_txt =(TextView)findViewById(R.id.price_txt);
                 price_txt.setText(p.toString());
 
@@ -125,7 +151,7 @@ public class BuyProduct extends Activity implements View.OnClickListener, Google
 
 
 
-        mRefProductPricetype = new Firebase("https://unlimeted-house.firebaseio.com/shops/"+mShops+"/servicetype/"+mService+"/products/"+mProduct+"/price/currency");
+        mRefProductPricetype = new Firebase("https://unlimeted-house.firebaseio.com/shops/category/"+categ+"/"+mShops+"/servicetype/"+mService+"/products/"+mProduct+"/price/currency");
         mRefProductPricetype.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -141,12 +167,12 @@ public class BuyProduct extends Activity implements View.OnClickListener, Google
             }
         });
 
-        mRefProductDecrip = new Firebase("https://unlimeted-house.firebaseio.com/shops/"+mShops+"/servicetype/"+mService+"/products/"+mProduct+"/decrip");
+        mRefProductDecrip = new Firebase("https://unlimeted-house.firebaseio.com/shops/category/"+categ+"/"+mShops+"/servicetype/"+mService+"/products/"+mProduct+"/description");
         mRefProductDecrip.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String d = dataSnapshot.getValue(String.class);
-                TextView service_desc = (TextView)findViewById(R.id.service_desc);
+                service_desc = (TextView)findViewById(R.id.service_desc);
                 service_desc.setText(d);
             }
 
@@ -155,6 +181,8 @@ public class BuyProduct extends Activity implements View.OnClickListener, Google
 
             }
         });
+
+
 
          }
 
@@ -187,21 +215,86 @@ public class BuyProduct extends Activity implements View.OnClickListener, Google
                 break;
             }
 
+            case  R.id.add_to_basket:{
+                Integer numZakaz= null;
+                numZakaz = Hawk.get("numZakaz",numZakaz);
+                Date date = new Date();
+                if (numZakaz == null){
+                    numZakaz = 0;
+                    Hawk.put("numZakaz",numZakaz);
+                }
+                 else  if (numZakaz >= 0){
+                    Hawk.put("numZakaz",numZakaz= numZakaz+1);
+                }
+                String fromShop = Hawk.get("fromShop");
+                Integer sum = Integer.parseInt(price_txt.getText().toString()) * Integer.parseInt(person_numb_count.getText().toString());
+                String productname = Hawk.get("productname");
+                Map<String,String> order = new HashMap<String, String>();
+                order.put("p",price_txt.getText().toString());
+                order.put("currency",price_t.getText().toString());
+                order.put("count",person_numb_count.getText().toString());
+                order.put("data", date.toString());
+                order.put("visiting",mVisting);
+                order.put("fromShop",fromShop);
+                order.put("sum",sum.toString());
+                order.put("name",productname);
+                order.put("descript",service_desc.getText().toString());
+                String coment = Hawk.get("coment");
+                if (coment != null) {
+                order.put("coment",coment);}
+                Map<Integer,Map<String,String>> ordervc = new HashMap<Integer,Map<String,String>>();
+                if (Hawk.get("order")!= null){ordervc = Hawk.get("order");}
+                ordervc.put(numZakaz,order);
+                Hawk.put("order",ordervc);
+                Toast.makeText(getApplicationContext(),"aded in basket",Toast.LENGTH_SHORT).show();
+
+
+
+                break;
+            }
+            case R.id.visting_req_btn_yes:{
+                mVisting = "yes";
+                Toast.makeText(getApplicationContext(),"Set visiting No",Toast.LENGTH_SHORT).show();
+            }
+            case R.id.visting_req_btn_no:{
+                mVisting = "no";
+                Toast.makeText(getApplicationContext(),"Set visiting Yes",Toast.LENGTH_SHORT).show();
+            }
+
         }
     }
 
     @Override
     protected Dialog onCreateDialog(int id) {
-        AlertDialog.Builder adb = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
 //        adb.setTitle("Please write your preference");
+
         // создаем view из dialog.xml
         view = (LinearLayout) getLayoutInflater()
                 .inflate(R.layout.dialog, null);
         // устанавливаем ее, как содержимое тела диалога
-        adb.setView(view);
+        builder.setView(view);
         // находим TexView для отображения кол-ва
         tvCount = (TextView) view.findViewById(R.id.tvCount);
-        return adb.create();
+        Button sendbtn = (Button)view.findViewById(R.id.sendbtn);
+        final AlertDialog adb =builder.show();
+        sendbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (v.getId()){
+                    case R.id.sendbtn:{
+                        Hawk.put("coment",tvCount.getText().toString());
+                        adb.cancel();
+
+
+                         }
+                }
+            }
+        });
+
+
+        return null;
     }
 
     @Override

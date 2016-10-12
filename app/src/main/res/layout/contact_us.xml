@@ -36,7 +36,8 @@
         android:id="@+id/contact_us_layout"
         android:layout_below="@id/contact_us_line"
         android:layout_marginTop="20dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:weightSum="1">
 
         <TextView
             android:layout_width="wrap_content"
@@ -45,7 +46,8 @@
             android:text="We are so glad because you will give us precious time of yours, just feel free to say what you would like too, complaint, feedback, ideas, anything you want to say we will hear it from our heart!"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:textColor="#000"/>
+            android:textColor="#000"
+            android:textSize="15sp"/>
 
         <ImageView
             android:layout_width="match_parent"
@@ -60,7 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="20dp"
             android:id="@+id/contact_us_name_layout"
 
             android:layout_gravity="center_horizontal">
@@ -86,20 +88,21 @@
         </LinearLayout>
 
         <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/savee"
+            android:layout_width="286dp"
+            android:layout_height="150dp"
+            android:background="@drawable/rectangl"
             android:text="xxxxxx"
             android:textAlignment="center"
-            android:layout_marginTop="40dp"
-            android:layout_gravity="center_horizontal" />
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.31" />
 
         <ImageButton
             android:layout_width="100dp"
             android:layout_height="30dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/sendd" />
+            android:layout_marginTop="40dp"
+            android:background="@drawable/send" />
 
 
     </LinearLayout>

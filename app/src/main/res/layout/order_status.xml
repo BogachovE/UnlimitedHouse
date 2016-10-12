@@ -40,6 +40,7 @@ XXPM/AM"
 
 
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -72,7 +73,8 @@ XXPM/AM"
                     android:layout_below="@+id/process"
                     android:layout_marginLeft="30dp"
                     android:layout_marginTop="5dp"
-                    android:textSize="10sp" />
+                    android:textSize="10sp"
+                    android:id="@+id/proc_txt" />
 
 
             </RelativeLayout>
@@ -90,7 +92,8 @@ XXPM/AM"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:id="@+id/linearLayout3">
+            android:id="@+id/linearLayout3"
+            android:visibility="invisible">
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -156,7 +159,8 @@ XXPM/AM"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:visibility="invisible">
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -222,7 +226,8 @@ XXPM/AM"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="10dp"
+            android:visibility="invisible">
 
             <RelativeLayout
                 android:layout_width="wrap_content"

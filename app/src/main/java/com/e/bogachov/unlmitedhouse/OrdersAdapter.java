@@ -62,8 +62,8 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrdersView
 
     }
 
-    List<Order> order;
-    OrdersAdapter(List<Order> product){this.order = product;}
+    //List<Order> order;
+   // OrdersAdapter(List<Order> product){this.order = product;}
 
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
@@ -81,11 +81,11 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrdersView
     @Override
     public void onBindViewHolder (final OrdersViewHolder ordersViewHolder, int i) {
 
-        ordersViewHolder.orderNumb.setText(order.get(i).orderNumb);
-        ordersViewHolder.fromShop.setText(order.get(i).fromShop);
-        ordersViewHolder.orderData.setText(order.get(i).orderData);
-        ordersViewHolder.rv.setOnClickListener(new View.OnClickListener(){
-
+       // ordersViewHolder.orderNumb.setText(order.get(i).orderNumb);
+      //  ordersViewHolder.fromShop.setText(order.get(i).fromShop);
+      //  ordersViewHolder.orderData.setText(order.get(i).orderData);
+      // ordersViewHolder.rv.setOnClickListener(new View.OnClickListener(){
+/*
 
             @Override
             public void onClick(View view) {
@@ -94,7 +94,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrdersView
                 ordersViewHolder.oreder_btnss.startAnimation(anim);
                 ordersViewHolder.rvs.setVisibility(View.INVISIBLE);
             }
-        });
+        });*/
         ordersViewHolder.oreder_btnss.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -124,7 +124,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrdersView
     @Override
     public int getItemCount() {
 
-        return order.size();
+        return 0; // order.size();
     }
 
 

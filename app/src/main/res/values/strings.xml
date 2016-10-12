@@ -5,6 +5,20 @@
     <string name="title_activity_signup">Signup</string>
     <string name="title_activity_main2">Main2Activity</string>
 
+
+    <!-- Verify Fragment strings -->
+    <string name="sign_in">Sign in</string>
+    <string name="sign_in_hint">Please enter your phone number</string>
+    <string name="error_phone_number">The phone number is invalid.</string>
+    <string name="enter_phone_number"> Phone number </string>
+
+    <!-- Check code Fragment strings -->
+    <string name="check_code_fragment_name">Check code</string>
+    <string name="info_message">Please enter the pin code you received</string>
+    <string name="enter_pin_code">Six-digit code</string>
+    <string name="check_code">Confirm</string>
+    <string name="error_code">The pin code length is too short.</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
@@ -16,4 +30,12 @@
     <string name="item3">Item3</string>
     <string name="item4">Item4</string>
     <string name="mar5">MAR <br>   5</br></string>
+
+    <string name="action_today">Today</string>
+    <string name="action_day_view">Day view</string>
+    <string name="action_three_day_view">3 day view</string>
+    <string name="action_week_view">Week view</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -42,8 +42,7 @@ public class ShopMenu extends Activity implements View.OnClickListener {
 
         switch (view.getId()){
             case R.id.my_shop:{
-                Intent goToShops = new Intent(this, ShopsMenu.class);
-                goToShops.putExtra("isItShop", "true");
+                Intent goToShops = new Intent(this, MainMenu.class);
                 startActivity(goToShops);
                 break;
             }

@@ -25,7 +25,7 @@
             android:id="@+id/tvCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="i want this order to be without tomato this order this order this order"
+            android:text=""
 
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
@@ -37,7 +37,7 @@
     <Button
         android:layout_width="80dp"
         android:layout_height="30dp"
-        android:id="@+id/button"
+        android:id="@+id/sendbtn"
         android:layout_below="@+id/relativeLayout"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"

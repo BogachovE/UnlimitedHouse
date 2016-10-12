@@ -106,14 +106,15 @@
             android:textSize="18sp"
             android:layout_marginLeft="10dp"/>
 
-        <Button
+        <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:background="@drawable/less"
+            android:src="@drawable/less"
             android:id="@+id/person_numb_btn_less"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/person_numb_count"
             android:layout_marginRight="2dp"
+            android:scaleType="fitXY"
            />
 
         <TextView
@@ -129,13 +130,14 @@
             android:layout_marginRight="3dp"
            />
 
-        <Button
+        <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:background="@drawable/more"
+            android:src="@drawable/more"
             android:id="@+id/btn_more"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
+
 
          />
 
@@ -209,7 +211,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/custom_order"
-    android:layout_marginTop="10dp"
+    android:layout_marginBottom="4dp"
     android:layout_above="@+id/add_to_basket"
     >
 

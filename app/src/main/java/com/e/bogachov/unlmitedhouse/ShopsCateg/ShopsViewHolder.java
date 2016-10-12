@@ -1,7 +1,6 @@
 package com.e.bogachov.unlmitedhouse.ShopsCateg;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -32,7 +31,7 @@ public  class ShopsViewHolder extends RecyclerView.ViewHolder implements View.On
 
         cv = (CardView)itemView.findViewById(R.id.cv);
         shopName = (TextView)itemView.findViewById(R.id.shop_name);
-        shopPhoto = (ImageView)itemView.findViewById(R.id.shop_photo);
+        shopPhoto = (ImageView)itemView.findViewById(R.id.plus);
         rl =(RelativeLayout)itemView.findViewById(R.id.rl);
         rl.setOnClickListener(this);
 

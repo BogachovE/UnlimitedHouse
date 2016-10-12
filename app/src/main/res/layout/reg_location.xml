@@ -29,7 +29,9 @@
         android:drawableLeft="@drawable/locationn"
         android:textColor="#BBBCBE"
         android:textColorHint="#BBBCBE"
-        android:backgroundTint="#BBBCBE"/>
+        android:backgroundTint="#BBBCBE"
+        android:focusable="false"
+        />
 
     <EditText
         android:layout_width="wrap_content"
@@ -43,6 +45,7 @@
         android:textColor="#BBBCBE"
         android:textColorHint="#BBBCBE"
         android:backgroundTint="#BBBCBE"
+        android:inputType="none"
 
 
 

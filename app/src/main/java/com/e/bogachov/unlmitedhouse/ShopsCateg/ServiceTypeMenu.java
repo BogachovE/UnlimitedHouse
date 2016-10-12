@@ -1,92 +1,107 @@
 package com.e.bogachov.unlmitedhouse.ShopsCateg;
 
 import android.app.Activity;
+import android.app.DialogFragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.e.bogachov.unlmitedhouse.Dialog1;
+import com.e.bogachov.unlmitedhouse.Dialog2;
 import com.e.bogachov.unlmitedhouse.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.orhanobut.hawk.Hawk;
 import com.squareup.picasso.Picasso;
 
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 
 public class ServiceTypeMenu extends Activity implements GoogleApiClient.OnConnectionFailedListener {
     String mShops;
     SharedPreferences sPref;
+    String isItShop;
+    Query mQuery;
 
 
 
 
-    public static class MessageViewHolder extends RecyclerView.ViewHolder {
+    public static class MessageViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         CardView cv;
         TextView shopName;
         ImageView shopPhoto;
         RelativeLayout rl;
-        Context context =itemView.getContext();
-
-
-
-
-
-
-
+        Context context = itemView.getContext();
 
 
         public MessageViewHolder(View v) {
             super(v);
 
 
-
-            cv = (CardView)itemView.findViewById(R.id.cv);
-            cv.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    Intent goToProduct = new Intent(context,ProductMenu.class);
-                    context.startActivity(goToProduct);
-                    Hawk.put("serviceid",String.valueOf(getAdapterPosition()));
-
-
-                    Toast.makeText(context, "clisk."+(getItemId()+2), Toast.LENGTH_SHORT).show();
-
-
-                }
-            });
-            shopName = (TextView)itemView.findViewById(R.id.shop_name);
-            shopPhoto = (ImageView)itemView.findViewById(R.id.shop_photo);
-            rl =(RelativeLayout)itemView.findViewById(R.id.rl);
+            shopName = (TextView) itemView.findViewById(R.id.shop_name);
+            shopPhoto = (ImageView) itemView.findViewById(R.id.plus);
+            rl = (RelativeLayout) itemView.findViewById(R.id.rl);
+            rl.setOnClickListener(this);
 
 
         }
 
 
+        @Override
+        public void onClick(View v) {
+            DialogFragment dlg1;
+            String isItShop = Hawk.get("isitshop");
+
+            switch (v.getId()) {
+                case R.id.rl: {
+                    if (isItShop.equals("false")) {
+                        Intent goToServiceType = new Intent(v.getContext(), ProductMenu.class);
+                        goToServiceType.putExtra("clickid", String.valueOf(getAdapterPosition()+1));
+                        Hawk.put("fromShop", shopName.getText().toString());
+                        v.getContext().startActivity(goToServiceType);
+                        Toast.makeText(v.getContext().getApplicationContext(), "clisk." + (getAdapterPosition()), Toast.LENGTH_SHORT).show();
+
+                    }else if(isItShop.equals("true") & getAdapterPosition() != 0){
+                        Intent goToServiceType = new Intent(v.getContext(), ProductMenu.class);
+                        goToServiceType.putExtra("clickid", String.valueOf(getAdapterPosition()+1));
+                        Hawk.put("fromShop", shopName.getText().toString());
+                        v.getContext().startActivity(goToServiceType);
+                        Toast.makeText(v.getContext().getApplicationContext(), "clisk." + (getAdapterPosition()), Toast.LENGTH_SHORT).show();
+
+                    }
+                    else {
+                        FragmentManager fr = ((Activity) v.getContext()).getFragmentManager();
+                        dlg1 = new Dialog1();
+                        dlg1.show(fr, "dlg1");
+
+
+                    }
+                }
+
+
+            }
+
+
+        }
     }
+
+
 
     private static final String TAG = "MainActivity";
     private List<Shops> shops;
@@ -117,23 +132,20 @@ public class ServiceTypeMenu extends Activity implements GoogleApiClient.OnConne
 
         Hawk.init(this).build();
         Hawk.put("shopid",mShops);
-        Toast.makeText(this, "shopid="+Hawk.get("shopid"), Toast.LENGTH_SHORT).show();
+        isItShop=Hawk.get("isitshop");
+        String categ = Hawk.get("categ");
+        mChild="shops/category/"+categ+"/"+mShops.toString()+"/servicetype";
+
+        if(isItShop.equals("false")) {
+            mQuery = mData.child(mChild).orderByKey().startAt("1");
+        }
+        else mQuery = mData;
 
 
 
-
-
-
-
-
-
-
-
-
-        mChild="shops/"+mShops+"/servicetype";
 
         mAdapter = new FirebaseRecyclerAdapter<FriendlyMessage, MessageViewHolder >(
-                FriendlyMessage.class, R.layout.item, MessageViewHolder.class, mData.child(mChild) ){
+                FriendlyMessage.class, R.layout.item, MessageViewHolder.class, mQuery ){
 
 
             @Override

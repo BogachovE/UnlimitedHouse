@@ -2,20 +2,22 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background">
+    android:background="@drawable/background"
+    android:id="@+id/container">
+
+
 
 
     <ImageView
         android:layout_width="@dimen/house_width"
         android:layout_height="@dimen/house_height"
         android:id="@+id/house"
-        android:background="@drawable/house2"
+        android:background="@drawable/logo_inside"
         android:contentDescription="@string/deck"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/sign_btn_margin_top"
 
         />
-
 
     <EditText
         android:layout_width="wrap_content"
@@ -30,6 +32,7 @@
         android:textColor="#BBBCBE"
         android:textColorHint="#BBBCBE"
         android:backgroundTint="#BBBCBE"
+        android:descendantFocusability="beforeDescendants"
 
 
 
@@ -38,7 +41,7 @@
 <Button
     android:layout_width="@dimen/sign_btn_width"
     android:layout_height="@dimen/sign_btn_height"
-    android:background="@drawable/nextbtn"
+    android:background="@drawable/nextbtnmdpi"
     android:layout_below="@id/phonetxt"
     android:layout_centerHorizontal="true"
     android:layout_marginTop="@dimen/sign_btn_margin_top"
