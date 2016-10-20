@@ -3,8 +3,10 @@ package com.e.bogachov.unlmitedhouse;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
@@ -30,6 +32,7 @@ public class MainMenu extends Activity implements View.OnClickListener {
     SlidingMenu menu;
     private Animation mFadeInAnimation, mFadeOutAnimation;
 
+    SharedPreferences sPref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -136,7 +139,11 @@ public class MainMenu extends Activity implements View.OnClickListener {
 
 
 
-
+        userId=Hawk.get("userid");
+        SharedPreferences sPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor ed = sPref.edit();
+        ed.putString("userid", userId);
+        ed.commit();
     }
 
     @Override
@@ -250,7 +257,13 @@ public class MainMenu extends Activity implements View.OnClickListener {
             case R.id.logoutbtn:{
                 Intent goToStart = new Intent(getApplicationContext(),MainActivity.class);
                 Hawk.deleteAll();
+                SharedPreferences sPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                SharedPreferences.Editor ed = sPref.edit();
+                ed.clear();
+                ed.apply();
                 startActivity(goToStart);
+
+
                 break;
             }
 

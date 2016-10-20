@@ -4,10 +4,13 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Message;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -16,6 +19,8 @@ import android.widget.Toast;
 import com.e.bogachov.unlmitedhouse.R;
 
 import com.e.bogachov.unlmitedhouse.ShopMenu;
+import com.e.bogachov.unlmitedhouse.ShopsCateg.Order;
+import com.e.bogachov.unlmitedhouse.Users;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
@@ -53,6 +58,8 @@ public class SiginUp extends Activity implements View.OnClickListener {
     Long newUserId;
     String userPhone;
     String isItShop;
+    SharedPreferences sPref;
+    Users users;
 
 
     public static final String TAG = SiginUp.class.getSimpleName();
@@ -82,6 +89,33 @@ public class SiginUp extends Activity implements View.OnClickListener {
 
         EditText phonetxt = (EditText)findViewById(R.id.phonetxt);
         phonetxt.setOnClickListener(this);
+
+        Firebase countRef = new Firebase("https://unlimeted-house.firebaseio.com/users");
+        countRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+                Hawk.put("count",dataSnapshot.getChildrenCount()+1);
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+
+        phonetxt.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
+                if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(
+                            INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                    return true;
+                }
+
+                return false;
+            }
+        });
 
 
 
@@ -133,6 +167,7 @@ public class SiginUp extends Activity implements View.OnClickListener {
                 Toast.makeText(getApplicationContext(), "You are verificated", Toast.LENGTH_SHORT).show();
 
 
+
                 Hawk.init(getApplicationContext()).build();
                 Hawk.put("userphone", mPhone);
 
@@ -141,43 +176,62 @@ public class SiginUp extends Activity implements View.OnClickListener {
 
 
 
-                 Query queryRef = mData.child("users").orderByChild("phone").equalTo(userPhone);
+                Query queryRef = mData.child("users").orderByChild("phone").equalTo(userPhone);
 
-                queryRef.addValueEventListener(new com.google.firebase.database.ValueEventListener() {
+                queryRef.addListenerForSingleValueEvent(new com.google.firebase.database.ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
 
-                            String kostil = dataSnapshot.toString();
-                            String kostil2 = kostil.substring(35);
-                            String resultStr = kostil2.substring(kostil2.indexOf('{') + 1, kostil2.indexOf('='));
-                            Hawk.put("userid", resultStr);
-                            Hawk.put("isitshop", dataSnapshot.child(resultStr).child("isitshop").getValue(String.class));
-                            isItShop = dataSnapshot.child(resultStr).child("isitshop").getValue(String.class);
-                            //Toast.makeText(getApplicationContext(), isItShop, Toast.LENGTH_SHORT).show();
-                            if(isItShop.equals("true")){
-                                Intent goToShopMenu = new Intent(getApplicationContext(), ShopMenu.class);
-                                startActivity(goToShopMenu);
+                            //dataSnapshot.getChildren().iterator().next()
+
+                            for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                                users = postSnapshot.getValue(Users.class);
+
+                                Hawk.put("userid", users.getId());
+                                sPref = getPreferences(MODE_PRIVATE);
+                                SharedPreferences.Editor ed = sPref.edit();
+                                ed.putString("userid", users.getId());
+                                ed.commit();
+                                Hawk.put("isitshop", users.getIsitshop());
+                                isItShop = users.getIsitshop();
+                                ed.putString("isitshop", "true");
+                                ed.commit();
+                                //Toast.makeText(getApplicationContext(), isItShop, Toast.LENGTH_SHORT).show();
+                                if (isItShop.equals("true")) {
+                                    Intent goToShopMenu = new Intent(getApplicationContext(), ShopMenu.class);
+                                    startActivity(goToShopMenu);
+                                }
                             }
 
                         }
                         else if (!dataSnapshot.exists()){
-                            Long lcount =dataSnapshot.getChildrenCount()+1;
+                            Long lcount =Hawk.get("count");
                             String count = lcount.toString();
                             mData.child("users/"+count).child("phone").setValue(userPhone);
                             mData.child("users/"+count).child("isitshop").setValue("false");
+                            mData.child("users/"+count).child("id").setValue(count);
                             Hawk.put("isitshop","false");
                             isItShop = Hawk.get("isitshop");
                             //Toast.makeText(getApplicationContext(),isItShop, Toast.LENGTH_SHORT).show();
 
-                            String kostil = dataSnapshot.toString();
-                            String kostil2 =kostil.substring(35);
-                            String resultStr = kostil2.substring(kostil2.indexOf('{') + 1, kostil2.indexOf('='));
-                            Hawk.put("userid",resultStr);
+
+                            Hawk.put("userid",count);
+                            sPref = getPreferences(MODE_PRIVATE);
+                            SharedPreferences.Editor ed = sPref.edit();
+                            ed.putString("userid", count);
+                            ed.commit();
+                            ed.putString("isitshop", "false");
+                            ed.commit();
+
 
                         }
                         if(isItShop.equals("false")) {
                             Hawk.put("isitshop","false");
+                            sPref = getPreferences(MODE_PRIVATE);
+                            SharedPreferences.Editor ed = sPref.edit();
+                            ed.putString("isitshop", "false");
+                            ed.commit();
                             Intent goToLocation = new Intent(getApplicationContext(), RegLocation.class);
                             startActivity(goToLocation);
                         }

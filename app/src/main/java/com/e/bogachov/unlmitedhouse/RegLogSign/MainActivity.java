@@ -2,7 +2,9 @@ package com.e.bogachov.unlmitedhouse.RegLogSign;
 
 import android.app.ActionBar;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.e.bogachov.unlmitedhouse.MainMenu;
 import com.e.bogachov.unlmitedhouse.ShopOrders;
 import com.e.bogachov.unlmitedhouse.Slide.AddService;
 import com.e.bogachov.unlmitedhouse.Slide.ContactUs;
@@ -25,6 +28,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Locale mNewLocale;
     String lang;
+    String userId;
+
 
 
     @Override
@@ -44,6 +49,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         menu.attachToActivity(this, SlidingMenu.SLIDING_WINDOW);
         menu.setMenu(R.layout.sidemenu);
         menu.setBehindWidthRes(R.dimen.slidingmenu_behind_width);
+
+
+        Hawk.init(this).build();
 
 
 
@@ -80,14 +88,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         arablang.setOnClickListener(this);
 
 
+
+
+
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.signbtn:{
-                Intent signintent = new Intent(MainActivity.this, SiginUp.class);
-                startActivity(signintent);
+                SharedPreferences sPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                SharedPreferences.Editor ed = sPref.edit();
+                userId = sPref.getString("userid", "");
+                if(userId.equals("")) {
+                    Intent signintent = new Intent(MainActivity.this, SiginUp.class);
+                    startActivity(signintent);
+
+                }else if(!userId.equals("")) {
+                    Hawk.put("userid", userId);
+                    Intent goToMain = new Intent(MainActivity.this, MainMenu.class);
+                    startActivity(goToMain);
+
+                }
+
+
                 break;
 
             }
@@ -132,6 +156,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             }
         }
+    }
+
+    @Override
+    protected void onDestroy(){
+        userId=Hawk.get("userid");
+        SharedPreferences sPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor ed = sPref.edit();
+        ed.putString("userid", userId);
+        ed.commit();
+
+        super.onDestroy();
     }
 
 

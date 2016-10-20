@@ -1,5 +1,6 @@
 package com.e.bogachov.unlmitedhouse.Slide;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.e.bogachov.unlmitedhouse.R;
 import com.e.bogachov.unlmitedhouse.ShopMenu;
@@ -21,6 +23,11 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlacePicker;
 import com.orhanobut.hawk.Hawk;
 
 import java.util.HashMap;
@@ -89,6 +96,9 @@ public class AddService extends Activity implements View.OnClickListener {
             }
         });
 
+        ActionBar actionBar = getActionBar();
+        actionBar.hide();
+
 
         signbtn = (ImageView)findViewById(R.id.signbtn);
         signbtn.setOnClickListener(this);
@@ -98,10 +108,15 @@ public class AddService extends Activity implements View.OnClickListener {
         userId= Hawk.get("userid");
         Firebase.setAndroidContext(this);
 
+
         profile_photo_edit= (EditText)findViewById(R.id.profile_photo_edit);
         profile_name_edit =(EditText)findViewById(R.id.profile_name_edit);
         profile_email_edit =(EditText)findViewById(R.id.profile_email_edit);
         profile_adress_edit =(EditText)findViewById(R.id.profile_adress_edit);
+        profile_adress_edit.setOnClickListener(this);
+        profile_photo_edit.setOnClickListener(this);
+        profile_name_edit.setOnClickListener(this);
+        profile_email_edit.setOnClickListener(this);
 
         ref = new Firebase("https://unlimeted-house.firebaseio.com/users/"+userId);
 
@@ -109,6 +124,15 @@ public class AddService extends Activity implements View.OnClickListener {
 
 
 
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        final Place place = PlacePicker.getPlace(data, this);
+        Toast.makeText(this, place.getAddress(),
+                Toast.LENGTH_LONG)
+                .show();
+
+        profile_adress_edit.setText(place.getAddress().toString());
     }
 
     @Override
@@ -141,6 +165,42 @@ public class AddService extends Activity implements View.OnClickListener {
                 ref.child("isitshop").setValue("true");
                 Intent goToShopMenu = new Intent(getApplicationContext(), ShopMenu.class);
                 startActivity(goToShopMenu);
+                break;
+            }
+            case R.id.profile_adress_edit:{
+                try {
+                    PlacePicker.IntentBuilder intentBuilder = new PlacePicker.IntentBuilder();
+                    Intent intent = intentBuilder.build(this);
+                    // Start the Intent by requesting a result, identified by a request code.
+                    startActivityForResult(intent, 1);
+
+                    // Hide the pick option in the UI to prevent users from starting the picker
+                    // multiple times.
+
+
+                } catch (GooglePlayServicesRepairableException e) {
+                    GooglePlayServicesUtil
+                            .getErrorDialog(e.getConnectionStatusCode(), this, 0);
+                } catch (GooglePlayServicesNotAvailableException e) {
+                    Toast.makeText(this, "Google Play Services is not available.",
+                            Toast.LENGTH_LONG)
+                            .show();
+                }
+
+                break;
+
+            }
+            case R.id.profile_photo_edit:{
+                profile_photo_edit.setText("");
+                break;
+            }
+            case R.id.profile_name_edit:{
+                profile_name_edit.setText("");
+                break;
+            }
+            case R.id.profile_email_edit:{
+                profile_email_edit.setText("");
+
                 break;
             }
         }

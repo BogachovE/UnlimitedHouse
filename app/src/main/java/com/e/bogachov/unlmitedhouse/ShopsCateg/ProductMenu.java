@@ -42,7 +42,7 @@ public class ProductMenu extends Activity implements GoogleApiClient.OnConnectio
     private DatabaseReference mData;
     private FirebaseRecyclerAdapter<FriendlyMessage, MessageViewHolder> mAdapter;
     String mChild;
-    Integer mService;
+    String mService;
     String mShops;
     Intent toProduct;
     SharedPreferences sPref;
@@ -125,9 +125,7 @@ public class ProductMenu extends Activity implements GoogleApiClient.OnConnectio
 
 
         Hawk.init(this).build();
-        toProduct = getIntent();
-        mService=Hawk.get("serviceid");
-        Hawk.put("serviceid",mService);
+        mService =Hawk.get("serviceid");
         isItShop = Hawk.get("isitshop");
         mShops=Hawk.get("shopid");
 

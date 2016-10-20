@@ -83,13 +83,16 @@ public class ServiceTypeMenu extends Activity implements GoogleApiClient.OnConne
                     if (isItShop.equals("false")) {
                         Intent goToServiceType = new Intent(v.getContext(), ProductMenu.class);
                         goToServiceType.putExtra("clickid", String.valueOf(getAdapterPosition()+1));
+                        Hawk.put("productid",String.valueOf(getAdapterPosition()+1));
                         Hawk.put("fromShop", shopName.getText().toString());
+                        Hawk.put("serviceid", String.valueOf(getAdapterPosition()+1));
                         v.getContext().startActivity(goToServiceType);
                         Toast.makeText(v.getContext().getApplicationContext(), "clisk." + (getAdapterPosition()), Toast.LENGTH_SHORT).show();
 
                     }else if(isItShop.equals("true") & getAdapterPosition() != 0){
                         Intent goToServiceType = new Intent(v.getContext(), ProductMenu.class);
                         goToServiceType.putExtra("clickid", String.valueOf(getAdapterPosition()+1));
+                        Hawk.put("serviceid", String.valueOf(getAdapterPosition()+1));
                         Hawk.put("fromShop", shopName.getText().toString());
                         v.getContext().startActivity(goToServiceType);
                         Toast.makeText(v.getContext().getApplicationContext(), "clisk." + (getAdapterPosition()), Toast.LENGTH_SHORT).show();
@@ -151,6 +154,7 @@ public class ServiceTypeMenu extends Activity implements GoogleApiClient.OnConne
         isItShop=Hawk.get("isitshop");
         String categ = Hawk.get("categ");
         mChild="shops/category/"+categ+"/"+mShops.toString()+"/servicetype";
+        Firebase.setAndroidContext(this);
 
         ownerRef = new Firebase("https://unlimeted-house.firebaseio.com/shops/category/"+categ+"/"+mShops+"/");
         ownerRef.addListenerForSingleValueEvent(new ValueEventListener() {

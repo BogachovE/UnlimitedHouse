@@ -42,8 +42,8 @@ public class BuyProduct extends Activity implements View.OnClickListener, Google
     ImageView custom_order_back;
     TextView tvCount;
     String mShops;
-    Integer mService;
-    Integer mProduct;
+    String mService;
+    String mProduct;
     private DatabaseReference mData;
     private static final String TAG = "MainActivity";
     Firebase mRefProductPhoto;

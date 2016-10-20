@@ -7,12 +7,14 @@ import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import android.app.Activity;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.CardView;
@@ -73,6 +75,7 @@ public class ShopsMenu extends Activity implements  GoogleApiClient.OnConnection
     Query mQuery;
     ImageView shadow;
     private Animation mFadeInAnimation, mFadeOutAnimation;
+    SharedPreferences sPref;
 
 
 
@@ -144,8 +147,10 @@ public class ShopsMenu extends Activity implements  GoogleApiClient.OnConnection
 
 
         Hawk.init(this).build();
+        SharedPreferences sPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor ed = sPref.edit();
+        isItShop = sPref.getString("isitshop", "");
 
-        isItShop=Hawk.get("isitshop");
 
         String categ = Hawk.get("categ");
 
@@ -157,7 +162,7 @@ public class ShopsMenu extends Activity implements  GoogleApiClient.OnConnection
                 }
 
                 case "product": {
-                    super.setTheme(R.style.Product);
+                    super.setTheme(R.style.Candy);
 
                     break;
                 }
@@ -279,23 +284,43 @@ public class ShopsMenu extends Activity implements  GoogleApiClient.OnConnection
 
                 case "product": {
                     getActionBar().setCustomView(R.layout.abs_product);
+                    Button curtBtn = (Button)findViewById(R.id.curtBtn);
+                    curtBtn.setOnClickListener(this);
+                    Button basket_btn = (Button)findViewById(R.id.basket_btn);
+                    basket_btn.setOnClickListener(this);
+
 
                     break;
                 }
 
                 case "candy": {
                     getActionBar().setCustomView(R.layout.abs_candy);
+                    Button curtBtn = (Button)findViewById(R.id.curtBtn);
+                    curtBtn.setOnClickListener(this);
+                    Button basket_btn = (Button)findViewById(R.id.basket_btn);
+                    basket_btn.setOnClickListener(this);
+
 
                     break;
                 }
 
                 case "house": {
                     getActionBar().setCustomView(R.layout.abs_house);
+                    Button curtBtn = (Button)findViewById(R.id.curtBtn);
+                    curtBtn.setOnClickListener(this);
+                    Button basket_btn = (Button)findViewById(R.id.basket_btn);
+                    basket_btn.setOnClickListener(this);
+
 
                     break;
                 }
                 case "other": {
                     getActionBar().setCustomView(R.layout.abs_other);
+                    Button curtBtn = (Button)findViewById(R.id.curtBtn);
+                    curtBtn.setOnClickListener(this);
+                    Button basket_btn = (Button)findViewById(R.id.basket_btn);
+                    basket_btn.setOnClickListener(this);
+
 
                     break;
                 }

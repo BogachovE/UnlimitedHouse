@@ -52,8 +52,7 @@
                 android:textSize="@dimen/profile_text_size"
                 />
             <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="150dp"
                 android:text="   NAME"
                 android:layout_marginLeft="10dp"
                 android:id="@+id/profile_name_edit"
@@ -61,7 +60,7 @@
                 android:textColorHint="#BBBCBE"
                 android:backgroundTint="#BBBCBE"
 
-                />
+                android:layout_height="40dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -80,15 +79,14 @@
                 android:textSize="@dimen/profile_text_size"/>
 
             <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="   EMAIL@EMAIL.COM"
                 android:layout_marginLeft="10dp"
                 android:id="@+id/profile_email_edit"
                 android:textColor="#BBBCBE"
                 android:textColorHint="#BBBCBE"
                 android:backgroundTint="#BBBCBE"
-                />
+                android:layout_width="200dp"
+                android:layout_height="60dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -106,14 +104,15 @@
                 android:textColor="#00aeef"
                 android:textSize="@dimen/profile_text_size"/>
             <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
                 android:text="   SAUDI ARABIA"
                 android:layout_marginLeft="10dp"
                 android:id="@+id/profile_location_edit"
                 android:textColor="#BBBCBE"
                 android:textColorHint="#BBBCBE"
                 android:backgroundTint="#BBBCBE"
+                android:focusable="false"
                 />
         </LinearLayout>
 
@@ -134,8 +133,8 @@
                 android:textSize="@dimen/profile_text_size"
                 />
             <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="150dp"
+                android:layout_height="40dp"
                 android:text="   XX"
                 android:layout_marginLeft="10dp"
                 android:id="@+id/profile_adress_edit"
