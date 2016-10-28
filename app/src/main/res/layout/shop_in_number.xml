@@ -43,7 +43,8 @@
             android:textStyle="bold"
             android:textColor="@android:color/black"
             android:layout_alignTop="@+id/numb_of_ord"
-            android:layout_marginRight="40dp"/>
+            android:layout_marginRight="40dp"
+            android:id="@+id/num_ord" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -66,7 +67,8 @@
             android:textStyle="bold"
             android:textColor="@android:color/black"
             android:layout_alignTop="@+id/comb_ord"
-            android:layout_marginRight="40dp"/>
+            android:layout_marginRight="40dp"
+            android:id="@+id/com_ord" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -90,7 +92,7 @@
             android:textColor="@android:color/black"
             android:layout_alignTop="@+id/canc_ord"
             android:layout_marginRight="40dp"
-            />
+            android:id="@+id/canc_order" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -113,7 +115,8 @@
             android:textStyle="bold"
             android:textColor="@android:color/black"
             android:layout_alignTop="@+id/most_ord"
-            android:layout_marginRight="40dp"/>
+            android:layout_marginRight="40dp"
+            android:id="@+id/most_order" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -136,7 +139,8 @@
             android:textStyle="bold"
             android:textColor="@android:color/black"
             android:layout_alignTop="@+id/most_time_ord"
-            android:layout_marginRight="40dp"/>
+            android:layout_marginRight="40dp"
+            android:id="@+id/most_time" />
 
 
     </RelativeLayout>
@@ -148,5 +152,5 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
-        />
+        android:id="@+id/back_btn" />
 </RelativeLayout>

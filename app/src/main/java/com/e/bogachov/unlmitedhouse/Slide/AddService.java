@@ -139,13 +139,15 @@ public class AddService extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.signbtn:{
-                categRef = new Firebase("https://unlimeted-house.firebaseio.com/shops/category/"+categ+"/");
+                categRef = new Firebase("https://unlimeted-house.firebaseio.com/shopsreguest/category/"+categ+"/");
                 ref.child("name").setValue(profile_name_edit.getText().toString());
                 ref.child("email").setValue(profile_email_edit.getText().toString());
                 categRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         Long count = dataSnapshot.getChildrenCount();
+                        ref.child("shopid").setValue(count.toString());
+                        ref.child("shopcateg").setValue(categ);
                         categRef.child(count.toString()).child("name").setValue(profile_name_edit.getText().toString());
                         categRef.child(count.toString()).child("photourl").setValue(profile_photo_edit.getText().toString());
                         categRef.child(count.toString()).child("ownerid").setValue(userId);
@@ -162,7 +164,6 @@ public class AddService extends Activity implements View.OnClickListener {
                     }
                 });
                 ref.child("adress").setValue(profile_adress_edit.getText().toString());
-                ref.child("isitshop").setValue("true");
                 Intent goToShopMenu = new Intent(getApplicationContext(), ShopMenu.class);
                 startActivity(goToShopMenu);
                 break;

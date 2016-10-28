@@ -68,7 +68,11 @@ public class MySchedule extends Activity implements WeekView.EventClickListener,
     String dataString;
     String mycustomNum;
     Order order;
+    Date bDate;
     List<Date> lDate;
+    List<Date>lBusy;
+    String busyTime;
+    String mLong;
     List<String> lEventName;
     List<String>lOrderId;
     List<String> lOrderStatus;
@@ -76,13 +80,16 @@ public class MySchedule extends Activity implements WeekView.EventClickListener,
     private List<Order> orders;
     final int DIALOG_EXIT = 2;
     String mID;
+    String categ,shopid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_schedule);
-        myShopName = "fructus";
-        mycustomNum ="0636277226";
+        myShopName = Hawk.get("fromshop");
+        mycustomNum = Hawk.get("phone");
+        categ=Hawk.get("categ");
+        shopid=Hawk.get("shopid");
         Firebase.setAndroidContext(this);
 
 
@@ -115,6 +122,34 @@ public class MySchedule extends Activity implements WeekView.EventClickListener,
         else if(isItShop.equals("false")){
             mQuery = mRef.child("orders").orderByChild("customNum").equalTo(mycustomNum);
         }
+        Firebase busyRef = new Firebase("https://unlimeted-house.firebaseio.com/shops/category/"+categ+"/"+shopid+"/");
+        busyRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
+            @Override
+            public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+                busyTime=dataSnapshot.child("busy/time").getValue(String.class);
+                mLong=dataSnapshot.child("busy/long").getValue(String.class);
+
+                SimpleDateFormat formatter = new SimpleDateFormat("E MMM dd HH:mm:ss z yyyy");
+                if(busyTime!=null) {
+                    try {
+                        bDate = formatter.parse(busyTime);
+
+                    } catch (ParseException e) {
+                        bDate = new Date();
+                        e.printStackTrace();
+                    }
+                }
+
+
+
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
 
         mQuery.addValueEventListener(new ValueEventListener() {
             @Override
@@ -125,6 +160,7 @@ public class MySchedule extends Activity implements WeekView.EventClickListener,
                  lEventName = new ArrayList<String>();
                  lOrderId = new ArrayList<String>();
                  lOrderStatus = new ArrayList<String>();
+
 
 
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
@@ -249,6 +285,24 @@ public class MySchedule extends Activity implements WeekView.EventClickListener,
 
         if(isItShop.equals("true")&event.getName().equals("Busy")){
             mNewEvents.remove(event);
+            lBusy=null;
+            bDate=null;
+            final Firebase ref = new Firebase("https://unlimeted-house.firebaseio.com/shops/category/"+categ+"/"+shopid+"/");
+
+            com.firebase.client.Query refQ = ref.child("busy").orderByChild("time").equalTo(event.getStartTime().getTime().toString());
+            refQ.addListenerForSingleValueEvent(new com.firebase.client.ValueEventListener() {
+                @Override
+                public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+                    ref.child(dataSnapshot.getKey()).removeValue();
+                }
+
+                @Override
+                public void onCancelled(FirebaseError firebaseError) {
+
+                }
+            });
+
+
             mWeekView.notifyDatasetChanged();
         }
         if(isItShop.equals("true")&event.getColor()==-14186012){
@@ -333,9 +387,23 @@ public class MySchedule extends Activity implements WeekView.EventClickListener,
                 events.add(event);
             }
 
-            ArrayList<WeekViewEvent> newEvents = getNewEvents(newYear, newMonth);
-            events.addAll(newEvents);
+
+
         }
+        if(bDate!=null){
+
+                Calendar startTime = Calendar.getInstance();
+                startTime.setTime(bDate);
+                startTime.set(Calendar.MONTH, newMonth - 1);
+                Calendar endTime = (Calendar) startTime.clone();
+                endTime.add(Calendar.HOUR, Integer.parseInt(mLong));
+            WeekViewEvent busyevent = new WeekViewEvent(random.nextInt(),"Busy",startTime,endTime);
+            busyevent.setColor(getResources().getColor(R.color.colorAccent));
+            events.add(busyevent);
+            }
+
+        ArrayList<WeekViewEvent> newEvents = getNewEvents(newYear, newMonth);
+        events.addAll(newEvents);
 
 
         return events;
@@ -426,16 +494,17 @@ public class MySchedule extends Activity implements WeekView.EventClickListener,
     @Override
     protected Dialog onCreateDialog(int id) {
        if(id==DIALOG) {
-           AlertDialog.Builder adb = new AlertDialog.Builder(this);
-           adb.setTitle("How long you will busy");
+           final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+           builder.setTitle("How long you will busy");
            // создаем view из dialog.xml
            view = (LinearLayout) getLayoutInflater()
                    .inflate(R.layout.dialog, null);
            // устанавливаем ее, как содержимое тела диалога
-           adb.setView(view);
+           builder.setView(view);
            // находим TexView для отображения кол-ва
            tvCount = (TextView) view.findViewById(R.id.tvCount);
            Button sendbtn = (Button) view.findViewById(R.id.sendbtn);
+           final AlertDialog adb =builder.show();
            sendbtn.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View v) {
@@ -448,6 +517,9 @@ public class MySchedule extends Activity implements WeekView.EventClickListener,
                                endTime.add(Calendar.HOUR, Integer.parseInt(tvCount.getText().toString()));
 
 
+                               Firebase ref = new Firebase("https://unlimeted-house.firebaseio.com/shops/category/"+categ+"/"+shopid+"/");
+                               ref.child("busy/time").setValue(ttime.getTime().toString());
+                               ref.child("busy/long").setValue(tvCount.getText().toString());
                                // Create a new event.
                                WeekViewEvent event = new WeekViewEvent(random.nextInt(), "Busy", ttime, endTime);
                                event.setColor(getResources().getColor(R.color.colorAccent));
@@ -455,6 +527,7 @@ public class MySchedule extends Activity implements WeekView.EventClickListener,
 
                                // Refresh the week view. onMonthChange will be called again.
                                mWeekView.notifyDatasetChanged();
+                               adb.cancel();
                            }
 
 
@@ -462,7 +535,7 @@ public class MySchedule extends Activity implements WeekView.EventClickListener,
                    }
                }
            });
-           return adb.create();
+           return null;
        }
         if(id==DIALOG_EXIT){
             AlertDialog.Builder adb = new AlertDialog.Builder(this);
@@ -507,6 +580,9 @@ public class MySchedule extends Activity implements WeekView.EventClickListener,
                // case Dialog.BUTTON_NEUTRAL:
                  //   break;
             }
+
+
+
         }
     };
 }

@@ -90,19 +90,21 @@
         <EditText
             android:layout_width="286dp"
             android:layout_height="150dp"
-            android:background="@drawable/rectangl"
+            android:background="@drawable/bar"
             android:text="xxxxxx"
             android:textAlignment="center"
             android:layout_marginTop="10dp"
             android:layout_gravity="center_horizontal"
-            android:layout_weight="0.31" />
+            android:layout_weight="0.31"
+            android:id="@+id/mail_text"/>
 
         <ImageButton
             android:layout_width="100dp"
             android:layout_height="30dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="40dp"
-            android:background="@drawable/send" />
+            android:background="@drawable/sendbtn"
+            android:id="@+id/email_btn" />
 
 
     </LinearLayout>

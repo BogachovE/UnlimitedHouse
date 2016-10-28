@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -16,7 +17,6 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,23 +26,17 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.e.bogachov.unlmitedhouse.Dialog1;
-import com.e.bogachov.unlmitedhouse.MyApplication;
+import com.alamkanak.weekview.WeekViewEvent;
 import com.e.bogachov.unlmitedhouse.MySchedule;
-import com.e.bogachov.unlmitedhouse.Product;
 import com.e.bogachov.unlmitedhouse.R;
-import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
-import com.firebase.client.ValueEventListener;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -54,6 +48,7 @@ import com.orhanobut.hawk.Hawk;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -76,14 +71,15 @@ public class ShopsMenu extends Activity implements  GoogleApiClient.OnConnection
     ImageView shadow;
     private Animation mFadeInAnimation, mFadeOutAnimation;
     SharedPreferences sPref;
+    final int DIALOG_EXIT = 2;
 
 
 
 
 
-    public static class MessageViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        CardView cv;
+    public class MessageViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnLongClickListener{
         TextView shopName;
+        CardView cv;
         ImageView shopPhoto;
         RelativeLayout rl;
         Context context;
@@ -127,11 +123,36 @@ public class ShopsMenu extends Activity implements  GoogleApiClient.OnConnection
                     Hawk.put("fromShop", shopName.getText().toString());
                     v.getContext().startActivity(goToServiceType);
                     Toast.makeText(v.getContext().getApplicationContext(), "clisk." + (getAdapterPosition()), Toast.LENGTH_SHORT).show();
+                    break;
                 }
 
             }
 
 
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            String isItShop=Hawk.get("isitshop");
+
+
+
+            switch(v.getId()){
+                case R.id.rl:{
+                    if(isItShop.equals("true") & getAdapterPosition() != 0){
+                        showDialog(DIALOG_EXIT);
+
+
+                    }
+
+                    break;
+                }
+
+
+
+            }
+
+            return false;
         }
     }
 
@@ -262,11 +283,12 @@ public class ShopsMenu extends Activity implements  GoogleApiClient.OnConnection
         ActionBar actionBar = getActionBar();
 
 
+        initializeData();
 
 
 
 
-        categ = intent.getStringExtra("categ");
+        categ = Hawk.get("categ");
 
 
 
@@ -277,6 +299,9 @@ public class ShopsMenu extends Activity implements  GoogleApiClient.OnConnection
                     curtBtn.setOnClickListener(this);
                     Button basket_btn = (Button)findViewById(R.id.basket_btn);
                     basket_btn.setOnClickListener(this);
+                    if (orders.size()!=0){
+                        basket_btn.setBackgroundResource(R.drawable.basket_full);
+                    }
 
 
                     break;
@@ -288,6 +313,9 @@ public class ShopsMenu extends Activity implements  GoogleApiClient.OnConnection
                     curtBtn.setOnClickListener(this);
                     Button basket_btn = (Button)findViewById(R.id.basket_btn);
                     basket_btn.setOnClickListener(this);
+                    if (orders.size()!=0){
+                        basket_btn.setBackgroundResource(R.drawable.basket_full_white);
+                    }
 
 
                     break;
@@ -299,6 +327,9 @@ public class ShopsMenu extends Activity implements  GoogleApiClient.OnConnection
                     curtBtn.setOnClickListener(this);
                     Button basket_btn = (Button)findViewById(R.id.basket_btn);
                     basket_btn.setOnClickListener(this);
+                    if (orders.size()!=0){
+                        basket_btn.setBackgroundResource(R.drawable.basket_full_white);
+                    }
 
 
                     break;
@@ -310,6 +341,9 @@ public class ShopsMenu extends Activity implements  GoogleApiClient.OnConnection
                     curtBtn.setOnClickListener(this);
                     Button basket_btn = (Button)findViewById(R.id.basket_btn);
                     basket_btn.setOnClickListener(this);
+                    if (orders.size()!=0){
+                        basket_btn.setBackgroundResource(R.drawable.basket_full);
+                    }
 
 
                     break;
@@ -320,6 +354,9 @@ public class ShopsMenu extends Activity implements  GoogleApiClient.OnConnection
                     curtBtn.setOnClickListener(this);
                     Button basket_btn = (Button)findViewById(R.id.basket_btn);
                     basket_btn.setOnClickListener(this);
+                    if (orders.size()!=0){
+                        basket_btn.setBackgroundResource(R.drawable.basket_full);
+                    }
 
 
                     break;
@@ -373,7 +410,7 @@ public class ShopsMenu extends Activity implements  GoogleApiClient.OnConnection
             Map<String,String> order = new HashMap<String, String>();
             for (int i = 0; i<= numZakaz ;i++ ){
               order=ordervc.get(i);
-              orders.add(new Order(order.get("count"),order.get("data"),order.get("fromShop"),order.get("currency"),order.get("p"),order.get("sum"),order.get("name"),order.get("descript"),"process",customNum,null));
+              orders.add(new Order(order.get("count"),order.get("data"),order.get("fromShop"),order.get("currency"),order.get("p"),order.get("sum"),order.get("name"),order.get("descript"),"process",customNum,"sda","da","sda","da","sda","das"));
             }
         }
         ordervc.clear();
@@ -519,6 +556,9 @@ public class ShopsMenu extends Activity implements  GoogleApiClient.OnConnection
             case R.id.textView7:{
                 Intent goToSchedle = new Intent(view.getContext(), MySchedule.class);
                 view.getContext().startActivity(goToSchedle);
+                Hawk.delete("orders");
+                mAdapter.notifyDataSetChanged();
+
                 break;
 
 
@@ -528,6 +568,61 @@ public class ShopsMenu extends Activity implements  GoogleApiClient.OnConnection
 
         }
     }
+    @Override
+    protected void onPrepareDialog(int id, Dialog dialog) {
+        super.onPrepareDialog(id, dialog);
+        if (id == DIALOG_EXIT) {
+
+        }
+    }
+
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        if(id==DIALOG_EXIT){
+            AlertDialog.Builder adb = new AlertDialog.Builder(this);
+            // заголовок
+            //   adb.setTitle(R.string.exit);
+            // сообщение
+            //adb.setMessage(R.string.save_data);
+            // иконка
+            // adb.setIcon(android.R.drawable.ic_dialog_info);
+            // кнопка положительного ответа
+            adb.setPositiveButton("Rename shop", myClickListener);
+            // кнопка отрицательного ответа
+            adb.setNegativeButton("Delete shop", myClickListener);
+            // кнопка нейтрального ответа
+            adb.setNeutralButton("Change picture", myClickListener);
+            // создаем диалог
+            return adb.create();
+        }
+        return super.onCreateDialog(id);
+    }
+    DialogInterface.OnClickListener myClickListener = new DialogInterface.OnClickListener() {
+        public void onClick(DialogInterface dialog, int which) {
+            switch (which) {
+                // положительная кнопка
+                case Dialog.BUTTON_POSITIVE:
+                    Firebase acceptRef = new Firebase("https://unlimeted-house.firebaseio.com/orders/"+mID);
+                    acceptRef.child("status").setValue("confirmation");
+                    acceptRef.child("confirmationdata").setValue(new Date().toString());
+                    Toast.makeText(getApplicationContext(), mID, Toast.LENGTH_SHORT).show();
+
+                    // finish();
+                    break;
+                // негативная кнопка
+                case Dialog.BUTTON_NEGATIVE:
+                    acceptRef = new Firebase("https://unlimeted-house.firebaseio.com/orders/"+mID);
+                    acceptRef.child("status").setValue("canceld");
+                    acceptRef.child("canceldata").setValue(new Date().toString());
+                    Toast.makeText(getApplicationContext(), mID, Toast.LENGTH_SHORT).show();
+                    //finish();
+                    break;
+                // нейтральная кнопка
+                // case Dialog.BUTTON_NEUTRAL:
+                //   break;
+            }
+        }
+    };
 
 
 

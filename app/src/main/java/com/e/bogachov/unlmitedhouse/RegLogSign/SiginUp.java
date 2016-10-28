@@ -192,11 +192,15 @@ public class SiginUp extends Activity implements View.OnClickListener {
                                 sPref = getPreferences(MODE_PRIVATE);
                                 SharedPreferences.Editor ed = sPref.edit();
                                 ed.putString("userid", users.getId());
+                                Hawk.put("userid", users.getId());
+                                Hawk.put("categ",users.getShopcateg());
+                                Hawk.put("shopid",users.getShopid());
                                 ed.commit();
                                 Hawk.put("isitshop", users.getIsitshop());
                                 isItShop = users.getIsitshop();
                                 ed.putString("isitshop", "true");
                                 ed.commit();
+
                                 //Toast.makeText(getApplicationContext(), isItShop, Toast.LENGTH_SHORT).show();
                                 if (isItShop.equals("true")) {
                                     Intent goToShopMenu = new Intent(getApplicationContext(), ShopMenu.class);
@@ -275,7 +279,7 @@ public class SiginUp extends Activity implements View.OnClickListener {
             case R.id.nextbtn: {
 
                 mPhone = phonetxt.getText().toString();
-                verifyClient.getVerifiedUser("UA",phonetxt.getText().toString());
+                verifyClient.getVerifiedUser("SA",phonetxt.getText().toString());
                 userPhone = mPhone;
 
 

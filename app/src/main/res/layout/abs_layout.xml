@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Candy and Pies"
+        android:text="Beauty"
         android:textColor="#ffffff"
         android:id="@+id/mytext"
         android:textSize="18sp"

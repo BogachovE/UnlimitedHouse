@@ -1,4 +1,4 @@
-package com.e.bogachov.unlmitedhouse;
+package com.e.bogachov.unlmitedhouse.Dialogs;
 
 
 import android.app.DialogFragment;
@@ -10,11 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import com.e.bogachov.unlmitedhouse.ShopsCateg.ShopsMenu;
+import com.e.bogachov.unlmitedhouse.R;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
@@ -23,23 +21,24 @@ import com.orhanobut.hawk.Hawk;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
-public class Dialog1 extends DialogFragment implements View.OnClickListener {
+public class Dialog2 extends DialogFragment implements OnClickListener {
 
     final String LOG_TAG = "myLogs";
     Context context ;
+    String mShops;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        getDialog().setTitle("Add new shop");
+        getDialog().setTitle("Add new servicetype");
         View v = inflater.inflate(R.layout.add_shop_diolog,null);
         v.findViewById(R.id.okbtn).setOnClickListener(this);
         v.findViewById(R.id.cancelbtn).setOnClickListener(this);
         EditText shop_name_etxt = (EditText)v.findViewById(R.id.shop_name_etxt);
 
         Hawk.init(getActivity()).build();
+        mShops =Hawk.get("shopid");
 
 
 
@@ -59,7 +58,7 @@ public class Dialog1 extends DialogFragment implements View.OnClickListener {
                 final String photo = shop_photo_etxt.getText().toString();
                 String categ = Hawk.get("categ");
 
-                final Firebase ref = new Firebase("https://unlimeted-house.firebaseio.com/shops/category/"+categ);
+                final Firebase ref = new Firebase("https://unlimeted-house.firebaseio.com/shops/category/"+categ+"/"+mShops.toString()+"/servicetype");
                 ref.addListenerForSingleValueEvent(new ValueEventListener() {
 
                     @Override
@@ -70,11 +69,11 @@ public class Dialog1 extends DialogFragment implements View.OnClickListener {
                         Map<String,String> shopName = new HashMap<String, String>();
                         shopName.put("name",name);
                         shopName.put("photourl",photo);
-                        shopName.put("category", Hawk.get("categ").toString());
+
                         addZeroServ.put("name","PLUS");
                         addZeroServ.put("photourl","http://fs156.www.ex.ua/show/697962838068/276256660/276256660.png");
                         ref.child(ss).setValue(shopName);
-                        ref.child(ss+"/servicetype/0/").setValue(addZeroServ);
+                        ref.child(ss+"/products/0/").setValue(addZeroServ);
 
                     }
 

@@ -35,6 +35,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.orhanobut.hawk.Hawk;
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -48,6 +50,7 @@ public class ShopOrders extends Activity {
     String isItShop;
     String customNum;
     Query mQuery;
+    String shopname;
 
 
 
@@ -62,16 +65,18 @@ public class ShopOrders extends Activity {
         Hawk.init(this).build();
         isItShop = Hawk.get("isitshop");
         customNum = Hawk.get("userphone");
+        shopname = Hawk.get("fromshop");
+
 
 
 
 
         mData = FirebaseDatabase.getInstance().getReference();
 
-      //  if (isItShop.equals("false")) {
+       if (isItShop.equals("false")) {
              mQuery = mData.child("orders").orderByChild("customNum").equalTo(customNum);
-       // }
-       // else mQuery = mData.child("orders").orderByChild("fromshop").equalTo(shopname);
+       }
+       else mQuery = mData.child("orders").orderByChild("fromshop").equalTo(shopname);
 
 
         StaggeredGridLayoutManager gm = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
@@ -87,9 +92,33 @@ public class ShopOrders extends Activity {
 
             @Override
             protected void populateViewHolder(OrderViewHolder viewHolder, final Order model, int position) {
+                Date mDate;
                 viewHolder.from_shop.setText(" "+model.getFromshop());
                 viewHolder.order_numb.setText(" "+model.getId()+" ");
                 viewHolder.order_data.setText(" "+model.getData());
+
+
+
+                SimpleDateFormat formatter = new SimpleDateFormat("E MMM dd HH:mm:ss z yyyy");
+                try {
+                    String dataString = model.getData();
+                     mDate  = formatter.parse(dataString);
+
+                } catch (ParseException e) {
+                    Toast.makeText(getApplicationContext(),"blya",Toast.LENGTH_SHORT).show();
+                    mDate = new Date();
+                    e.printStackTrace();
+                }
+                Integer day = mDate.getDay();
+                Integer month = mDate.getMonth();
+                String[] monStr = {"JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"};
+                viewHolder.order_data_two.setText(day.toString());
+                viewHolder.order_data_big.setText(monStr[month]);
+
+
+
+
+
                 viewHolder.check_btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -190,6 +219,8 @@ public class ShopOrders extends Activity {
         Button check_btn;
         TextView order_data;
         String isItShop;
+        TextView order_data_two;
+        TextView order_data_big;
 
 
         public OrderViewHolder(View v) {
@@ -209,10 +240,13 @@ public class ShopOrders extends Activity {
             order_data = (TextView)itemView.findViewById(R.id.order_data);
             isItShop = Hawk.get("isitshop");
             if (isItShop.equals("true")){
-                cancel_btn.setText("REJECT");
-                check_btn.setText("ACCEPT");
+                cancel_btn.setBackgroundResource(R.drawable.reject);
+                check_btn.setBackgroundResource(R.drawable.accept);
 
             }
+            order_data_two = (TextView)itemView.findViewById(R.id.order_data_two);
+            order_data_big = (TextView)itemView.findViewById(R.id.order_data_big);
+
 
         }
 

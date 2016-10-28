@@ -78,7 +78,7 @@
     <dimen name="slide_liner_lay_margin_left">20dp</dimen>
     <dimen name="slide_liner_lay_margin_top">10dp</dimen>
     <dimen name="slider_text_margin_left">2dp</dimen>
-    <dimen name="slider_text_size">20sp</dimen>
+    <dimen name="slider_text_size">27sp</dimen>
     <dimen name="slider_icon_width">30dp</dimen>
     <dimen name="slider_icon_height">30dp</dimen>
     <dimen name="slider_icon_margin_right">20dp</dimen>
@@ -90,7 +90,7 @@
 
 
     <!--Profile-->
-    <dimen name="profile_titel_margin_left">20dp</dimen>
+    <dimen name="profile_titel_margin_left">27dp</dimen>
     <dimen name="profile_btn_width">90dp</dimen>
     <dimen name="profile_btn_height">90dp</dimen>
     <dimen name="profile_btn_margin_top">5dp</dimen>

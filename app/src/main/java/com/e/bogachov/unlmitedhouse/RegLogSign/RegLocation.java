@@ -26,6 +26,7 @@ import java.util.Map;
 
 public class RegLocation extends Activity implements View.OnClickListener {
 
+    EditText loc_house;
     String userId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,9 @@ public class RegLocation extends Activity implements View.OnClickListener {
         //find View
         Button loginBtn = (Button)findViewById(R.id.nextbtn);
         loginBtn.setOnClickListener(this);
+
+        loc_house = (EditText)findViewById(R.id.loc_house);
+        loc_house.setOnClickListener(this);
 
         EditText loc = (EditText)findViewById(R.id.loc_editloc);
         loc.setOnClickListener(this);
@@ -71,13 +75,15 @@ public class RegLocation extends Activity implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.nextbtn:{
-                EditText loc_house = (EditText)findViewById(R.id.loc_house);
-                Firebase ref = new Firebase("https://unlimeted-house.firebaseio.com/users/"+userId);
-                Map<String, Object> setHouse = new HashMap<String, Object>();
-                setHouse.put("house", loc_house.getText().toString());
-                ref.updateChildren(setHouse);
-                Intent goMainMenu = new Intent(RegLocation.this, MainMenu.class);
-                startActivity(goMainMenu);
+                if (!loc_house.getText().equals("  ENTER HOUSE NUMBER")) {
+                    EditText loc_house = (EditText) findViewById(R.id.loc_house);
+                    Firebase ref = new Firebase("https://unlimeted-house.firebaseio.com/users/" + userId);
+                    Map<String, Object> setHouse = new HashMap<String, Object>();
+                    setHouse.put("house", loc_house.getText().toString());
+                    ref.updateChildren(setHouse);
+                    Intent goMainMenu = new Intent(RegLocation.this, MainMenu.class);
+                    startActivity(goMainMenu);
+                }
                 break;
             }
 
@@ -102,6 +108,9 @@ public class RegLocation extends Activity implements View.OnClickListener {
                 }
 
 
+            }
+            case R.id.loc_house:{
+                loc_house.setText("");
             }
         }
     }

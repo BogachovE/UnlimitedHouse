@@ -1,5 +1,6 @@
 package com.e.bogachov.unlmitedhouse.ShopsCateg;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -62,8 +63,6 @@ public class BuyProduct extends Activity implements View.OnClickListener, Google
     TextView price_txt;
     TextView price_t;
     String mVisting;
-    TextView visting_req_btn_yes;
-    TextView visting_req_btn_no;
     TextView service_desc;
 
 
@@ -72,71 +71,137 @@ public class BuyProduct extends Activity implements View.OnClickListener, Google
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        String categ = Hawk.get("categ");
+
+        switch (categ) {
+            case "beauty": {
+                super.setTheme(R.style.Beauty);
+
+                break;
+            }
+
+            case "product": {
+                super.setTheme(R.style.Candy);
+
+                break;
+            }
+
+            case "candy": {
+                super.setTheme(R.style.Candy);
+
+                break;
+            }
+
+            case "house": {
+                super.setTheme(R.style.House);
+
+                break;
+            }
+            case "other": {
+                super.setTheme(R.style.Other);
+
+                break;
+            }
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.buy_product);
         Firebase.setAndroidContext(this);
 
         Intent intent = getIntent();
-        mProduct=Hawk.get("productid");
+        mProduct = Hawk.get("productid");
 
         Hawk.init(this).build();
-        mShops=Hawk.get("shopid");
-        mService=Hawk.get("serviceid");
+        mShops = Hawk.get("shopid");
+        mService = Hawk.get("serviceid");
 
         context = getApplicationContext();
 
-        custom_order_back =(ImageView) findViewById(R.id.custom_order_back);
+        custom_order_back = (ImageView) findViewById(R.id.custom_order_back);
         custom_order_back.setOnClickListener(this);
 
-        ImageView btn_more =(ImageView) findViewById(R.id.btn_more);
+        ImageView btn_more = (ImageView) findViewById(R.id.btn_more);
         btn_more.setOnClickListener(this);
 
-        ImageView person_numb_btn_less =(ImageView) findViewById(R.id.person_numb_btn_less);
+        ImageView person_numb_btn_less = (ImageView) findViewById(R.id.person_numb_btn_less);
         person_numb_btn_less.setOnClickListener(this);
 
-        visting_req_btn = (ImageView)findViewById(R.id.visting_req_btn);
+        visting_req_btn = (ImageView) findViewById(R.id.visting_req_btn);
         visting_req_btn.setOnClickListener(this);
 
-        visting_req_btn2 = (ImageView)findViewById(R.id.visting_req_btn2);
+        visting_req_btn2 = (ImageView) findViewById(R.id.visting_req_btn2);
         visting_req_btn2.setOnClickListener(this);
 
-        add_to_basket = (RelativeLayout)findViewById(R.id.add_to_basket);
+        add_to_basket = (RelativeLayout) findViewById(R.id.add_to_basket);
         add_to_basket.setOnClickListener(this);
 
-        price_txt = (TextView)findViewById(R.id.price_txt);
-        price_t= (TextView)findViewById(R.id.price_t);
-        person_numb_count= (TextView)findViewById(R.id.person_numb_count);
-        visting_req_btn_yes = (TextView)findViewById(R.id.visting_req_btn_yes);
-        visting_req_btn_yes.setOnClickListener(this);
-        visting_req_btn_no = (TextView)findViewById(R.id.visting_req_btn_no);
-        visting_req_btn_no.setOnClickListener(this);
+        price_txt = (TextView) findViewById(R.id.price_txt);
+        price_t = (TextView) findViewById(R.id.price_t);
+        person_numb_count = (TextView) findViewById(R.id.person_numb_count);
+        visting_req_btn = (ImageView) findViewById(R.id.visting_req_btn);
+        visting_req_btn.setOnClickListener(this);
+        visting_req_btn2 = (ImageView) findViewById(R.id.visting_req_btn2);
+        visting_req_btn2.setOnClickListener(this);
         mVisting = "no";
 
+        getActionBar().setHomeAsUpIndicator(R.drawable.btn_aaact);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getActionBar().setHomeAsUpIndicator(R.drawable.btn_aaact);
+        ActionBar actionBar = getActionBar();
 
-        count=1;
-        String categ =Hawk.get("categ");
+        switch (categ) {
+            case "beauty": {
+                getActionBar().setCustomView(R.layout.abs_layout);
+                break;
+            }
+
+            case "product": {
+                getActionBar().setCustomView(R.layout.abs_product);
+                break;
+            }
+
+            case "candy": {
+                getActionBar().setCustomView(R.layout.abs_candy);
+                break;
+            }
+
+            case "house": {
+                getActionBar().setCustomView(R.layout.abs_house);
+                Button curtBtn = (Button) findViewById(R.id.curtBtn);
+                break;
+            }
+            case "other": {
+                getActionBar().setCustomView(R.layout.abs_other);
+                break;
+            }
+        }
+
+        count = 1;
+        categ = Hawk.get("categ");
 
         mData = FirebaseDatabase.getInstance().getReference();
-        mRefProductPhoto = new Firebase("https://unlimeted-house.firebaseio.com/shops/category/"+categ+"/"+mShops+"/servicetype/"+mService.toString()+"/products/"+mProduct+"/photourl");
+        mRefProductPhoto = new Firebase("https://unlimeted-house.firebaseio.com/shops/category/" + categ + "/" + mShops + "/servicetype/" + mService.toString() + "/products/" + mProduct + "/photourl");
         mRefProductPhoto.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String producturl = dataSnapshot.getValue(String.class);
-                ImageView product_image = (ImageView)findViewById(R.id.product_image);
+                ImageView product_image = (ImageView) findViewById(R.id.product_image);
                 Picasso.with(getApplication()).load(producturl).into(product_image);
             }
+
             @Override
             public void onCancelled(FirebaseError firebaseError) {
 
             }
         });
 
-        mRefProductPrice = new Firebase("https://unlimeted-house.firebaseio.com/shops/category/"+categ+"/"+mShops+"/servicetype/"+mService.toString()+"/products/"+mProduct.toString()+"/price/p");
+        mRefProductPrice = new Firebase("https://unlimeted-house.firebaseio.com/shops/category/" + categ + "/" + mShops + "/servicetype/" + mService.toString() + "/products/" + mProduct.toString() + "/price/p");
         mRefProductPrice.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String p = dataSnapshot.getValue(String.class);
-                TextView price_txt =(TextView)findViewById(R.id.price_txt);
+                TextView price_txt = (TextView) findViewById(R.id.price_txt);
                 price_txt.setText(p.toString());
 
             }
@@ -149,15 +214,13 @@ public class BuyProduct extends Activity implements View.OnClickListener, Google
         Firebase.setAndroidContext(this);
 
 
-
-
-        mRefProductPricetype = new Firebase("https://unlimeted-house.firebaseio.com/shops/category/"+categ+"/"+mShops+"/servicetype/"+mService+"/products/"+mProduct+"/price/currency");
+        mRefProductPricetype = new Firebase("https://unlimeted-house.firebaseio.com/shops/category/" + categ + "/" + mShops + "/servicetype/" + mService + "/products/" + mProduct + "/price/currency");
         mRefProductPricetype.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String t = dataSnapshot.getValue(String.class);
-                TextView price_t =(TextView)findViewById(R.id.price_t);
-                price_t.setText(" "+t.toString());
+                TextView price_t = (TextView) findViewById(R.id.price_t);
+                price_t.setText(" " + t.toString());
 
             }
 
@@ -167,12 +230,12 @@ public class BuyProduct extends Activity implements View.OnClickListener, Google
             }
         });
 
-        mRefProductDecrip = new Firebase("https://unlimeted-house.firebaseio.com/shops/category/"+categ+"/"+mShops+"/servicetype/"+mService+"/products/"+mProduct+"/description");
+        mRefProductDecrip = new Firebase("https://unlimeted-house.firebaseio.com/shops/category/" + categ + "/" + mShops + "/servicetype/" + mService + "/products/" + mProduct + "/description");
         mRefProductDecrip.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String d = dataSnapshot.getValue(String.class);
-                service_desc = (TextView)findViewById(R.id.service_desc);
+                service_desc = (TextView) findViewById(R.id.service_desc);
                 service_desc.setText(d);
             }
 
@@ -183,8 +246,11 @@ public class BuyProduct extends Activity implements View.OnClickListener, Google
         });
 
 
+    }
 
-         }
+
+
+
 
     @Override
     public void onClick(View view) {
@@ -252,14 +318,7 @@ public class BuyProduct extends Activity implements View.OnClickListener, Google
 
                 break;
             }
-            case R.id.visting_req_btn_yes:{
-                mVisting = "yes";
-                Toast.makeText(getApplicationContext(),"Set visiting No",Toast.LENGTH_SHORT).show();
-            }
-            case R.id.visting_req_btn_no:{
-                mVisting = "no";
-                Toast.makeText(getApplicationContext(),"Set visiting Yes",Toast.LENGTH_SHORT).show();
-            }
+
 
         }
     }

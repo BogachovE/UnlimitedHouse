@@ -13,11 +13,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.e.bogachov.unlmitedhouse.MainMenu;
+import com.e.bogachov.unlmitedhouse.ShopMenu;
 import com.e.bogachov.unlmitedhouse.ShopOrders;
 import com.e.bogachov.unlmitedhouse.Slide.AddService;
 import com.e.bogachov.unlmitedhouse.Slide.ContactUs;
 import com.e.bogachov.unlmitedhouse.Slide.Profile;
 import com.e.bogachov.unlmitedhouse.R;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.orhanobut.hawk.Hawk;
 
@@ -29,6 +34,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Locale mNewLocale;
     String lang;
     String userId;
+    String isitshop;
+    String shopId;
+    String shopcateg;
+    String phone;
+    String fromshop;
 
 
 
@@ -50,8 +60,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         menu.setMenu(R.layout.sidemenu);
         menu.setBehindWidthRes(R.dimen.slidingmenu_behind_width);
 
-
+        Firebase.setAndroidContext(this);
         Hawk.init(this).build();
+
+        SharedPreferences sPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor ed = sPref.edit();
+        userId = sPref.getString("userid", "");
+        isitshop =sPref.getString("isitshop","");
+        shopId=sPref.getString("shopid","");
+
+        Firebase shopRef = new Firebase("https://unlimeted-house.firebaseio.com/users/"+userId+"/");
+        shopRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                isitshop= dataSnapshot.child("isitshop").getValue(String.class);
+                Hawk.put("isitshop",isitshop);
+                shopId=dataSnapshot.child("shopid").getValue(String.class);
+                Hawk.put("shopid",shopId);
+                shopcateg=dataSnapshot.child("shopcateg").getValue(String.class);
+                Hawk.put("categ",shopcateg);
+                phone=dataSnapshot.child("phone").getValue(String.class);
+                Hawk.put("phone",phone);
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+
+
 
 
 
@@ -91,29 +130,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
+
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.signbtn:{
-                SharedPreferences sPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                SharedPreferences.Editor ed = sPref.edit();
-                userId = sPref.getString("userid", "");
-                if(userId.equals("")) {
-                    Intent signintent = new Intent(MainActivity.this, SiginUp.class);
-                    startActivity(signintent);
+            case R.id.signbtn: {
 
-                }else if(!userId.equals("")) {
-                    Hawk.put("userid", userId);
-                    Intent goToMain = new Intent(MainActivity.this, MainMenu.class);
-                    startActivity(goToMain);
+
+                if (isitshop != null) {
+                    if (!userId.equals("") & (isitshop.equals("false"))) {
+                        Hawk.put("userid", userId);
+                        Intent goToMain = new Intent(MainActivity.this, MainMenu.class);
+                        startActivity(goToMain);
+
+                    } else if (!userId.equals("") & (isitshop.equals("true"))) {
+                        Hawk.put("userid", userId);
+                        Intent goToShop = new Intent(MainActivity.this, ShopMenu.class);
+                        startActivity(goToShop);
+                    } else {
+                        Intent signintent = new Intent(MainActivity.this, SiginUp.class);
+                        startActivity(signintent);
+                    }
+
+
+                    break;
 
                 }
-
-
-                break;
-
+                else{
+                    Intent signintent = new Intent(MainActivity.this, SiginUp.class);
+                    startActivity(signintent);
+                }
             }
 
 
@@ -152,6 +200,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.logoutbtn:{
                 Intent goToStart = new Intent(getApplicationContext(),MainActivity.class);
                 Hawk.deleteAll();
+                SharedPreferences sPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                SharedPreferences.Editor ed = sPref.edit();
+                ed.clear();
+                ed.apply();
                 startActivity(goToStart);
                 break;
             }
@@ -161,9 +213,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onDestroy(){
         userId=Hawk.get("userid");
+        isitshop=Hawk.get("isitshop");
+        shopId=Hawk.get("shopid");
         SharedPreferences sPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor ed = sPref.edit();
         ed.putString("userid", userId);
+        ed.putString("isitshop", isitshop);
+        ed.putString("shopid", shopId);
         ed.commit();
 
         super.onDestroy();

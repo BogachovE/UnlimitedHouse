@@ -12,9 +12,17 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.e.bogachov.unlmitedhouse.ShopsCateg.ServiceTypeMenu;
 import com.e.bogachov.unlmitedhouse.ShopsCateg.ShopsMenu;
+import com.e.bogachov.unlmitedhouse.Slide.ContactUs;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
+import com.orhanobut.hawk.Hawk;
 
 public class ShopMenu extends Activity implements View.OnClickListener {
+    String shopcateg,shopId,fromshop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +43,26 @@ public class ShopMenu extends Activity implements View.OnClickListener {
         shop_in_number.setOnClickListener(this);
         FrameLayout rating = (FrameLayout)findViewById(R.id.rating);
         rating.setOnClickListener(this);
+
+
+        Hawk.init(this).build();
+        shopcateg=Hawk.get("categ");
+        shopId=Hawk.get("shopid");
+        Firebase.setAndroidContext(this);
+
+        Firebase orderRef = new Firebase("https://unlimeted-house.firebaseio.com/shops/category/"+shopcateg+"/"+shopId+"/");
+        orderRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                fromshop= dataSnapshot.child("name").getValue(String.class);
+                Hawk.put("fromshop",fromshop);
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
     }
 
     @Override
@@ -42,13 +70,15 @@ public class ShopMenu extends Activity implements View.OnClickListener {
 
         switch (view.getId()){
             case R.id.my_shop:{
-                Intent goToShops = new Intent(this, MainMenu.class);
+                Intent goToShops = new Intent(this, ServiceTypeMenu.class);
                 startActivity(goToShops);
                 break;
             }
 
             case R.id.my_schedule:{
                 Intent goToMySchedule = new Intent(this,MySchedule.class);
+                startActivity(goToMySchedule);
+                break;
             }
 
             case R.id.orders_btn:{
@@ -58,9 +88,13 @@ public class ShopMenu extends Activity implements View.OnClickListener {
             }
             case R.id.shop_in_number:{
                 Intent goToShopInNumber= new Intent(this,ShopInNumber.class);
+                startActivity(goToShopInNumber);
+                break;
             }
             case R.id.rating:{
-                Intent goToRating = new Intent(this,Rating.class);
+                Intent goToRating = new Intent(this,ContactUs.class);
+                startActivity(goToRating);
+                break;
             }
         }
 

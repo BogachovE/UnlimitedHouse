@@ -1,10 +1,11 @@
 package com.e.bogachov.unlmitedhouse;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class Rating extends AppCompatActivity {
+public class Rating extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
