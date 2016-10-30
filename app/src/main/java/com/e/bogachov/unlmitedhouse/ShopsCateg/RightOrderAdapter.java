@@ -59,16 +59,8 @@ public class RightOrderAdapter extends RecyclerView.Adapter<RightOrderAdapter.Ri
             productName = (TextView)itemView.findViewById(R.id.productName);
             productCount = (TextView) itemView.findViewById(R.id.productCount);
             btn =(Button)itemView.findViewById(R.id.btn);
-            btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    delete(getAdapterPosition());
 
 
-
-                }
-            });
             productName.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/roboto.ttf"));
             productCount.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/roboto.ttf"));
 
@@ -132,11 +124,22 @@ public class RightOrderAdapter extends RecyclerView.Adapter<RightOrderAdapter.Ri
     }
 
     @Override
-    public void onBindViewHolder(RightOrderViewHolder rightOrderViewHolder, int i) {
+    public void onBindViewHolder(RightOrderViewHolder rightOrderViewHolder, final int i) {
 
 
         rightOrderViewHolder.productName.setText(orders.get(i).name + orders.get(i).count);
         rightOrderViewHolder.productCount.setText(orders.get(i).descript);
+        rightOrderViewHolder.btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                delete(i);
+                orders.remove(i);
+
+
+
+            }
+        });
 
 
 

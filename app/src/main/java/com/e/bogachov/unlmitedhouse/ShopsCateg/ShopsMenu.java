@@ -22,9 +22,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -77,7 +80,7 @@ public class ShopsMenu extends Activity implements  GoogleApiClient.OnConnection
 
 
 
-    public class MessageViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnLongClickListener{
+    public static class MessageViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView shopName;
         CardView cv;
         ImageView shopPhoto;
@@ -131,29 +134,7 @@ public class ShopsMenu extends Activity implements  GoogleApiClient.OnConnection
 
         }
 
-        @Override
-        public boolean onLongClick(View v) {
-            String isItShop=Hawk.get("isitshop");
 
-
-
-            switch(v.getId()){
-                case R.id.rl:{
-                    if(isItShop.equals("true") & getAdapterPosition() != 0){
-                        showDialog(DIALOG_EXIT);
-
-
-                    }
-
-                    break;
-                }
-
-
-
-            }
-
-            return false;
-        }
     }
 
 
@@ -248,6 +229,7 @@ public class ShopsMenu extends Activity implements  GoogleApiClient.OnConnection
                         viewHolder.cv.setBackground(cdn);
 
                     }
+
             }
 
 
@@ -556,7 +538,7 @@ public class ShopsMenu extends Activity implements  GoogleApiClient.OnConnection
             case R.id.textView7:{
                 Intent goToSchedle = new Intent(view.getContext(), MySchedule.class);
                 view.getContext().startActivity(goToSchedle);
-                Hawk.delete("orders");
+                Hawk.put("orders",orders);
                 mAdapter.notifyDataSetChanged();
 
                 break;
@@ -568,6 +550,7 @@ public class ShopsMenu extends Activity implements  GoogleApiClient.OnConnection
 
         }
     }
+
     @Override
     protected void onPrepareDialog(int id, Dialog dialog) {
         super.onPrepareDialog(id, dialog);
@@ -579,51 +562,65 @@ public class ShopsMenu extends Activity implements  GoogleApiClient.OnConnection
     @Override
     protected Dialog onCreateDialog(int id) {
         if(id==DIALOG_EXIT){
-            AlertDialog.Builder adb = new AlertDialog.Builder(this);
-            // заголовок
-            //   adb.setTitle(R.string.exit);
-            // сообщение
-            //adb.setMessage(R.string.save_data);
-            // иконка
-            // adb.setIcon(android.R.drawable.ic_dialog_info);
-            // кнопка положительного ответа
-            adb.setPositiveButton("Rename shop", myClickListener);
-            // кнопка отрицательного ответа
-            adb.setNegativeButton("Delete shop", myClickListener);
-            // кнопка нейтрального ответа
-            adb.setNeutralButton("Change picture", myClickListener);
-            // создаем диалог
-            return adb.create();
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            LayoutInflater inflater = getLayoutInflater();
+            View view = inflater.inflate(R.layout.dialog_select_service, (ViewGroup) findViewById(R.id.root));
+            String categ = Hawk.get("categ");
+            String mShops=Hawk.get("longservice");
+
+            final Firebase selectRef = new Firebase("https://unlimeted-house.firebaseio.com/shops/category/"+categ+"/"+mShops+"/");
+
+
+            final EditText rename_edit = (EditText) view.findViewById(R.id.rename_edit);
+            final EditText change_pic_edit = (EditText) view.findViewById(R.id.change_pic_edit);
+
+
+            Button rename_btn = (Button) view.findViewById(R.id.rename_btn);
+            rename_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    selectRef.child("name").setValue(rename_edit.getText().toString());
+                    finish();
+                }
+            });
+
+
+            Button dell_btn = (Button) view.findViewById(R.id.dell_btn);
+            dell_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    selectRef.removeValue();
+                    finish();
+                }
+            });
+
+
+            Button change_pic_btn = (Button) view.findViewById(R.id.change_pic_btn);
+            change_pic_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    selectRef.child("photourl").setValue(change_pic_edit.getText().toString());
+                    finish();
+
+
+                }
+            });
+
+            rename_btn.setText("Rename shop");
+            dell_btn.setText("Delete shop");
+            change_pic_btn.setText("Change shop picture");
+
+
+
+
+            alert.setView(view);
+            alert.show();
+
         }
         return super.onCreateDialog(id);
+
     }
-    DialogInterface.OnClickListener myClickListener = new DialogInterface.OnClickListener() {
-        public void onClick(DialogInterface dialog, int which) {
-            switch (which) {
-                // положительная кнопка
-                case Dialog.BUTTON_POSITIVE:
-                    Firebase acceptRef = new Firebase("https://unlimeted-house.firebaseio.com/orders/"+mID);
-                    acceptRef.child("status").setValue("confirmation");
-                    acceptRef.child("confirmationdata").setValue(new Date().toString());
-                    Toast.makeText(getApplicationContext(), mID, Toast.LENGTH_SHORT).show();
-
-                    // finish();
-                    break;
-                // негативная кнопка
-                case Dialog.BUTTON_NEGATIVE:
-                    acceptRef = new Firebase("https://unlimeted-house.firebaseio.com/orders/"+mID);
-                    acceptRef.child("status").setValue("canceld");
-                    acceptRef.child("canceldata").setValue(new Date().toString());
-                    Toast.makeText(getApplicationContext(), mID, Toast.LENGTH_SHORT).show();
-                    //finish();
-                    break;
-                // нейтральная кнопка
-                // case Dialog.BUTTON_NEUTRAL:
-                //   break;
-            }
-        }
-    };
-
 
 
 

@@ -2,9 +2,12 @@ package com.e.bogachov.unlmitedhouse.ShopsCateg;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
@@ -13,8 +16,11 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -50,6 +56,11 @@ public class ServiceTypeMenu extends Activity implements GoogleApiClient.OnConne
     String userId;
     private List<Order> orders;
     String customNum;
+    final int DIALOG_EXIT = 2;
+    Context mContext;
+
+
+
 
     @Override
     public void onClick(View v) {
@@ -57,7 +68,7 @@ public class ServiceTypeMenu extends Activity implements GoogleApiClient.OnConne
     }
 
 
-    public static class MessageViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public static  class MessageViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         CardView cv;
         TextView shopName;
         ImageView shopPhoto;
@@ -65,6 +76,7 @@ public class ServiceTypeMenu extends Activity implements GoogleApiClient.OnConne
         Context context = itemView.getContext();
         String userId;
         String ownerid;
+
 
 
         public MessageViewHolder(View v) {
@@ -122,6 +134,9 @@ public class ServiceTypeMenu extends Activity implements GoogleApiClient.OnConne
 
 
         }
+
+
+
     }
 
 
@@ -217,11 +232,24 @@ public class ServiceTypeMenu extends Activity implements GoogleApiClient.OnConne
 
 
                         @Override
-                        protected void populateViewHolder(MessageViewHolder viewHolder, FriendlyMessage model, int position) {
+                        protected void populateViewHolder(MessageViewHolder viewHolder, FriendlyMessage model,  int position) {
                             viewHolder.shopName.setText(model.getName());
                             Picasso.with(getApplication()).load(model.getphotourl()).into(viewHolder.shopPhoto);
                             Intent shopint = new Intent(getApplicationContext(), ProductMenu.class);
                             shopint.putExtra("shopid", mShops);
+                            final Integer pos = position;
+
+                            if(isItShop.equals("true") & position != 0& userId.equals(ownerid)) {
+
+                                viewHolder.rl.setOnLongClickListener(new View.OnLongClickListener() {
+                                    @Override
+                                    public boolean onLongClick(View v) {
+                                        Hawk.put("longservice", pos.toString());
+                                        showDialog(DIALOG_EXIT);
+                                        return false;
+                                    }
+                                });
+                            }
 
 
                         }
@@ -364,5 +392,73 @@ public class ServiceTypeMenu extends Activity implements GoogleApiClient.OnConne
 
 
     }
+
+    @Override
+    protected void onPrepareDialog(int id, Dialog dialog) {
+        super.onPrepareDialog(id, dialog);
+        if (id == DIALOG_EXIT) {
+
+        }
+    }
+
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        if(id==DIALOG_EXIT){
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            LayoutInflater inflater = getLayoutInflater();
+            View view = inflater.inflate(R.layout.dialog_select_service, (ViewGroup) findViewById(R.id.root));
+            String categ = Hawk.get("categ");
+            String mShops=Hawk.get("shopid");
+            String mService= Hawk.get("longservice");
+            final Firebase selectRef = new Firebase("https://unlimeted-house.firebaseio.com/shops/category/"+categ+"/"+mShops+"/servicetype/"+mService+"/");
+
+
+            final EditText rename_edit = (EditText) view.findViewById(R.id.rename_edit);
+            final EditText change_pic_edit = (EditText) view.findViewById(R.id.change_pic_edit);
+
+
+            Button rename_btn = (Button) view.findViewById(R.id.rename_btn);
+            rename_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    selectRef.child("name").setValue(rename_edit.getText().toString());
+                    finish();
+                }
+            });
+
+
+            Button dell_btn = (Button) view.findViewById(R.id.dell_btn);
+            dell_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    selectRef.removeValue();
+                    finish();
+                }
+            });
+
+
+            Button change_pic_btn = (Button) view.findViewById(R.id.change_pic_btn);
+            change_pic_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    selectRef.child("photourl").setValue(change_pic_edit.getText().toString());
+                    finish();
+
+
+                }
+            });
+
+
+
+            alert.setView(view);
+            alert.show();
+
+        }
+        return super.onCreateDialog(id);
+
+    }
+
+
 
 }

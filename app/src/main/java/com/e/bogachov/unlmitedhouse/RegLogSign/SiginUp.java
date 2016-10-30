@@ -279,7 +279,7 @@ public class SiginUp extends Activity implements View.OnClickListener {
             case R.id.nextbtn: {
 
                 mPhone = phonetxt.getText().toString();
-                verifyClient.getVerifiedUser("SA",phonetxt.getText().toString());
+                verifyClient.getVerifiedUser("UA",phonetxt.getText().toString());
                 userPhone = mPhone;
 
 
