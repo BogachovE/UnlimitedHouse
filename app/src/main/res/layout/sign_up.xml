@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/phonetxt"
         android:inputType="phone"
-        android:text="  PHONE NUMBER"
+        android:text="@string/sigin_up_pNumb"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/housee"
         android:layout_marginTop="@dimen/sign_btn_margin_top"

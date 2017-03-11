@@ -26,7 +26,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Number of orders"
+            android:text="@string/shop_in_num_ordernum"
             android:layout_marginLeft="15dp"
             android:textSize="21dp"
             android:textStyle="bold"
@@ -49,7 +49,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Comblished orders"
+            android:text="@string/shop_in_num_ordercomb"
             android:layout_marginLeft="15dp"
             android:textSize="21dp"
             android:textStyle="bold"
@@ -73,7 +73,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Canceled orders"
+            android:text="@string/shop_in_num_ordercanc"
             android:layout_marginLeft="15dp"
             android:textSize="21dp"
             android:textStyle="bold"
@@ -97,7 +97,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Most ordered item"
+            android:text="@string/shop_in_num_most_item"
             android:layout_marginLeft="15dp"
             android:textSize="21dp"
             android:textStyle="bold"
@@ -121,7 +121,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Most time for orders"
+            android:text="@string/shop_in_num_most_time"
             android:layout_marginLeft="15dp"
             android:textSize="21dp"
             android:textStyle="bold"

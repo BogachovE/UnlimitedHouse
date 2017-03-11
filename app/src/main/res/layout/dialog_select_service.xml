@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:id="@+id/rename_btn"
         android:layout_weight="1"
-        android:text="Rename service"/>
+        android:text="@string/dialog_select_service_rename"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -27,14 +27,14 @@
         android:layout_height="match_parent"
         android:id="@+id/change_pic_btn"
         android:layout_weight="1"
-        android:text="Change service picture"/>
+        android:text="@string/dialog_select_service_pic"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/dell_btn"
         android:layout_weight="1"
-        android:text="Delete service"
+        android:text="@string/dialog_select_service_del"
         />
 
 </LinearLayout>

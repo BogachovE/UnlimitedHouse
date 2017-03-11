@@ -80,7 +80,7 @@ public class Profile extends Activity implements View.OnClickListener{
                 ref.child("name").setValue(profile_name_edit.getText().toString());
                 ref.child("email").setValue(profile_email_edit.getText().toString());
                 ref.child("location").setValue(profile_location_edit.getText().toString());
-                ref.child("house:").setValue(profile_adress_edit.getText().toString());
+                ref.child("house").setValue(profile_adress_edit.getText().toString());
                 Intent goToMainMenu = new Intent(getApplicationContext(), MainMenu.class);
                 startActivity(goToMainMenu);
                 break;

@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:id="@+id/rename_btn"
         android:layout_weight="1"
-        android:text="Rename product"/>
+        android:text="@string/dialog_select_product_rename"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
         android:layout_height="match_parent"
         android:id="@+id/change_pic_btn"
         android:layout_weight="1"
-        android:text="Change product picture"/>
+        android:text="@string/dialog_select_product_pic"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -41,7 +41,7 @@
         android:layout_height="match_parent"
         android:id="@+id/change_dec_btn"
         android:layout_weight="1"
-        android:text="Change product picture"/>
+        android:text="@string/dialog_select_product_dec"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -54,14 +54,14 @@
         android:layout_height="match_parent"
         android:id="@+id/change_price_btn"
         android:layout_weight="1"
-        android:text="Change product picture"/>
+        android:text="@string/dialog_select_product_price"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/dell_btn"
         android:layout_weight="1"
-        android:text="Delete product"
+        android:text="@string/dialog_select_product_dell"
         />
 
 </LinearLayout>

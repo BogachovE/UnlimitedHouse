@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +20,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.e.bogachov.unlmitedhouse.Models.Shops;
+import com.e.bogachov.unlmitedhouse.Notification;
 import com.e.bogachov.unlmitedhouse.R;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
@@ -27,8 +30,10 @@ import com.firebase.client.ValueEventListener;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.orhanobut.hawk.Hawk;
 import com.squareup.picasso.Picasso;
 import com.firebase.client.android.*;
@@ -109,10 +114,11 @@ public class BuyProduct extends Activity implements View.OnClickListener, Google
         Firebase.setAndroidContext(this);
 
         Intent intent = getIntent();
-        mProduct = Hawk.get("productid");
+
 
         Hawk.init(this).build();
         mShops = Hawk.get("shopid");
+        mProduct = Hawk.get("productid");
         mService = Hawk.get("serviceid");
 
         context = getApplicationContext();
@@ -181,7 +187,7 @@ public class BuyProduct extends Activity implements View.OnClickListener, Google
         categ = Hawk.get("categ");
 
         mData = FirebaseDatabase.getInstance().getReference();
-        mRefProductPhoto = new Firebase("https://unlimeted-house.firebaseio.com/shops/category/" + categ + "/" + mShops + "/servicetype/" + mService.toString() + "/products/" + mProduct + "/photourl");
+        mRefProductPhoto = new Firebase("https://unhouse-143417.firebaseio.com/shops/category/" + categ + "/" + mShops + "/servicetype/" + mService + "/products/" + mProduct + "/photourl");
         mRefProductPhoto.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -196,13 +202,13 @@ public class BuyProduct extends Activity implements View.OnClickListener, Google
             }
         });
 
-        mRefProductPrice = new Firebase("https://unlimeted-house.firebaseio.com/shops/category/" + categ + "/" + mShops + "/servicetype/" + mService.toString() + "/products/" + mProduct.toString() + "/price/p");
+        mRefProductPrice = new Firebase("https://unhouse-143417.firebaseio.com/shops/category/" + categ + "/" + mShops + "/servicetype/" + mService + "/products/" + mProduct + "/price/p");
         mRefProductPrice.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String p = dataSnapshot.getValue(String.class);
                 TextView price_txt = (TextView) findViewById(R.id.price_txt);
-                price_txt.setText(p.toString());
+                price_txt.setText(p);
 
             }
 
@@ -212,15 +218,57 @@ public class BuyProduct extends Activity implements View.OnClickListener, Google
             }
         });
         Firebase.setAndroidContext(this);
+        if(categ.equals("house")){
+            DatabaseReference nearlyRef = FirebaseDatabase.getInstance().getReference();
+            Query nearlyQuery = nearlyRef.child("products").orderByChild("name").equalTo("Papirony");
 
 
-        mRefProductPricetype = new Firebase("https://unlimeted-house.firebaseio.com/shops/category/" + categ + "/" + mShops + "/servicetype/" + mService + "/products/" + mProduct + "/price/currency");
+
+
+            nearlyQuery.addListenerForSingleValueEvent(new com.google.firebase.database.ValueEventListener() {
+                @Override
+                public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
+                    int i = 0;
+                    for (com.google.firebase.database.DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                        dataSnapshot = postSnapshot.child("shops");
+                        for (com.google.firebase.database.DataSnapshot postSnapshot1 : dataSnapshot.getChildren()) {
+                            Hawk.put("shopNotifIp",postSnapshot1.child("shopNotifIp").getValue(String.class));
+
+
+                        }
+                    }
+
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                }
+            });
+            }else{
+            Firebase newRef = new Firebase("https://unhouse-143417.firebaseio.com/shops/category/" + categ + "/" + mShops + "/");
+            newRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    Hawk.put("shopNotifIp",dataSnapshot.child("shopNotifIp").getValue(String.class));
+                }
+
+                @Override
+                public void onCancelled(FirebaseError firebaseError) {
+
+                }
+            });
+        }
+
+
+
+        mRefProductPricetype = new Firebase("https://unhouse-143417.firebaseio.com/shops/category/" + categ + "/" + mShops + "/servicetype/" + mService + "/products/" + mProduct + "/price/currency");
         mRefProductPricetype.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String t = dataSnapshot.getValue(String.class);
                 TextView price_t = (TextView) findViewById(R.id.price_t);
-                price_t.setText(" " + t.toString());
+                price_t.setText(" " + t);
 
             }
 
@@ -230,7 +278,7 @@ public class BuyProduct extends Activity implements View.OnClickListener, Google
             }
         });
 
-        mRefProductDecrip = new Firebase("https://unlimeted-house.firebaseio.com/shops/category/" + categ + "/" + mShops + "/servicetype/" + mService + "/products/" + mProduct + "/description");
+        mRefProductDecrip = new Firebase("https://unhouse-143417.firebaseio.com/shops/category/" + categ + "/" + mShops + "/servicetype/" + mService + "/products/" + mProduct + "/description");
         mRefProductDecrip.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -292,7 +340,9 @@ public class BuyProduct extends Activity implements View.OnClickListener, Google
                  else  if (numZakaz >= 0){
                     Hawk.put("numZakaz",numZakaz= numZakaz+1);
                 }
+                String servicetype = Hawk.get("servicetype");
                 String fromShop = Hawk.get("fromShop");
+                String shopNotifIp = Hawk.get("shopNotifIp");
                 Integer sum = Integer.parseInt(price_txt.getText().toString()) * Integer.parseInt(person_numb_count.getText().toString());
                 String productname = Hawk.get("productname");
                 Map<String,String> order = new HashMap<String, String>();
@@ -305,6 +355,8 @@ public class BuyProduct extends Activity implements View.OnClickListener, Google
                 order.put("sum",sum.toString());
                 order.put("name",productname);
                 order.put("descript",service_desc.getText().toString());
+                order.put("servicetype",servicetype);
+                order.put("shopNotifIp",shopNotifIp);
                 String coment = Hawk.get("coment");
                 if (coment != null) {
                 order.put("coment",coment);}

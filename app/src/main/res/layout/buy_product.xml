@@ -28,7 +28,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Service Describtion"
+            android:text="@string/buy_product_sdec"
             android:textStyle="bold"
             android:textColor="#000000"
             android:textSize="21sp"
@@ -98,7 +98,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Number of Served Person"
+            android:text="@string/buy_product_count"
             android:id="@+id/person_numb_txt"
             android:layout_centerVertical="true"
             android:textColor="#000000"
@@ -156,7 +156,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Required House Visting"
+            android:text="@string/buy_product_visiting"
             android:layout_gravity="center_vertical"
             android:id="@+id/visting_req_txt"
             android:layout_centerVertical="true"
@@ -205,7 +205,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Click to customize order"
+        android:text="@string/buy_product_cust"
         android:textColor="@android:color/white"
         android:layout_gravity="center"
         android:textSize="18sp"
@@ -227,7 +227,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/add_to_basket_txt"
-        android:text="Add To Basket"
+        android:text="@string/buy_product_add"
         android:textStyle="bold"
         android:textColor="@android:color/black"
         android:textSize="18sp"

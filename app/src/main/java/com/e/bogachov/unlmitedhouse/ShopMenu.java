@@ -50,7 +50,7 @@ public class ShopMenu extends Activity implements View.OnClickListener {
         shopId=Hawk.get("shopid");
         Firebase.setAndroidContext(this);
 
-        Firebase orderRef = new Firebase("https://unlimeted-house.firebaseio.com/shops/category/"+shopcateg+"/"+shopId+"/");
+        Firebase orderRef = new Firebase("https://unhouse-143417.firebaseio.com/shops/category/"+shopcateg+"/"+shopId+"/");
         orderRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

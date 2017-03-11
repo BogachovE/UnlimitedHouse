@@ -22,6 +22,10 @@ public class Order {
     String processdata;
     String  finishingdata;
     String confirmationdata;
+    String visiting;
+    String fromcateg;
+    String servicetype;
+    String shopNotifIp;
 
     public Order() {
 
@@ -32,7 +36,8 @@ public class Order {
             String canceldata,
             String processdata,
             String  finishingdata,
-            String confirmationdata) {
+            String confirmationdata, String visiting,String fromcateg,
+                 String servicetype,String shopNotifIp) {
         this.count = count;
         this.name = name;
         this.data = data;
@@ -49,6 +54,10 @@ public class Order {
         this.processdata = processdata;
         this.finishingdata = finishingdata;
         this.confirmationdata = confirmationdata;
+        this.visiting = visiting;
+        this.fromcateg = fromcateg;
+        this.servicetype = servicetype;
+        this.shopNotifIp = shopNotifIp;
 
     }
 
@@ -99,6 +108,12 @@ public class Order {
     public String getConfirmationdata() {
         return confirmationdata;
     }
+    public String getVisiting(){return visiting;}
+    public String getCustomNum(){return customNum;}
+    public String getFromcateg(){return fromcateg;}
+    public String getServicetype(){return servicetype;}
+    public String getDescript(){return descript;}
+    public String getShopNotifIp(){return shopNotifIp;}
 
 }
 

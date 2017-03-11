@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.e.bogachov.unlmitedhouse.R;
 import com.firebase.client.DataSnapshot;
@@ -36,13 +37,8 @@ public class Dialog2 extends DialogFragment implements OnClickListener {
         v.findViewById(R.id.okbtn).setOnClickListener(this);
         v.findViewById(R.id.cancelbtn).setOnClickListener(this);
         EditText shop_name_etxt = (EditText)v.findViewById(R.id.shop_name_etxt);
-
         Hawk.init(getActivity()).build();
         mShops =Hawk.get("shopid");
-
-
-
-
         context = getActivity();
         return v;
     }
@@ -51,29 +47,34 @@ public class Dialog2 extends DialogFragment implements OnClickListener {
     public void onClick(View v){
         switch (v.getId()){
             case R.id.okbtn:
-                EditText shop_name_etxt = (EditText)getDialog().findViewById(R.id.shop_name_etxt);
+                final EditText shop_name_etxt = (EditText)getDialog().findViewById(R.id.shop_name_etxt);
                 EditText shop_photo_etxt = (EditText)getDialog().findViewById(R.id.shop_photo_etxt);
 
                 final String name = shop_name_etxt.getText().toString();
                 final String photo = shop_photo_etxt.getText().toString();
                 String categ = Hawk.get("categ");
 
-                final Firebase ref = new Firebase("https://unlimeted-house.firebaseio.com/shops/category/"+categ+"/"+mShops.toString()+"/servicetype");
+                final Firebase ref = new Firebase("https://unhouse-143417.firebaseio.com/shops/category/"+categ+"/"+ mShops +"/servicetype");
                 ref.addListenerForSingleValueEvent(new ValueEventListener() {
 
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         Long s = dataSnapshot.getChildrenCount();
                         final String ss = s.toString();
+
+                        if(!photo.equals("")){
                         Map<String,String> addZeroServ = new HashMap<String,String>();
                         Map<String,String> shopName = new HashMap<String, String>();
                         shopName.put("name",name);
                         shopName.put("photourl",photo);
 
                         addZeroServ.put("name","PLUS");
-                        addZeroServ.put("photourl","http://fs156.www.ex.ua/show/697962838068/276256660/276256660.png");
+                        addZeroServ.put("photourl","https://firebasestorage.googleapis.com/v0/b/unlimeted-house.appspot.com/o/PLUS.png?alt=media&token=470dc5a1-fca3-4bda-b9d0-a8590e73783a");
                         ref.child(ss).setValue(shopName);
                         ref.child(ss+"/products/0/").setValue(addZeroServ);
+
+                        }
+                        else Toast.makeText(context,R.string.nullpic,Toast.LENGTH_SHORT).show();
 
                     }
 

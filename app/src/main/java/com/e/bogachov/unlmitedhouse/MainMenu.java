@@ -23,7 +23,7 @@ import com.e.bogachov.unlmitedhouse.Slide.Profile;
 import com.firebase.client.Firebase;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.orhanobut.hawk.Hawk;
-
+//TODO добавить добавление в продукты
 
 public class MainMenu extends Activity implements View.OnClickListener {
     String isItShop;
@@ -117,7 +117,7 @@ public class MainMenu extends Activity implements View.OnClickListener {
         actionBar.setCustomView(R.layout.abs_main);
         TextView title=(TextView)findViewById(getResources().getIdentifier("hello", "id", getPackageName()));
         title.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/roboto.ttf"));
-        title.setText("UNLIMETED HOUSE");
+        title.setText(R.string.main_menu_title);
 
 
 
@@ -169,6 +169,7 @@ public class MainMenu extends Activity implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         switch (view.getId()){
+
             case R.id.hbtn:{
                 Intent goToShopsMenu = new Intent(MainMenu.this,ShopsMenu.class);
                 goToShopsMenu.putExtra("categ","house");

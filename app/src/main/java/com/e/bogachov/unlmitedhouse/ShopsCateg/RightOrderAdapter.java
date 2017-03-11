@@ -106,7 +106,7 @@ public class RightOrderAdapter extends RecyclerView.Adapter<RightOrderAdapter.Ri
 
 
     List<Order> orders;
-    RightOrderAdapter(List<Order> orders){
+    public RightOrderAdapter(List<Order> orders){
         this.orders = orders;
     }
 
@@ -133,8 +133,12 @@ public class RightOrderAdapter extends RecyclerView.Adapter<RightOrderAdapter.Ri
             @Override
             public void onClick(View v) {
 
-                delete(i);
+
                 orders.remove(i);
+                Hawk.put("orders",orders);
+                notifyDataSetChanged();
+
+
 
 
 
@@ -150,7 +154,8 @@ public class RightOrderAdapter extends RecyclerView.Adapter<RightOrderAdapter.Ri
 
     @Override
     public int getItemCount() {
-        return orders.size();
+        if(orders!=null)return orders.size();
+        else return 0;
     }
 
 

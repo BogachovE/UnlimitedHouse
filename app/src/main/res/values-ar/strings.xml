@@ -1,0 +1,171 @@
+﻿<resources>
+<string name="app_name">"المنزل بلا حدود "</string>
+<string name="deck">sdasd</string>
+<string name="title_activity_signup">التسجيل</string>
+<string name="title_activity_main2">Main2Activity</string>
+<!--  Verify Fragment strings  -->
+<string name="sign_in">تسجيل الدخول</string>
+<string name="sign_in_hint">ادخل رقم الهاتف</string>
+<string name="error_phone_number">رقم الهاتف غير صحيح.</string>
+<string name="enter_phone_number">Phone number</string>
+<!--  Check code Fragment strings  -->
+<string name="check_code_fragment_name">تحقق من الرقم</string>
+<string name="info_message">ارجوا ادخال الرقم المرسل</string>
+<string name="enter_pin_code">رمز مكون من ستة أرقام</string>
+<string name="check_code">تأكيد</string>
+<string name="error_code">طول الرقم قصير جدا.</string>
+<string name="navigation_drawer_open">فتح القائمة الجانبية</string>
+<string name="navigation_drawer_close">غلق القائمة الجانبية</string>
+<string name="action_settings">الإعدادات</string>
+<string name="item1">منتج 1</string>
+<string name="item2">منتج 2</string>
+<string name="item3">منتج 3</string>
+<string name="item4">منتج 4</string>
+<string name="mar5">
+MAR
+<br>5</br>
+</string>
+<string name="action_today">اليوم</string>
+<string name="action_day_view">عرض الأيام</string>
+<string name="action_three_day_view">عرض ثلاثة ايام</string>
+<string name="action_week_view">عرض الاسبوع</string>
+<!--  TODO: Remove or change this placeholder text  -->
+<string name="hello_blank_fragment">مرحبا جزء فارغ</string>
+<!--  abs_candy  -->
+<string name="candy_title">حلوى وفطائر</string>
+<!--  abs_layout  -->
+<string name="Beauty_title">المشاغل</string>
+<!--  abs_main  -->
+<string name="UnHouse">المنزل بلا حدود</string>
+<!--  abs_other -->
+<string name="Other_title">اخرى</string>
+<!--  abs_product  -->
+<string name="product_title">الأسر المنتجة</string>
+<!--  activity_login  -->
+<string name="pNumber">رقم الهاتف</string>
+<!--  add_shop_diolog  -->
+<string name="enter_name">أدخل الاسم</string>
+<string name="pUrl">الصق رابط الصوره بالأسفل</string>
+<string name="ok">موافق</string>
+<string name="cancel">إلغاء الأمر</string>
+<!--  add_service  -->
+<string name="add_serv">إضافة الخدمة الخاصة بك</string>
+<string name="name">اسمك</string>
+<string name="add_srev_name">الاسم</string>
+<string name="add_serv_email_v">البريد الإلكتروني</string>
+<string name="add_serv_email_e">البريد الإلكتروني</string>
+<string name="add_serv_categ">البريد الإلكتروني</string>
+<string name="add_serv_loc">حدد موقع المتجر</string>
+<string name="add_serv_logo">ادخل رابط شعار متجرك بالأسفل</string>
+<!--  add_shop_diolog3  -->
+<string name="add_shop_d3_name">أدخل الاسم</string>
+<string name="add_shop_d3_pUrl">الصق رابط الصوره بالأسفل</string>
+<string name="add_shop_d3_dec">أدخل وصف المنتج</string>
+<string name="add_shop_d3_price">أدخل سعر المنتج</string>
+<string name="add_shop_d3_cur">أدخل العملة المنتج</string>
+<!--  dialog_select_service  -->
+<string name="dialog_select_service_rename">إعادة تسمية الخدمة</string>
+<string name="dialog_select_service_pic">Change service picture</string>
+<string name="dialog_select_service_del">Delete servicee</string>
+<!--  dialog_select_product  -->
+<string name="dialog_select_product_rename">Rename product</string>
+<string name="dialog_select_product_pic">Change product picture</string>
+<string name="dialog_select_product_price">Change product price</string>
+<string name="dialog_select_product_dec">Change product description</string>
+<string name="dialog_select_product_dell">Delete product</string>
+<!--  dialog  -->
+<string name="dialog_pref">Please write your preference</string>
+<!--  contact_us  -->
+<string name="contact_us">CONTACT US</string>
+<string name="contact_text">
+We are so glad because you will give us precious time of yours, just feel free to say what you would like too, complaint, feedback, ideas, anything you want to say we will hear it from our heart!
+</string>
+<!--  buy_product  -->
+<string name="buy_product_sdec">Service Describtion</string>
+<string name="buy_product_count">Number of Served Person</string>
+<string name="buy_product_visiting">Required House Visting</string>
+<string name="buy_product_cust">Click to customize order</string>
+<string name="buy_product_add">Add To Basket</string>
+<!--  order_conf  -->
+<string name="order_conf_numb">Order number:</string>
+<string name="order_conf_shop">Shop:</string>
+<string name="order_conf_details">Details:</string>
+<string name="order_conf_date">Date:</string>
+<string name="order_conf_time">Time:</string>
+<string name="order_conf_orders_btn">MY ORDERS</string>
+<string name="order_conf_main_btn">MAIN MENU</string>
+<string name="order_conf_txt_5">
+"We have received your order , once confirmation is accomplished from shop we will notify you ,confirmation may take 5 minutes Thank you!"
+</string>
+<string name="order_conf_txt_4">
+"We have received your order , once confirmation is accomplished from shop we will notify you ,confirmation may take 4 minutes Thank you!"
+</string>
+<string name="order_conf_txt_3">
+"We have received your order , once confirmation is accomplished from shop we will notify you ,confirmation may take 3 minutes Thank you!"
+</string>
+<string name="order_conf_txt_2">
+"We have received your order , once confirmation is accomplished from shop we will notify you ,confirmation may take 2 minutes Thank you!"
+</string>
+<string name="order_conf_txt_1">
+"We have received your order , once confirmation is accomplished from shop we will notify you ,confirmation may take 1 minutes Thank you!"
+</string>
+<string name="order_conf_txt_0">We are sorry</string>
+<!--  order_item  -->
+<string name="order_item_order">ORDER №</string>
+<string name="order_item_fromshop">FROM SHOP</string>
+<string name="order_item_attdate">AT DATE</string>
+<!--  profile  -->
+<string name="profile_title">PROFILE</string>
+<string name="profile_y_loc">Your Location</string>
+<string name="profile_apart">HOUSE/APARTMENT №</string>
+<!--  rating  -->
+<string name="rating_text">If you have any question, we will help you</string>
+<!--  order_status  -->
+<string name="status_proc">PROCESS</string>
+<string name="status_proc_text">
+Your order is now being waiting for our agents approval
+</string>
+<string name="status_conf">CONFIRMATIOMN</string>
+<string name="status_conf_text">
+Your order isconfirmed our agent will arrive to you as per scheduled
+</string>
+<string name="status_fin">FINISHING</string>
+<string name="status_fin_text">Your order is finished and our agent has colsed it</string>
+<string name="status_rating">RATING SERVICE</string>
+<string name="status_rating_text">1 is Excellent, 5 is Bad</string>
+<string name="status_canc">"canceld"</string>
+<string name="status_canc_text">Your order was cancel</string>
+<!--  reg_location  -->
+<string name="reg_loc_click">CLICK FOR LOCATION</string>
+<string name="reg_loc_house">ادخل رقم المنزل</string>
+<!--  shop_menu  -->
+<string name="shop_menu_sName">اسم المتجر</string>
+<string name="shop_menu_myshop">متجري</string>
+<string name="shop_menu_schedule">الجدول الزمني</string>
+<string name="shop_menu_orders">الطلبات</string>
+<string name="shop_menu_shop_in_number">متجري بالأرقام</string>
+<string name="shop_menu_rating">التواصل</string>
+<!--  shop_in_numb  -->
+<string name="shop_in_num_ordernum">عدد الطلبات</string>
+<string name="shop_in_num_ordercomb">الطلبات المكتملة</string>
+<string name="shop_in_num_ordercanc">الطلبات الملغاة</string>
+<string name="shop_in_num_most_item">أكثر صنف مطلوب</string>
+<string name="shop_in_num_most_time">اكثر وقت تلقيت الطلبات به</string>
+<!--  sigin_up  -->
+<string name="sigin_up_pNumb">رقم الهاتف</string>
+<string name="sigin_up_pin">ادخل رقم الـPIN</string>
+<!--  slide_right  -->
+<string name="slide_right_btn">الدفع</string>
+<!--  slide_left  -->
+<string name="slide_left_profile">الحساب</string>
+<string name="slide_left_myOrders">طلباتي</string>
+<string name="slide_left_addServ">قم بإضافة خدمتك!</string>
+<string name="slide_left_contact_us">اتصل بنا</string>
+<string name="slide_left_logout">تسجيل الخروج</string>
+<!--  shops_menu  -->
+<string name="shops_menu_ren">أعادة تسمية المتجر</string>
+<string name="shops_menu_dell">حذف المتجر</string>
+<string name="shops_menu_pic">تغيير صورة المتجر</string>
+<!--  Main_Menu  -->
+<string name="main_menu_title">المنزل بلا حدود</string>
+</resources>

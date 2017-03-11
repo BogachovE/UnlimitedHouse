@@ -9,8 +9,12 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -26,7 +30,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.e.bogachov.unlmitedhouse.Dialogs.Dialog3;
+import com.e.bogachov.unlmitedhouse.MySchedule;
 import com.e.bogachov.unlmitedhouse.R;
+import com.e.bogachov.unlmitedhouse.SlideMenuHelper;
 import com.firebase.client.Firebase;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.common.ConnectionResult;
@@ -45,7 +51,7 @@ import java.util.Map;
 public class ProductMenu extends Activity implements GoogleApiClient.OnConnectionFailedListener,View.OnClickListener {
 
     private static final String TAG = "MainActivity";
-    private List<Shops> shops;
+
     private RecyclerView rv;
     private DatabaseReference mData;
     private FirebaseRecyclerAdapter<FriendlyMessage, MessageViewHolder> mAdapter;
@@ -59,6 +65,8 @@ public class ProductMenu extends Activity implements GoogleApiClient.OnConnectio
     private List<Order> orders;
     String customNum;
     final int DIALOG_EXIT = 2;
+    ColorDrawable cn;
+    ColorDrawable cdn;
 
 
 
@@ -70,10 +78,6 @@ public class ProductMenu extends Activity implements GoogleApiClient.OnConnectio
 
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
 
     public static class MessageViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         CardView cv;
@@ -91,6 +95,7 @@ public class ProductMenu extends Activity implements GoogleApiClient.OnConnectio
             shopPhoto = (ImageView)itemView.findViewById(R.id.plus);
             rl =(RelativeLayout)itemView.findViewById(R.id.rl);
             rl.setOnClickListener(this);
+            cv = (CardView) itemView.findViewById(R.id.cv);
 
 
         }
@@ -105,15 +110,16 @@ public class ProductMenu extends Activity implements GoogleApiClient.OnConnectio
 
                     if (isItShop.equals("false")) {
                         Intent goToServiceType = new Intent(v.getContext(), BuyProduct.class);
+                        Hawk.put("productid", String.valueOf(getAdapterPosition()+1));
+                        Hawk.put("productname", shopName.getText().toString());
                         goToServiceType.putExtra("clickid", String.valueOf(getAdapterPosition()+1));
-                        Hawk.put("fromShop", shopName.getText().toString());
                         v.getContext().startActivity(goToServiceType);
                         Toast.makeText(v.getContext().getApplicationContext(), "clisk." + (getAdapterPosition()), Toast.LENGTH_SHORT).show();
 
                     }else if(isItShop.equals("true") & getAdapterPosition() != 0){
                         Intent goToServiceType = new Intent(v.getContext(), BuyProduct.class);
                         Hawk.put("productid", String.valueOf(getAdapterPosition()));
-                        Hawk.put("fromShop", shopName.getText().toString());
+                        Hawk.put("productname", shopName.getText().toString());
                         v.getContext().startActivity(goToServiceType);
                         Toast.makeText(v.getContext().getApplicationContext(), "clisk." + (getAdapterPosition()), Toast.LENGTH_SHORT).show();
 
@@ -131,11 +137,11 @@ public class ProductMenu extends Activity implements GoogleApiClient.OnConnectio
         }
     }
 
-
-
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        Hawk.init(this).build();
         String categ = Hawk.get("categ");
 
         switch (categ) {
@@ -173,8 +179,9 @@ public class ProductMenu extends Activity implements GoogleApiClient.OnConnectio
         super.onCreate(savedInstanceState);
         setContentView(R.layout.product_menu);
 
+        cn = new ColorDrawable(Color.parseColor("#FAFAFA"));
+        cdn = new ColorDrawable(Color.parseColor("#FFFFFF"));
 
-        Hawk.init(this).build();
         mService =Hawk.get("serviceid");
         isItShop = Hawk.get("isitshop");
         mShops=Hawk.get("shopid");
@@ -188,7 +195,7 @@ public class ProductMenu extends Activity implements GoogleApiClient.OnConnectio
 
        categ = Hawk.get("categ");
 
-        mChild="shops/"+"category/"+categ+"/"+mShops.toString()+"/servicetype/"+mService.toString()+"/products";
+        mChild="shops/"+"category/"+categ+"/"+ mShops +"/servicetype/"+ mService +"/products";
 
 
             if (isItShop.equals("false")) {
@@ -207,6 +214,14 @@ public class ProductMenu extends Activity implements GoogleApiClient.OnConnectio
             protected void populateViewHolder(MessageViewHolder viewHolder, FriendlyMessage model, int position) {
                 viewHolder.shopName.setText(model.getName());
                 Picasso.with(getApplication()).load(model.getphotourl()).into(viewHolder.shopPhoto);
+
+                if (((position + 3) % 4 != 0) && ((position + 2) % 4 != 0)) {
+                    viewHolder.cv.setBackground(cdn);
+                } else {
+                    viewHolder.cv.setBackground(cn);
+
+                }
+
                 final Integer pos = position;
                 if(isItShop.equals("true") & position != 0& userId.equals(ownerid)) {
                     viewHolder.rl.setOnLongClickListener(new View.OnLongClickListener() {
@@ -223,86 +238,12 @@ public class ProductMenu extends Activity implements GoogleApiClient.OnConnectio
             }
         };
 
-        categ = Hawk.get("categ");
-        getActionBar().setHomeAsUpIndicator(R.drawable.btn_aaact);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getActionBar().setHomeAsUpIndicator(R.drawable.btn_aaact);
-        ActionBar actionBar = getActionBar();
 
-        initializeData();
+        RecycleMenuHelper recycleMenuHelper = new RecycleMenuHelper();
+        RecycleMenuHelper.initializeData();
+        recycleMenuHelper.setActionBar(this);
 
 
-        switch (categ) {
-            case "beauty": {
-                getActionBar().setCustomView(R.layout.abs_layout);
-                Button curtBtn = (Button)findViewById(R.id.curtBtn);
-                curtBtn.setOnClickListener(this);
-                Button basket_btn = (Button)findViewById(R.id.basket_btn);
-                basket_btn.setOnClickListener(this);
-                if (orders.size()!=0){
-                    basket_btn.setBackgroundResource(R.drawable.basket_full);
-                }
-
-
-                break;
-            }
-
-            case "product": {
-                getActionBar().setCustomView(R.layout.abs_product);
-                Button curtBtn = (Button)findViewById(R.id.curtBtn);
-                curtBtn.setOnClickListener(this);
-                Button basket_btn = (Button)findViewById(R.id.basket_btn);
-                basket_btn.setOnClickListener(this);
-                if (orders.size()!=0){
-                    basket_btn.setBackgroundResource(R.drawable.basket_full_white);
-                }
-
-
-                break;
-            }
-
-            case "candy": {
-                getActionBar().setCustomView(R.layout.abs_candy);
-                Button curtBtn = (Button)findViewById(R.id.curtBtn);
-                curtBtn.setOnClickListener(this);
-                Button basket_btn = (Button)findViewById(R.id.basket_btn);
-                basket_btn.setOnClickListener(this);
-                if (orders.size()!=0){
-                    basket_btn.setBackgroundResource(R.drawable.basket_full_white);
-                }
-
-
-                break;
-            }
-
-            case "house": {
-                getActionBar().setCustomView(R.layout.abs_house);
-                Button curtBtn = (Button)findViewById(R.id.curtBtn);
-                curtBtn.setOnClickListener(this);
-                Button basket_btn = (Button)findViewById(R.id.basket_btn);
-                basket_btn.setOnClickListener(this);
-                if (orders.size()!=0){
-                    basket_btn.setBackgroundResource(R.drawable.basket_full);
-                }
-
-
-                break;
-            }
-            case "other": {
-                getActionBar().setCustomView(R.layout.abs_other);
-                Button curtBtn = (Button)findViewById(R.id.curtBtn);
-                curtBtn.setOnClickListener(this);
-                Button basket_btn = (Button)findViewById(R.id.basket_btn);
-                basket_btn.setOnClickListener(this);
-                if (orders.size()!=0){
-                    basket_btn.setBackgroundResource(R.drawable.basket_full);
-                }
-
-
-                break;
-            }
-        }
 
         mAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
@@ -315,33 +256,40 @@ public class ProductMenu extends Activity implements GoogleApiClient.OnConnectio
 
 
         rv.setAdapter(mAdapter);
-
-
-
-
-
     }
-    private List<Order> initializeData(){
-        orders = new ArrayList<>();
-        Integer numZakaz= null;
-        numZakaz = Hawk.get("numZakaz");
-        customNum= Hawk.get("userphone").toString();
-        Map<Integer,Map<String,String>> ordervc = new HashMap<Integer,Map<String,String>>();
-        if (Hawk.get("order")!= null & numZakaz!=null){
-            ordervc = Hawk.get("order");
-            Map<String,String> order = new HashMap<String, String>();
-            for (int i = 0; i<= numZakaz ;i++ ){
-                order=ordervc.get(i);
-                orders.add(new Order(order.get("count"),order.get("data"),order.get("fromShop"),order.get("currency"),order.get("p"),order.get("sum"),order.get("name"),order.get("descript"),"process",customNum,null,null,null,null,null,null));
+
+    @Override
+    public void onClick(View view) {
+        SlideMenuHelper slideMenuHelper = new SlideMenuHelper();
+
+        switch (view.getId()) {
+            case R.id.basket_btn:{
+                slideMenuHelper.setRightSlideMenu(this, orders);
+                view.setClickable(false);
+                break;
+            }
+
+            case R.id.curtBtn:{
+                slideMenuHelper.setLeftSlideMenu(this);
+                break;
+
+            }
+
+            case R.id.okbtn:{
+                Toast.makeText(getApplicationContext(),"Clsik ok",Toast.LENGTH_LONG).show();
+                break;
+            }
+
+            case R.id.textView7:{
+                Intent goToSchedle = new Intent(view.getContext(), MySchedule.class);
+                view.getContext().startActivity(goToSchedle);
+                Hawk.put("orders",orders);
+                mAdapter.notifyDataSetChanged();
+                break;
             }
         }
-        ordervc.clear();
-
-        Hawk.put("orders",orders);
-        return orders;
-
-
     }
+
 
     @Override
     protected void onPrepareDialog(int id, Dialog dialog) {
@@ -361,7 +309,7 @@ public class ProductMenu extends Activity implements GoogleApiClient.OnConnectio
             String mShops=Hawk.get("shopid");
             String mService= Hawk.get("serviceid");
             String mProduct = Hawk.get("longservice");
-            final Firebase selectRef = new Firebase("https://unlimeted-house.firebaseio.com/shops/category/"+categ+"/"+mShops+"/servicetype/"+mService+"/products/"+mProduct+"/");
+            final Firebase selectRef = new Firebase("https://unhouse-143417.firebaseio.com/shops/category/"+categ+"/"+mShops+"/servicetype/"+mService+"/products/"+mProduct+"/");
 
 
             final EditText rename_edit = (EditText) view.findViewById(R.id.rename_edit);
@@ -395,7 +343,10 @@ public class ProductMenu extends Activity implements GoogleApiClient.OnConnectio
             change_pic_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if(change_pic_edit.getText()!=null){
                     selectRef.child("photourl").setValue(change_pic_edit.getText().toString());
+                    }
+                    else Toast.makeText(getApplicationContext(),R.string.nullpic,Toast.LENGTH_SHORT).show();
                     finish();
 
 

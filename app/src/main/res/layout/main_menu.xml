@@ -87,10 +87,8 @@
         android:layout_height="match_parent"
         android:src="#000"
         android:id="@+id/shadow"
-    android:visibility="gone"
-
-
-
+        android:visibility="gone"
         />
+
 </FrameLayout>
 

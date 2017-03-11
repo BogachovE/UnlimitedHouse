@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.TextView;
 
-import com.e.bogachov.unlmitedhouse.ShopsCateg.Shops;
 
 import java.util.List;
 

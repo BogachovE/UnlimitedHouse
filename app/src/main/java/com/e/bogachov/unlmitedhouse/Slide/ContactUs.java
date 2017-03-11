@@ -41,19 +41,21 @@ public class ContactUs extends Activity  implements View.OnClickListener{
         email_btn.setOnClickListener(this);
 
         mail_text = (EditText)findViewById(R.id.mail_text);
+        mail_text.setOnClickListener(this);
         contact_us_name_edit = (EditText)findViewById(R.id.contact_us_name_edit);
+        contact_us_name_edit.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.email_btn:{
+        switch (v.getId()) {
+            case R.id.email_btn: {
                 final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
 
                 emailIntent.setType("plain/text");
                 // Кому
                 emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL,
-                        new String[] { "support@unlimited-house.com" });
+                        new String[]{"support@unlimited-house.com"});
                 // Зачем
                 emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,
                         contact_us_name_edit.getText().toString());
@@ -64,10 +66,16 @@ public class ContactUs extends Activity  implements View.OnClickListener{
                 // Поехали!
                 this.startActivity(Intent.createChooser(emailIntent,
                         "Massege sending.."));
+                break;
             }
-            case R.id.mail_text:{
+            case R.id.mail_text: {
                 mail_text.setText("");
+                break;
             }
+            case R.id.contact_us_name_edit: {
+                contact_us_name_edit.setText("");
+            }
+
         }
     }
 }

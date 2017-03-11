@@ -21,7 +21,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SHOP NAME"
+        android:text="@string/shop_menu_sName"
         android:layout_alignParentTop="false"
         android:layout_toRightOf="@+id/housee"
         android:layout_centerVertical="true"
@@ -66,7 +66,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="MY SHOP"
+                android:text="@string/shop_menu_myshop"
                 android:textColor="@android:color/black"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="20dp"
@@ -89,7 +89,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="MY SCHEDULE"
+                android:text="@string/shop_menu_schedule"
                 android:textColor="@android:color/black"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="20dp"
@@ -113,7 +113,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ORDERS"
+                android:text="@string/shop_menu_orders"
                 android:textColor="@android:color/black"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="20dp"
@@ -137,7 +137,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="SHOP IN NUMBER"
+                android:text="@string/shop_menu_shop_in_number"
                 android:textColor="@android:color/black"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="20dp"
@@ -159,7 +159,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="RATING"
+                android:text="@string/shop_menu_rating"
                 android:textColor="@android:color/black"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="20dp"

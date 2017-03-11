@@ -17,6 +17,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.e.bogachov.unlmitedhouse.MainMenu;
 import com.e.bogachov.unlmitedhouse.R;
 import com.e.bogachov.unlmitedhouse.ShopMenu;
 import com.firebase.client.DataSnapshot;
@@ -164,8 +165,9 @@ public class AddService extends Activity implements View.OnClickListener {
                     }
                 });
                 ref.child("adress").setValue(profile_adress_edit.getText().toString());
-                Intent goToShopMenu = new Intent(getApplicationContext(), ShopMenu.class);
-                startActivity(goToShopMenu);
+                Intent goToMainMenu = new Intent(getApplicationContext(), MainMenu.class);
+                startActivity(goToMainMenu);
+                Toast.makeText(this, "We had received your request our tech team will contact you shortly", Toast.LENGTH_SHORT).show();
                 break;
             }
             case R.id.profile_adress_edit:{

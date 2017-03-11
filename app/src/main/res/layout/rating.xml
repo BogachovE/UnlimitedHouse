@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/profile_profeile"
-        android:text="Rating"
+        android:text="@string/rating_title"
         android:layout_marginTop="15dp"
         android:textColor="#00aeef"
         android:textSize="@dimen/profile_text_size"
@@ -42,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/contact_us_text"
-            android:text="If you have any question, we will help you "
+            android:text="@string/rating_text"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:textColor="#000"/>
@@ -68,7 +68,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="YOURE NAME"
+                android:text="@string/name"
                 android:id="@+id/contact_us_name_text"
                 android:textSize="@dimen/profile_text_size"
                 android:layout_marginRight="120dp"
@@ -76,7 +76,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="      NAME"
+                android:text="@string/add_srev_name"
                 android:layout_marginLeft="15dp"
                 android:id="@+id/contact_us_name_edit"
                 android:textSize="16sp"

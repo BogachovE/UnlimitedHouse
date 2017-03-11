@@ -53,29 +53,33 @@ public class Dialog1 extends DialogFragment implements View.OnClickListener {
     public void onClick(View v){
         switch (v.getId()){
             case R.id.okbtn:
-                EditText shop_name_etxt = (EditText)getDialog().findViewById(R.id.shop_name_etxt);
+                final EditText shop_name_etxt = (EditText)getDialog().findViewById(R.id.shop_name_etxt);
                 EditText shop_photo_etxt = (EditText)getDialog().findViewById(R.id.shop_photo_etxt);
 
                 final String name = shop_name_etxt.getText().toString();
                 final String photo = shop_photo_etxt.getText().toString();
                 String categ = Hawk.get("categ");
 
-                final Firebase ref = new Firebase("https://unlimeted-house.firebaseio.com/shops/category/"+categ);
+                final Firebase ref = new Firebase("https://unhouse-143417.firebaseio.com/shops/category/"+categ);
                 ref.addListenerForSingleValueEvent(new ValueEventListener() {
 
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         Long s = dataSnapshot.getChildrenCount();
                         final String ss = s.toString();
-                        Map<String,String> addZeroServ = new HashMap<String,String>();
-                        Map<String,String> shopName = new HashMap<String, String>();
-                        shopName.put("name",name);
-                        shopName.put("photourl",photo);
-                        shopName.put("category", Hawk.get("categ").toString());
-                        addZeroServ.put("name","PLUS");
-                        addZeroServ.put("photourl","http://fs156.www.ex.ua/show/697962838068/276256660/276256660.png");
-                        ref.child(ss).setValue(shopName);
-                        ref.child(ss+"/servicetype/0/").setValue(addZeroServ);
+
+                        if(!photo.equals("")){
+                            Map<String, String> addZeroServ = new HashMap<String, String>();
+                            Map<String, String> shopName = new HashMap<String, String>();
+                            shopName.put("name", name);
+                            shopName.put("photourl", photo);
+                            shopName.put("category", Hawk.get("categ").toString());
+                            addZeroServ.put("name", "PLUS");
+                            addZeroServ.put("photourl", "https://firebasestorage.googleapis.com/v0/b/unlimeted-house.appspot.com/o/PLUS.png?alt=media&token=470dc5a1-fca3-4bda-b9d0-a8590e73783a");
+                            ref.child(ss).setValue(shopName);
+                            ref.child(ss + "/servicetype/0/").setValue(addZeroServ);
+                        }
+                        else Toast.makeText(context,R.string.nullpic,Toast.LENGTH_SHORT).show();
 
                     }
 

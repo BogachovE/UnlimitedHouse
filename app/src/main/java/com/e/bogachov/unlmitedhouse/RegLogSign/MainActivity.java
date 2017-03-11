@@ -1,6 +1,7 @@
 package com.e.bogachov.unlmitedhouse.RegLogSign;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
@@ -23,6 +24,7 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+import com.google.firebase.FirebaseApp;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.orhanobut.hawk.Hawk;
 
@@ -31,14 +33,11 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Locale mNewLocale;
-    String lang;
     String userId;
     String isitshop;
     String shopId;
     String shopcateg;
-    String phone;
-    String fromshop;
+    String mPhone;
 
 
 
@@ -48,73 +47,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         ActionBar actionBar = getActionBar();
-        actionBar.hide();
-
-
-        //SlidingMenu
-        SlidingMenu menu = new SlidingMenu(this);
-        menu.setMode(SlidingMenu.LEFT);
-        menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-        menu.setFadeDegree(0.35f);
-        menu.attachToActivity(this, SlidingMenu.SLIDING_WINDOW);
-        menu.setMenu(R.layout.sidemenu);
-        menu.setBehindWidthRes(R.dimen.slidingmenu_behind_width);
+        if (actionBar != null) {
+            actionBar.hide();
+        }
 
         Firebase.setAndroidContext(this);
         Hawk.init(this).build();
 
-        SharedPreferences sPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        SharedPreferences.Editor ed = sPref.edit();
-        userId = sPref.getString("userid", "");
-        isitshop =sPref.getString("isitshop","");
-        shopId=sPref.getString("shopid","");
-
-        Firebase shopRef = new Firebase("https://unlimeted-house.firebaseio.com/users/"+userId+"/");
-        shopRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                isitshop= dataSnapshot.child("isitshop").getValue(String.class);
-                Hawk.put("isitshop",isitshop);
-                shopId=dataSnapshot.child("shopid").getValue(String.class);
-                Hawk.put("shopid",shopId);
-                shopcateg=dataSnapshot.child("shopcateg").getValue(String.class);
-                Hawk.put("categ",shopcateg);
-                phone=dataSnapshot.child("phone").getValue(String.class);
-                Hawk.put("phone",phone);
-
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-
-            }
-        });
-
-
-
-
-
-
-
-
-        //Find View Slide Bar
-        TextView profilebtn = ((TextView) findViewById(R.id.profilebtn));
-        profilebtn.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/BebasNeueBook.otf"));
-
-
-        TextView ordersbtn = (TextView) findViewById(R.id.ordersbtn);
-        ordersbtn.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/BebasNeueBook.otf"));
-        TextView addservicebtn = (TextView) findViewById(R.id.addservicebtn);
-        addservicebtn.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/BebasNeueBook.otf"));
-        TextView contactbtn = (TextView) findViewById(R.id.contactbtn);
-        contactbtn.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/BebasNeueBook.otf"));
-        TextView logoutbtn = (TextView) findViewById(R.id.logoutbtn);
-        logoutbtn.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/BebasNeueBook.otf"));
-        profilebtn.setOnClickListener(this);
-        ordersbtn.setOnClickListener(this);
-        addservicebtn.setOnClickListener(this);
-        contactbtn.setOnClickListener(this);
-        logoutbtn.setOnClickListener(this);
+        if (Hawk.contains("userid")) {
+          loadUser();
+        }
 
         //find view
         ImageView signbtn = (ImageView) findViewById(R.id.signbtn);
@@ -126,11 +68,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ImageView arablang = (ImageView) findViewById(R.id.arablang);
         arablang.setOnClickListener(this);
 
-
-
-
-
-
+        setSlideMenu();
     }
 
     @Override
@@ -153,10 +91,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Intent signintent = new Intent(MainActivity.this, SiginUp.class);
                         startActivity(signintent);
                     }
-
-
                     break;
-
                 }
                 else{
                     Intent signintent = new Intent(MainActivity.this, SiginUp.class);
@@ -167,13 +102,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
             case R.id.englang:{
-
-
+                //TODO will do
                 break;
             }
 
             case R.id.arablang:{
-
+                //TODO will do
                 break;
             }
     //Slide Menu Buttons
@@ -200,31 +134,67 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.logoutbtn:{
                 Intent goToStart = new Intent(getApplicationContext(),MainActivity.class);
                 Hawk.deleteAll();
-                SharedPreferences sPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                SharedPreferences.Editor ed = sPref.edit();
-                ed.clear();
-                ed.apply();
                 startActivity(goToStart);
                 break;
             }
         }
     }
 
-    @Override
-    protected void onDestroy(){
-        userId=Hawk.get("userid");
-        isitshop=Hawk.get("isitshop");
-        shopId=Hawk.get("shopid");
-        SharedPreferences sPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        SharedPreferences.Editor ed = sPref.edit();
-        ed.putString("userid", userId);
-        ed.putString("isitshop", isitshop);
-        ed.putString("shopid", shopId);
-        ed.commit();
+    public void setSlideMenu(){
+        SlidingMenu menu;
 
-        super.onDestroy();
+        menu= new SlidingMenu(this);
+        menu.setMode(SlidingMenu.LEFT);
+        menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+        menu.setFadeDegree(0.35f);
+        menu.attachToActivity(this, SlidingMenu.SLIDING_WINDOW);
+        menu.setMenu(R.layout.sidemenu);
+        menu.setBehindWidthRes(R.dimen.slidingmenu_behind_width);
+
+        //Find View Slide Bar
+        TextView profilebtn = ((TextView) findViewById(R.id.profilebtn));
+        profilebtn.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/BebasNeueBook.otf"));
+        TextView ordersbtn = (TextView) findViewById(R.id.ordersbtn);
+        ordersbtn.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/BebasNeueBook.otf"));
+        TextView addservicebtn = (TextView) findViewById(R.id.addservicebtn);
+        addservicebtn.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/BebasNeueBook.otf"));
+        TextView contactbtn = (TextView) findViewById(R.id.contactbtn);
+        contactbtn.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/BebasNeueBook.otf"));
+        TextView logoutbtn = (TextView) findViewById(R.id.logoutbtn);
+        logoutbtn.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/BebasNeueBook.otf"));
+        profilebtn.setOnClickListener(this);
+        ordersbtn.setOnClickListener(this);
+        addservicebtn.setOnClickListener(this);
+        contactbtn.setOnClickListener(this);
+        logoutbtn.setOnClickListener(this);
     }
 
+    public void loadUser() {
+        userId = Hawk.get("userid");
 
+        Firebase shopRef = new Firebase("https://unhouse-143417.firebaseio.com/users/"+userId+"/");
+        shopRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    isitshop = dataSnapshot.child("isitshop").getValue(String.class);
+                    Hawk.put("isitshop", isitshop);
+                    if (isitshop.equals("true")) {
+                        shopId = dataSnapshot.child("shopid").getValue(String.class);
+                        Hawk.put("shopid", shopId);
+                        shopcateg = dataSnapshot.child("shopcategory").getValue(String.class);
+                        Hawk.put("categ", shopcateg);
+                    }
+                    mPhone = dataSnapshot.child("phone").getValue(String.class);
+                    Hawk.put("phone", mPhone);
+                }
 
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+    }
 }

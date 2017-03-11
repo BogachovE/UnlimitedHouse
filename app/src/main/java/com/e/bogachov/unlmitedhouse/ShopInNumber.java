@@ -72,146 +72,85 @@ public class ShopInNumber extends Activity implements View.OnClickListener{
         orderRef = FirebaseDatabase.getInstance().getReference();
         orderCountQ = orderRef.child("orders").orderByChild("fromshop").equalTo(fromshop);
         orderCountQ.addListenerForSingleValueEvent(new com.google.firebase.database.ValueEventListener() {
-                                                       @Override
-                                                       public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
-                                                           Long count = dataSnapshot.getChildrenCount();
-                                                           num_ord.setText(count.toString());
-                                                           orders= new ArrayList<>();
-                                                           orderstime= new ArrayList<Integer>();
-                                                           String finishDataString,confDataString;
-
-                                                           for (com.google.firebase.database.DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-
-
-                                                               //Getting the data from snapshot
-                                                               order = postSnapshot.getValue(Order.class);
-                                                               orders.add(order.getName());
-                                                               //dataString = dataSnapshot.child("data").getValue(Order.class);
-
-                                                               if (order.getStatus().equals("finishing")) {
-                                                                   complite = complite + 1;
-
-                                                                   SimpleDateFormat formatter = new SimpleDateFormat("E MMM dd HH:mm:ss z yyyy");
-
-                                                                   try {
-                                                                       finishDataString = order.getFinishingdata();
-                                                                       confDataString = order.getConfirmationdata();
-                                                                       finishData = formatter.parse(finishDataString);
-                                                                       startData = formatter.parse(confDataString);
-
-                                                                   } catch (ParseException e) {
-                                                                       finishData = new Date();
-                                                                       startData = new Date();
-                                                                       e.printStackTrace();
-                                                                   }
-                                                                   Integer fm = finishData.getMinutes() + finishData.getHours()*60;
-                                                                   Integer sm = startData.getMinutes() + startData.getHours()*60;
-                                                                   orderstime.add(fm-sm);
-
-
-                                                               }
-                                                               if (order.getStatus().equals("canceld")){
-                                                                   cancel = cancel + 1;
-                                                               }
-
-                                                           }
-
-                                                           m=1;
-                                                           p=1;
-
-                                                           if(orders!=null){
-                                                               for(i=0;i<=orders.size()-1;i++){
-                                                                   n=0;
-                                                                   for(j=0;j<=orders.size()-1;j++){
-                                                                       if(orders.get(i).equals(orders.get(j))){
-                                                                           n=n+1;
-                                                                       }
-                                                                   }
-                                                                   if (n>m){
-                                                                       m=n;
-                                                                       p=i;
-                                                                   }
-                                                               }
-                                                               most_order.setText(orders.get(p));
-
-
-                                                           }
-
-                                                           m=0.0;
-                                                           p=1;
-                                                           n=0.0;
-
-                                                           if(orderstime!=null){
-                                                               for(i=0;i<=orderstime.size()-1;i++){
-                                                                   for(j=0;j<=orderstime.size()-1;j++){
-                                                                       if(orderstime.get(i)>=(orderstime.get(j))){
-                                                                           n=orderstime.get(i);
-                                                                       }
-                                                                   }
-                                                                   if (n>m){
-                                                                       m=n;
-
-                                                                   }
-                                                               }
-                                                               Double res =m/60.0;
-                                                               most_time.setText(res.toString());
-
-
-                                                           }
-
-
-                                                           if (complite > 0) {
-                                                               com_ord.setText(complite.toString());
-                                                           } else com_ord.setText("0");
-
-                                                           if (cancel > 0) {
-                                                               canc_order.setText(cancel.toString());
-                                                           } else canc_order.setText("0");
-
-
-
-                                                       }
-
-                                                       @Override
-                                                       public void onCancelled(DatabaseError databaseError) {
-
-                                                       }
-                                                   });
-
-
-        /*compOrderQ = orderCountQ.startAt("finishing").endAt("finishing");
-        compOrderQ.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
                 Long count = dataSnapshot.getChildrenCount();
-                com_ord.setText(count.toString());
-            }
+                num_ord.setText(count.toString());
+                orders= new ArrayList<>();
+                orderstime= new ArrayList<Integer>();
+                String finishDataString,confDataString;
+                for (com.google.firebase.database.DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    order = postSnapshot.getValue(Order.class);
+                    orders.add(order.getName());
+                    //dataString = dataSnapshot.child("data").getValue(Order.class);
+                    if (order.getStatus().equals("finishing")) {
+                        complite = complite + 1;
+                        SimpleDateFormat formatter = new SimpleDateFormat("E MMM dd HH:mm:ss z yyyy");
+                        try {
+                            finishDataString = order.getFinishingdata();
+                            confDataString = order.getConfirmationdata();
+                            finishData = formatter.parse(finishDataString);
+                            startData = formatter.parse(confDataString);
+                        } catch (ParseException e) {
+                            finishData = new Date();
+                            startData = new Date();
+                            e.printStackTrace();
+                        }
+                        Integer fm = finishData.getMinutes() + finishData.getHours()*60;
+                        Integer sm = startData.getMinutes() + startData.getHours()*60;
+                        orderstime.add(fm-sm);
+                    }
+                    if (order.getStatus().equals("canceld")){
+                        cancel = cancel + 1;
+                    }
+                }
 
+
+                if(orders!=null) {
+                    p=0;
+                    m=0;
+                    for(i=0;i<=orders.size()-1;i++){
+                        n=0;
+                        for(j=0;j<=orders.size()-1;j++){
+                            if(orders.get(i).equals(orders.get(j))){
+                                n=n+1;
+                            }
+                        }
+                        if (n>m){
+                            m=n;
+                            p=i;
+                        }
+                    }
+                    if ((orders!=null) && (orders.size()!=0))most_order.setText(orders.get(p));
+                }
+                m=0.0;
+                p=1;
+                n=0.0;
+                if(orderstime!=null){
+                    for(i=0;i<=orderstime.size()-1;i++){
+                        for(j=0;j<=orderstime.size()-1;j++){
+                            if(orderstime.get(i)>=(orderstime.get(j))){
+                                n=orderstime.get(i);
+                            }
+                        }
+                        if (n>m){
+                            m=n;
+                        }
+                    }
+                    Double res =m/60.0;
+                    most_time.setText(res.toString());
+                }
+                if (complite > 0) {
+                    com_ord.setText(complite.toString());
+                } else com_ord.setText("0");
+                if (cancel > 0) {
+                    canc_order.setText(cancel.toString());
+                } else canc_order.setText("0");
+            }
             @Override
-            public void onCancelled(FirebaseError firebaseError) {
-
+            public void onCancelled(DatabaseError databaseError) {
             }
-        });*/
-        /*canc_orderQ = orderCountQ.orderByChild("status").equalTo("canceld");
-        canc_orderQ.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Long count = dataSnapshot.getChildrenCount();
-                canc_order.setText(count.toString());
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-
-            }
-        });*/
-
-
-
-
-
-
-
+        });
     }
 
     @Override

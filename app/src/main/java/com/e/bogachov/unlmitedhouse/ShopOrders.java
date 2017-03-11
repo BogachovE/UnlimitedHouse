@@ -32,6 +32,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StreamDownloadTask;
 import com.orhanobut.hawk.Hawk;
 import com.squareup.picasso.Picasso;
 
@@ -93,56 +94,61 @@ public class ShopOrders extends Activity {
             @Override
             protected void populateViewHolder(OrderViewHolder viewHolder, final Order model, int position) {
                 Date mDate;
-                viewHolder.from_shop.setText(" "+model.getFromshop());
-                viewHolder.order_numb.setText(" "+model.getId()+" ");
-                viewHolder.order_data.setText(" "+model.getData());
-
+                viewHolder.from_shop.setText(" " + model.getFromshop());
+                viewHolder.order_numb.setText(" " + model.getId() + " ");
+                viewHolder.order_data.setText(" " + model.getData());
+                final String orderid = String.valueOf(position);
 
 
                 SimpleDateFormat formatter = new SimpleDateFormat("E MMM dd HH:mm:ss z yyyy");
                 try {
                     String dataString = model.getData();
-                     mDate  = formatter.parse(dataString);
+                    mDate = formatter.parse(dataString);
 
                 } catch (ParseException e) {
-                    Toast.makeText(getApplicationContext(),"blya",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "blya", Toast.LENGTH_SHORT).show();
                     mDate = new Date();
                     e.printStackTrace();
                 }
                 Integer day = mDate.getDay();
                 Integer month = mDate.getMonth();
-                String[] monStr = {"JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"};
+                String[] monStr = {"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"};
                 viewHolder.order_data_two.setText(day.toString());
                 viewHolder.order_data_big.setText(monStr[month]);
+                viewHolder.order_data_big.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Hawk.put("orderid", model.getId());
+                        Intent goToOrderConf = new Intent(getApplicationContext(), OrderConf.class);
+                        v.getContext().startActivity(goToOrderConf);
 
-
-
+                    }
+                });
 
 
                 viewHolder.check_btn.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View v) {
-                        final Firebase   mDelRef = new Firebase("https://unlimeted-house.firebaseio.com/orders/"+model.getId());
-                        if(isItShop.equals("false")){
-                        mDelRef.addListenerForSingleValueEvent(new com.firebase.client.ValueEventListener() {
-                            @Override
-                            public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
-                                mDelRef.removeValue();
-
-                            }
-
-                            @Override
-                            public void onCancelled(FirebaseError firebaseError) {
-
-                            }
-                        });}
-                        else if (isItShop.equals("true")){
+                    public void onClick(final View v) {
+                        final Firebase mDelRef = new Firebase("hhttps://unhouse-143417.firebaseio.com/orders/" + model.getId());
+                        if (isItShop.equals("false")) {
                             mDelRef.addListenerForSingleValueEvent(new com.firebase.client.ValueEventListener() {
                                 @Override
                                 public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
-                                    Date d = new Date();
-                                    mDelRef.child("status").setValue("confirmation");
-                                    mDelRef.child("confirmationdata").setValue(d.toString());
+                                    Hawk.put("orderid",model.getId());
+                                    Intent goToOrderStat = new Intent(v.getContext(),OrderStatus.class);
+                                    v.getContext().startActivity(goToOrderStat);
+                                }
+
+                                @Override
+                                public void onCancelled(FirebaseError firebaseError) {
+
+                                }
+                            });
+                        } else if (isItShop.equals("true")) {
+                            mDelRef.addListenerForSingleValueEvent(new com.firebase.client.ValueEventListener() {
+                                @Override
+                                public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+                                    acceptOrder(mDelRef);
                                 }
 
                                 @Override
@@ -156,36 +162,40 @@ public class ShopOrders extends Activity {
                 });
                 viewHolder.cancel_btn.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View v) {
-                        if(isItShop.equals("false")){
-                        Hawk.put("orderid",model.getId());
-                        Intent goToOrderStat = new Intent(v.getContext(),OrderStatus.class);
-                        v.getContext().startActivity(goToOrderStat);}
-                        else if (isItShop.equals("true")){
-                            final Firebase   mDelRef = new Firebase("https://unlimeted-house.firebaseio.com/orders/"+model.getId());
-                            mDelRef.addListenerForSingleValueEvent(new com.firebase.client.ValueEventListener() {
-                                @Override
-                                public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
-                                    Date d = new Date();
-                                    mDelRef.child("status").setValue("canceld");
-                                    mDelRef.child("canceldata").setValue(d.toString());
-                                }
+                    public void onClick(final View v) {
+                        final Firebase mDelRef = new Firebase("https://unhouse-143417.firebaseio.com/orders/" + model.getId());
+                        mDelRef.addListenerForSingleValueEvent(new com.firebase.client.ValueEventListener() {
+                            @Override
+                            public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+                                cancelOrder(mDelRef, model.getId(),     v);
+                            }
 
-                                @Override
-                                public void onCancelled(FirebaseError firebaseError) {
-
-                                }
-                            });
-
-
-                        }
-
+                            @Override
+                            public void onCancelled(FirebaseError firebaseError) {
+                            }
+                        });
                     }
+
                 });
 
+            }
 
+            void cancelOrder(Firebase mDelRef, String id, View v) {
+                Date d = new Date();
+                mDelRef.child("status").setValue("canceld");
+                mDelRef.child("canceldata").setValue(d.toString());
+                Hawk.put("orderid",id);
+                Intent goToOrderStat = new Intent(v.getContext(),OrderStatus.class);
+                v.getContext().startActivity(goToOrderStat);
+            }
+            void acceptOrder(Firebase mDelRef) {
+                Date d = new Date();
+                mDelRef.child("status").setValue("confirmation");
+                mDelRef.child("confirmationdata").setValue(d.toString());
 
-
+                String userNotifIp = Hawk.get("userNotifIp");
+                Notification notif = new Notification();
+                notif.sendNotif("include_player_ids", userNotifIp, "Your order was accept");
             }
 
         };
@@ -258,6 +268,7 @@ public class ShopOrders extends Activity {
                     anim = AnimationUtils.loadAnimation(v.getContext(), R.anim.myrotate_back);
                     oreder_btnss.startAnimation(anim);
                     rvs.setVisibility(View.INVISIBLE);
+
                     break;
                 }
                 case R.id.oreder_btnss:{
