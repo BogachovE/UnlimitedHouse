@@ -49,7 +49,7 @@ public class OrderStatus extends Activity {
         textView = (TextView)findViewById(R.id.textView);
         textView3 = (TextView)findViewById(R.id.textView3);
 
-        mDataRef = new Firebase("https://unlimeted-house.firebaseio.com/orders/"+orderId);
+        mDataRef = new Firebase("https://unhouse-143417.firebaseio.com/orders/"+orderId);
         mDataRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -58,8 +58,8 @@ public class OrderStatus extends Activity {
                 String status =dataSnapshot.child("status").getValue(String.class);
                 switch (status){
                     case "canceld" :{
-                        process.setText("canceld");
-                        proc_txt.setText("Your order was cancel");
+                        process.setText(R.string.status_canc);
+                        proc_txt.setText(R.string.status_canc_text);
                         inProgressData=dataSnapshot.child("canceldata").getValue().toString();
                         order_data.setText(inProgressData);
 

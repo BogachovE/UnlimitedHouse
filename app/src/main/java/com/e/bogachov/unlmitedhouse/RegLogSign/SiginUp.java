@@ -4,57 +4,56 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.location.Location;
 import android.os.Bundle;
-import android.os.Message;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.e.bogachov.unlmitedhouse.MainMenu;
 import com.e.bogachov.unlmitedhouse.R;
 
 import com.e.bogachov.unlmitedhouse.ShopMenu;
-import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.e.bogachov.unlmitedhouse.Models.Users;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.storage.FirebaseStorage;
 import com.nexmo.sdk.NexmoClient;
 import com.nexmo.sdk.core.client.ClientBuilderException;
 import com.nexmo.sdk.verify.client.VerifyClient;
 import com.nexmo.sdk.verify.event.UserObject;
 import com.nexmo.sdk.verify.event.VerifyClientListener;
+import com.onesignal.OneSignal;
 import com.orhanobut.hawk.Hawk;
 
 import java.io.IOException;
-import java.security.Key;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
-import static com.e.bogachov.unlmitedhouse.R.id.phonetxt;
 import static com.e.bogachov.unlmitedhouse.verifysample.Config.NexmoAppId;
 import static com.e.bogachov.unlmitedhouse.verifysample.Config.NexmoSharedSecretKey;
 
 public class SiginUp extends Activity implements View.OnClickListener {
-    Context context = getApplication();
-
-    String mPrefix;
     EditText phonetxt;
     String mPhone;
     DatabaseReference mData;
-    Long count;
-    Long newUserId;
     String userPhone;
     String isItShop;
-
-
+    SharedPreferences sPref;
+    Users users;
+    String notifID;
     public static final String TAG = SiginUp.class.getSimpleName();
     VerifyClient  verifyClient;
 
@@ -63,29 +62,69 @@ public class SiginUp extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up);
-        // getFragmentManager().beginTransaction().add(R.id.container, new MainFragment()).commit();
+
 
         phonetxt = (EditText) findViewById(R.id.phonetxt);
-
-        ActionBar actionBar = getActionBar();
-        actionBar.hide();
-
-        //find View
         Button nextbtn = (Button) findViewById(R.id.nextbtn);
         nextbtn.setOnClickListener(this);
 
+        OneSignal.startInit(this).init();
+
+        OneSignal.idsAvailable(new OneSignal.IdsAvailableHandler() {
+            @Override
+            public void idsAvailable(String userId, String registrationId) {
+                Log.d("debug", "User:" + userId);
+                if (registrationId != null)
+                    Log.d("debug", "registrationId:" + registrationId);
+                notifID=registrationId;
+                notifID=userId;
+
+
+            }
+        });
+
+
+        ActionBar actionBar = getActionBar();
+        if (actionBar!= null) {
+            actionBar.hide();
+        }
+        Firebase.setAndroidContext(this);
         Hawk.init(this).build();
         acquireVerifyClient();
-        Firebase.setAndroidContext(this);
+
         mData = FirebaseDatabase.getInstance().getReference();
+
+
 
 
         EditText phonetxt = (EditText)findViewById(R.id.phonetxt);
         phonetxt.setOnClickListener(this);
+        phonetxt.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
+                if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(
+                            INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                    return true;
+                }
 
+                return false;
+            }
+        });
 
+        Firebase countRef = new Firebase("https://unhouse-143417.firebaseio.com/users");
+        countRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+                Hawk.put("count",dataSnapshot.getChildrenCount()+1);
+            }
 
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
 
+            }
+        });
     }
 
 
@@ -115,7 +154,7 @@ public class SiginUp extends Activity implements View.OnClickListener {
             public void onVerifyInProgress(final VerifyClient verifyClient, UserObject user) {
                 Log.d(TAG, "onVerifyInProgress for number: " + user.getPhoneNumber());
                 Toast.makeText(getApplicationContext(),"we send a sms", Toast.LENGTH_SHORT).show();
-                phonetxt.setText("Enter PIN code");
+                phonetxt.setText(R.string.sigin_up_pin);
                 Button nextbtn = (Button) findViewById(R.id.nextbtn);
                 nextbtn.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -123,65 +162,27 @@ public class SiginUp extends Activity implements View.OnClickListener {
                         verifyClient.checkPinCode(phonetxt.getText().toString());
                     }
                 });
-
-
             }
 
             @Override
-            public void onUserVerified(final VerifyClient verifyClient, UserObject user) {
+            public void onUserVerified(final VerifyClient verifyClient, final UserObject user) {
                 Log.d(TAG, "onUserVerified for number: " + user.getPhoneNumber());
                 Toast.makeText(getApplicationContext(), "You are verificated", Toast.LENGTH_SHORT).show();
 
-
-                Hawk.init(getApplicationContext()).build();
                 Hawk.put("userphone", mPhone);
 
                  mData = FirebaseDatabase.getInstance().getReference();
+                Query queryRef = mData.child("users").orderByChild("phone").equalTo(userPhone);
 
-
-
-
-                 Query queryRef = mData.child("users").orderByChild("phone").equalTo(userPhone);
-
-                queryRef.addValueEventListener(new com.google.firebase.database.ValueEventListener() {
+                queryRef.addListenerForSingleValueEvent(new com.google.firebase.database.ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
-
-                            String kostil = dataSnapshot.toString();
-                            String kostil2 = kostil.substring(35);
-                            String resultStr = kostil2.substring(kostil2.indexOf('{') + 1, kostil2.indexOf('='));
-                            Hawk.put("userid", resultStr);
-                            Hawk.put("isitshop", dataSnapshot.child(resultStr).child("isitshop").getValue(String.class));
-                            isItShop = dataSnapshot.child(resultStr).child("isitshop").getValue(String.class);
-                            //Toast.makeText(getApplicationContext(), isItShop, Toast.LENGTH_SHORT).show();
-                            if(isItShop.equals("true")){
-                                Intent goToShopMenu = new Intent(getApplicationContext(), ShopMenu.class);
-                                startActivity(goToShopMenu);
-                            }
-
+                            setExistUser(dataSnapshot);
                         }
-                        else if (!dataSnapshot.exists()){
-                            Long lcount =dataSnapshot.getChildrenCount()+1;
-                            String count = lcount.toString();
-                            mData.child("users/"+count).child("phone").setValue(userPhone);
-                            mData.child("users/"+count).child("isitshop").setValue("false");
-                            Hawk.put("isitshop","false");
-                            isItShop = Hawk.get("isitshop");
-                            //Toast.makeText(getApplicationContext(),isItShop, Toast.LENGTH_SHORT).show();
-
-                            // String kostil = dataSnapshot.toString();
-                            ////  String kostil2 =kostil.substring(35);
-                            //     String resultStr = kostil2.substring(kostil2.indexOf('{') + 1, kostil2.indexOf('='));
-//                            Hawk.put("userid",resultStr);
-
+                        else if (!dataSnapshot.exists()) {
+                            addNewUser(dataSnapshot);
                         }
-                        if(isItShop.equals("false")) {
-                            Intent goToLocation = new Intent(getApplicationContext(), RegLocation.class);
-                            startActivity(goToLocation);
-                        }
-
-
                     }
 
                     @Override
@@ -190,12 +191,6 @@ public class SiginUp extends Activity implements View.OnClickListener {
 
                     }
                 });
-
-
-
-
-
-
             }
 
             @Override
@@ -208,8 +203,7 @@ public class SiginUp extends Activity implements View.OnClickListener {
             }
         });
 
-        //verifyClient.getVerifiedUser(mPrefix, phonetxt);
-        //verifyClient.checkPinCode(mPin);
+
     }
 
 
@@ -218,13 +212,9 @@ public class SiginUp extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.nextbtn: {
-
                 mPhone = phonetxt.getText().toString();
-                verifyClient.getVerifiedUser("UA",phonetxt.getText().toString());
+                verifyClient.getVerifiedUser("SA",phonetxt.getText().toString());
                 userPhone = mPhone;
-
-
-
             }
             case R.id.phonetxt:{phonetxt.setText("");}
         }
@@ -232,6 +222,73 @@ public class SiginUp extends Activity implements View.OnClickListener {
 
     }
 
+    void addNewUser(DataSnapshot dataSnapshot) {
+        Long lcount = Hawk.get("count");
+        final String count = lcount.toString();
+        Intent goToLocation;
+        final HashMap<String, String> newUser = new HashMap<String, String>();
 
+        newUser.put("phone", userPhone);
+        newUser.put("isitshop", "false");
+        newUser.put("userid", count);
+
+        OneSignal.idsAvailable(new OneSignal.IdsAvailableHandler() {
+            @Override
+            public void idsAvailable(String userId, String registrationId) {
+                Log.d("debug", "User:" + userId);
+                if (registrationId != null)
+                    Log.d("debug", "registrationId:" + registrationId);
+                newUser.put("userNotifIp", notifID);
+            }
+        });
+        Hawk.put("userNotifIp",newUser.get("userNotifIp"));
+        Hawk.put("isitshop", "false");
+        Hawk.put("userid",count);
+
+        goToLocation = new Intent(getApplicationContext(), RegLocation.class);
+        goToLocation.putExtra("newUser",newUser);
+        startActivity(goToLocation);
+    }
+
+    void setExistUser(DataSnapshot dataSnapshot) {
+        String latitude;
+        String longitude;
+        Intent goToShopMenu;
+        Intent goToMain;
+        Location shopLoc;
+
+        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+            users = postSnapshot.getValue(Users.class);
+
+            latitude = users.getLocationlatitude();
+            longitude = users.getLocationlongitude();
+
+            shopLoc = new Location("asd");
+            shopLoc.setLatitude(Double.parseDouble(latitude));
+            shopLoc.setLongitude(Double.parseDouble(longitude));
+
+            isItShop = users.getIsitshop();
+
+            if (isItShop.equals("true")) {
+                Hawk.put("categ", users.getShopcategory());
+                Hawk.put("shopid", users.getShopid());
+            }
+
+            Hawk.put("userNumber", mPhone);
+            Hawk.put("isitshop", users.getIsitshop());
+            Hawk.put("userLoc", shopLoc);
+            Hawk.put("userid", users.getUserid());
+            Hawk.put("userNotifIp", users.getUserNotifIp());
+            Hawk.put("userid", users.getUserid());
+
+            if (isItShop.equals("true")) {
+                goToShopMenu = new Intent(getApplicationContext(), ShopMenu.class);
+                startActivity(goToShopMenu);
+            } else {
+                goToMain = new Intent(getApplicationContext(), MainMenu.class);
+                startActivity(goToMain);
+            }
+        }
+    }
 }
 

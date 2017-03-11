@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_height="match_parent"
+<FrameLayout android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent">
 
-    <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.e.bogachov.unlmitedhouse.MainMenu"
-    android:orientation="vertical"
-    android:clickable="true"
-    android:background="#8C7DB5"
-    android:id="@+id/lin"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.e.bogachov.unlmitedhouse.MainMenu"
+        android:orientation="vertical"
+        android:clickable="true"
+        android:background="#8C7DB5"
+        android:id="@+id/lin"
 
 
-    >
+        >
 
 
         <LinearLayout
@@ -70,15 +67,17 @@
             android:layout_height="match_parent"
             android:id="@+id/other"
             android:background="@drawable/othercc"
-            android:layout_toLeftOf="@+id/house"/>
+            android:layout_toLeftOf="@+id/hbtn"
+         />
+
 
         <ImageView
             android:layout_width="@dimen/main_right_elements_width"
             android:layout_height="match_parent"
-            android:id="@+id/house"
+            android:id="@+id/hbtn"
             android:background="@drawable/houseca"
             android:layout_alignParentRight="true"
-            />
+           />
     </RelativeLayout>
 
 </LinearLayout>
@@ -88,10 +87,8 @@
         android:layout_height="match_parent"
         android:src="#000"
         android:id="@+id/shadow"
-    android:visibility="gone"
-
-
-
+        android:visibility="gone"
         />
+
 </FrameLayout>
 

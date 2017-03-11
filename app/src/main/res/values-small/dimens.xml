@@ -92,10 +92,10 @@
     <dimen name="slider_soft_line_margin_left">20dp</dimen>
     <dimen name="slider_contact_margin_bottom">10dp</dimen>
     <dimen name="slider_logout_margin_bottom">70dp</dimen>
-    <dimen name="profile_text_size">23sp</dimen>
+    <dimen name="profile_text_size">27sp</dimen>
 
     <!--Profile-->
-    <dimen name="profile_titel_margin_left">20dp</dimen>
+    <dimen name="profile_titel_margin_left">22dp</dimen>
     <dimen name="profile_btn_width">110dp</dimen>
     <dimen name="profile_btn_height">110dp</dimen>
     <dimen name="profile_lay_margin_top">10dp</dimen>

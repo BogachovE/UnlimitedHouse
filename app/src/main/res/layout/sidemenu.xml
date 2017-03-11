@@ -12,7 +12,7 @@
         android:layout_height="@dimen/Slide_house_height"
         android:src="@drawable/logo_inside"
         android:scaleType="fitXY"
-        android:id="@+id/house"
+        android:id="@+id/housee"
         android:layout_marginTop="@dimen/Slide_house_margin_top"
         android:layout_centerHorizontal="true" />
 
@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/lineh"
-        android:layout_below="@+id/house"
+        android:layout_below="@+id/housee"
         android:layout_marginTop="@dimen/slide_hardline_margin_top"
         android:id="@+id/hardline"
         android:layout_marginLeft="@dimen/slide_hardline_margin_left"
@@ -37,7 +37,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="PROFILE"
+            android:text="@string/slide_left_profile"
             android:layout_weight="1"
             android:id="@+id/profilebtn"
             android:layout_gravity="bottom"
@@ -76,7 +76,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="MY ORDERS"
+            android:text="@string/slide_left_myOrders"
             android:layout_weight="1"
             android:id="@+id/ordersbtn"
             android:layout_gravity="bottom"
@@ -114,7 +114,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ADD YOUR SERVICE!"
+            android:text="@string/slide_left_addServ"
             android:layout_weight="1"
             android:id="@+id/addservicebtn"
             android:layout_gravity="bottom"
@@ -151,7 +151,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="CONTACT US"
+            android:text="@string/slide_left_contact_us"
             android:layout_weight="1"
             android:id="@+id/contactbtn"
             android:layout_marginLeft="@dimen/slider_text_margin_left"
@@ -188,7 +188,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="LOG OUT"
+            android:text="@string/slide_left_logout"
             android:id="@+id/logoutbtn"
             android:textSize="@dimen/slider_text_size"
             android:textColor="#00aeef"

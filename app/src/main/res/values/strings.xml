@@ -38,4 +38,163 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- abs_candy -->
+    <string name="candy_title">Candy and Pies</string>
+
+    <!-- abs_layout -->
+    <string name="Beauty_title">Beauty</string>
+
+    <!-- abs_main -->
+    <string name="UnHouse">UNLIMETED HOUSE</string>
+
+    <!-- abs_other-->
+    <string name="other_title">Others</string>
+
+    <!-- abs_product -->
+    <string name="product_title">Productive Families</string>
+
+    <!-- abs_house -->
+    <string name="house_title">House Service</string>
+
+    <!-- activity_login -->
+    <string name="pNumber">Phone number</string>
+
+    <!-- add_shop_diolog -->
+    <string name="enter_name">Enter name</string>
+    <string name="pUrl">Enter shop photo URL"</string>
+    <string name="ok">OK</string>
+    <string name="cancel">CANCEL</string>
+
+    <!-- add_service -->
+    <string name="add_serv">ADD YOUR SERVICE</string>
+    <string name="name">YOURE NAME</string>
+    <string name="add_srev_name">   NAME</string>
+    <string name="add_serv_email_v">EMAIL</string>
+    <string name="add_serv_email_e">Email</string>
+    <string name="add_serv_categ">Email</string>
+    <string name="add_serv_loc">ENTER SHOP LOCATION</string>
+    <string name="add_serv_logo">ENTER YOUR LOGO URL</string>
+
+    <!-- add_shop_diolog3 -->
+    <string name="add_shop_d3_name">Enter name</string>
+    <string name="add_shop_d3_pUrl">Enter shop photo URL</string>
+    <string name="add_shop_d3_dec">Enter product description</string>
+    <string name="add_shop_d3_price">Enter product price</string>
+    <string name="add_shop_d3_cur">Enter product currency</string>
+
+    <!-- dialog_select_service -->
+    <string name="dialog_select_service_rename">Rename service</string>
+    <string name="dialog_select_service_pic">Change service picture</string>
+    <string name="dialog_select_service_del">Delete servicee</string>
+
+    <!-- dialog_select_product -->
+    <string name="dialog_select_product_rename">Rename product</string>
+    <string name="dialog_select_product_pic">Change product picture</string>
+    <string name="dialog_select_product_price">Change product price</string>
+    <string name="dialog_select_product_dec">Change product description</string>
+    <string name="dialog_select_product_dell">Delete product</string>
+
+    <!-- dialog -->
+    <string name="dialog_pref">Please write your preference</string>
+
+    <!-- contact_us -->
+    <string name="contact_us">CONTACT US</string>
+    <string name="contact_text">We are so glad because you will give us precious time of yours, just feel free to say what you would like too, complaint, feedback, ideas, anything you want to say we will hear it from our heart!</string>
+
+    <!-- buy_product -->
+    <string name="buy_product_sdec">Service Describtion</string>
+    <string name="buy_product_count">Number of Served Person</string>
+    <string name="buy_product_visiting">Required House Visting</string>
+    <string name="buy_product_cust">Click to customize order</string>
+    <string name="buy_product_add">Add To Basket</string>
+
+    <!-- order_conf -->
+    <string name="order_conf_numb">Order number: </string>
+    <string name="order_conf_shop">Shop: </string>
+    <string name="order_conf_details">Details: </string>
+    <string name="order_conf_date">Date: </string>
+    <string name="order_conf_time">Time: </string>
+    <string name="order_conf_orders_btn">MY ORDERS </string>
+    <string name="order_conf_main_btn">MAIN MENU</string>
+    <string name="order_conf_txt_5">"We have received your order , once confirmation is accomplished from shop we will notify you ,confirmation may take 5 minutes Thank you!"</string>
+    <string name="order_conf_txt_4">"We have received your order , once confirmation is accomplished from shop we will notify you ,confirmation may take 4 minutes Thank you!"</string>
+    <string name="order_conf_txt_3">"We have received your order , once confirmation is accomplished from shop we will notify you ,confirmation may take 3 minutes Thank you!"</string>
+    <string name="order_conf_txt_2">"We have received your order , once confirmation is accomplished from shop we will notify you ,confirmation may take 2 minutes Thank you!"</string>
+    <string name="order_conf_txt_1">"We have received your order , once confirmation is accomplished from shop we will notify you ,confirmation may take 1 minutes Thank you!"</string>
+    <string name="order_conf_txt_0">We are sorry</string>
+
+    <!-- order_item -->
+    <string name="order_item_order">ORDER № </string>
+    <string name="order_item_fromshop">FROM SHOP</string>
+    <string name="order_item_attdate">AT DATE</string>
+
+    <!-- profile -->
+    <string name="profile_title">PROFILE</string>
+    <string name="profile_y_loc">Your Location</string>
+    <string name="profile_apart">HOUSE/APARTMENT №</string>
+
+    <!-- rating -->
+    <string name="rating_title"></string>
+    <string name="rating_text">If you have any question, we will help you </string>
+
+    <!-- order_status -->
+    <string name="status_proc">PROCESS</string>
+    <string name="status_proc_text">Your order is now being waiting for our agents approval</string>
+    <string name="status_conf">CONFIRMATIOMN</string>
+    <string name="status_conf_text">Your order isconfirmed our agent will arrive to you as per scheduled</string>
+    <string name="status_fin">FINISHING</string>
+    <string name="status_fin_text">Your order is finished and our agent has colsed it</string>
+    <string name="status_rating">RATING SERVICE</string>
+    <string name="status_rating_text">1 is Excellent, 5 is Bad</string>
+    <string name="status_canc">"canceld"</string>
+    <string name="status_canc_text">Your order was cancel</string>
+
+
+    <!-- reg_location -->
+    <string name="reg_loc_click"> CLICK FOR LOCATION</string>
+    <string name="reg_loc_house">  ENTER HOUSE NUMBER</string>
+
+    <!-- shop_menu -->
+    <string name="shop_menu_sName">SHOP NAME</string>
+    <string name="shop_menu_myshop">MY SHOP</string>
+    <string name="shop_menu_schedule">MY SCHEDULE</string>
+    <string name="shop_menu_orders">ORDERS</string>
+    <string name="shop_menu_shop_in_number">SHOP IN NUMBER</string>
+    <string name="shop_menu_rating">RATING</string>
+
+    <!-- shop_in_numb -->
+    <string name="shop_in_num_ordernum">Number of orders</string>
+    <string name="shop_in_num_ordercomb">Comblished orders</string>
+    <string name="shop_in_num_ordercanc">Canceled orders</string>
+    <string name="shop_in_num_most_item">Most ordered item</string>
+    <string name="shop_in_num_most_time">Most time for orders</string>
+
+    <!-- sigin_up -->
+    <string name="sigin_up_pNumb">  PHONE NUMBER</string>
+    <string name="sigin_up_pin">Enter PIN code</string>
+
+    <!-- slide_right -->
+    <string name="slide_right_btn">Checkout</string>
+
+    <!-- slide_left -->
+    <string name="slide_left_profile">PROFILE</string>
+    <string name="slide_left_myOrders">MY ORDERS</string>
+    <string name="slide_left_addServ">ADD YOUR SERVICE!</string>
+    <string name="slide_left_contact_us">CONTACT US</string>
+    <string name="slide_left_logout">LOG OUT</string>
+
+    <!-- shops_menu -->
+    <string name="shops_menu_ren">Rename shop</string>
+    <string name="shops_menu_dell">Delete shop</string>
+    <string name="shops_menu_pic">Change shop picture</string>
+    <string name="notnullshop">CheckOut pliz</string>
+
+    <!-- Main_Menu -->
+    <string name="main_menu_title">UNLIMETED HOUSE</string>
+
+    <!-- SelectionDialog -->
+    <string name="nullpic">Pliz enter pic URL</string>
+    <string name="api">AIzaSyDXZEOBZG_z3fW9yaxqBCNSZOCCeECA9zg</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

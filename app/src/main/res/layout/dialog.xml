@@ -48,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="Please write your preference"
+        android:text="@string/dialog_pref"
         android:id="@+id/title"
         android:textSize="21sp"
         android:textColor="#ffff"

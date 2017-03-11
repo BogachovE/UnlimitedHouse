@@ -3,37 +3,27 @@ package com.e.bogachov.unlmitedhouse;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
-import android.support.v4.app.NavUtils;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
+import android.preference.PreferenceManager;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.Animation.AnimationListener;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.e.bogachov.unlmitedhouse.RegLogSign.MainActivity;
 import com.e.bogachov.unlmitedhouse.ShopsCateg.ShopsMenu;
 import com.e.bogachov.unlmitedhouse.Slide.AddService;
 import com.e.bogachov.unlmitedhouse.Slide.ContactUs;
 import com.e.bogachov.unlmitedhouse.Slide.Profile;
-import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
-import com.firebase.client.ValueEventListener;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.orhanobut.hawk.Hawk;
-
+//TODO добавить добавление в продукты
 
 public class MainMenu extends Activity implements View.OnClickListener {
     String isItShop;
@@ -42,6 +32,7 @@ public class MainMenu extends Activity implements View.OnClickListener {
     SlidingMenu menu;
     private Animation mFadeInAnimation, mFadeOutAnimation;
 
+    SharedPreferences sPref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,10 +89,10 @@ public class MainMenu extends Activity implements View.OnClickListener {
 
 
         //Find View
+        ImageView hbtn = (ImageView)findViewById(R.id.hbtn);
         ImageView beauty = (ImageView) findViewById(R.id.beauty);
         ImageView product = (ImageView) findViewById(R.id.product);
         ImageView candy = (ImageView) findViewById(R.id.candy);
-        ImageView house = (ImageView) findViewById(R.id.house);
         ImageView other = (ImageView) findViewById(R.id.other);
         mFadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fadein);
         mFadeOutAnimation = AnimationUtils.loadAnimation(this, R.anim.fadeout);
@@ -110,20 +101,26 @@ public class MainMenu extends Activity implements View.OnClickListener {
 
 
 
+
+        hbtn.setOnClickListener(this);
         beauty.setOnClickListener(this);
         product.setOnClickListener(this);
         candy.setOnClickListener(this);
-        house.setOnClickListener(this);
         other.setOnClickListener(this);
-
 
 
         getActionBar().setHomeAsUpIndicator(R.drawable.btn_aaact);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getActionBar().setHomeAsUpIndicator(R.drawable.btn_aaact);
-        getActionBar().setCustomView(R.layout.abs_main);
         ActionBar actionBar = getActionBar();
+        actionBar.setCustomView(R.layout.abs_main);
+        TextView title=(TextView)findViewById(getResources().getIdentifier("hello", "id", getPackageName()));
+        title.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/roboto.ttf"));
+        title.setText(R.string.main_menu_title);
+
+
+
 
 
 
@@ -139,24 +136,14 @@ public class MainMenu extends Activity implements View.OnClickListener {
 
         Hawk.delete("numZakaz");
 
-        Firebase ref = new Firebase("https://unlimeted-house.firebaseio.com/users/"+userId+"/isitshop/");
-        ref.addValueEventListener(new com.firebase.client.ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                isItShop=dataSnapshot.getValue(String.class);
-                Hawk.put("isitshop",isItShop);
-                //Toast.makeText(getApplicationContext(),xShop.toString(),Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-
-            }
-
-        });
 
 
 
+        userId=Hawk.get("userid");
+        SharedPreferences sPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor ed = sPref.edit();
+        ed.putString("userid", userId);
+        ed.commit();
     }
 
     @Override
@@ -182,6 +169,15 @@ public class MainMenu extends Activity implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         switch (view.getId()){
+
+            case R.id.hbtn:{
+                Intent goToShopsMenu = new Intent(MainMenu.this,ShopsMenu.class);
+                goToShopsMenu.putExtra("categ","house");
+                Hawk.put("categ","house");
+
+                startActivity(goToShopsMenu);
+                break;
+            }
 
             case R.id.curtBtn:{
                 menu.toggle(true);
@@ -214,6 +210,7 @@ public class MainMenu extends Activity implements View.OnClickListener {
 
             }
 
+
             case R.id.candy:{
 
                 Intent goToShopsMenu = new Intent(MainMenu.this,ShopsMenu.class);
@@ -225,16 +222,8 @@ public class MainMenu extends Activity implements View.OnClickListener {
 
             }
 
-            case R.id.house:{
 
-                Intent goToShopsMenu = new Intent(MainMenu.this,ShopsMenu.class);
-                goToShopsMenu.putExtra("categ","house");
-                Hawk.put("categ","house");
-                goToShopsMenu.putExtra("isItShop","false");
-                startActivity(goToShopsMenu);
-                break;
 
-            }
             case R.id.other:{
 
                 Intent goToShopsMenu = new Intent(MainMenu.this,ShopsMenu.class);
@@ -269,7 +258,13 @@ public class MainMenu extends Activity implements View.OnClickListener {
             case R.id.logoutbtn:{
                 Intent goToStart = new Intent(getApplicationContext(),MainActivity.class);
                 Hawk.deleteAll();
+                SharedPreferences sPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                SharedPreferences.Editor ed = sPref.edit();
+                ed.clear();
+                ed.apply();
                 startActivity(goToStart);
+
+
                 break;
             }
 

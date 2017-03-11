@@ -7,8 +7,10 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.RectF;
+import android.location.Location;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,6 +25,8 @@ import com.alamkanak.weekview.DateTimeInterpreter;
 import com.alamkanak.weekview.MonthLoader;
 import com.alamkanak.weekview.WeekView;
 import com.alamkanak.weekview.WeekViewEvent;
+import com.e.bogachov.unlmitedhouse.Models.Products;
+import com.e.bogachov.unlmitedhouse.Models.Shops;
 import com.e.bogachov.unlmitedhouse.ShopsCateg.Order;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
@@ -36,14 +40,21 @@ import com.orhanobut.hawk.Hawk;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 
+import org.json.JSONObject;
+
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
+import java.util.Scanner;
 import java.util.TimeZone;
 
 import static android.R.color.holo_red_light;
@@ -64,11 +75,16 @@ public class MySchedule extends Activity implements WeekView.EventClickListener,
     final int DIALOG = 1;
     final Random random = new Random();
     Date mDate;
+    List<Products> mProducts;
     String myShopName;
     String dataString;
     String mycustomNum;
     Order order;
+    Date bDate;
     List<Date> lDate;
+    List<Date>lBusy;
+    String busyTime;
+    String mLong;
     List<String> lEventName;
     List<String>lOrderId;
     List<String> lOrderStatus;
@@ -76,14 +92,29 @@ public class MySchedule extends Activity implements WeekView.EventClickListener,
     private List<Order> orders;
     final int DIALOG_EXIT = 2;
     String mID;
+    String categ,shopid;
+    Shops mOneProsuct;
+    String test;
+    ArrayList<Location> allShopsLocation;
+    ArrayList<String> allShopsName;
+    ArrayList<Float> allDistance;
+    ArrayList<String> allShopsNotifIp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_schedule);
-        myShopName = "fructus";
-        mycustomNum ="0636277226";
+        Hawk.init(this).build();
+        myShopName = Hawk.get("fromshop");
+        mycustomNum = Hawk.get("phone");
+        categ=Hawk.get("categ");
+        shopid=Hawk.get("shopid");
         Firebase.setAndroidContext(this);
+
+        allShopsName = new ArrayList<>();
+        allShopsLocation = new ArrayList<>();
+        allDistance = new ArrayList<>();
+        allShopsNotifIp= new ArrayList<>();
 
 
 
@@ -105,7 +136,7 @@ public class MySchedule extends Activity implements WeekView.EventClickListener,
 
         setupDateTimeInterpreter(false);
 
-        Hawk.init(this).build();
+
         isItShop = Hawk.get("isitshop");
 
 
@@ -115,6 +146,34 @@ public class MySchedule extends Activity implements WeekView.EventClickListener,
         else if(isItShop.equals("false")){
             mQuery = mRef.child("orders").orderByChild("customNum").equalTo(mycustomNum);
         }
+        Firebase busyRef = new Firebase("https://unhouse-143417.firebaseio.com/shops/category/"+categ+"/"+shopid+"/");
+        busyRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
+            @Override
+            public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+                busyTime=dataSnapshot.child("busy/time").getValue(String.class);
+                mLong=dataSnapshot.child("busy/long").getValue(String.class);
+
+                SimpleDateFormat formatter = new SimpleDateFormat("E MMM dd HH:mm:ss z yyyy");
+                if(busyTime!=null) {
+                    try {
+                        bDate = formatter.parse(busyTime);
+
+                    } catch (ParseException e) {
+                        bDate = new Date();
+                        e.printStackTrace();
+                    }
+                }
+
+
+
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
 
         mQuery.addValueEventListener(new ValueEventListener() {
             @Override
@@ -125,6 +184,7 @@ public class MySchedule extends Activity implements WeekView.EventClickListener,
                  lEventName = new ArrayList<String>();
                  lOrderId = new ArrayList<String>();
                  lOrderStatus = new ArrayList<String>();
+
 
 
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
@@ -249,6 +309,24 @@ public class MySchedule extends Activity implements WeekView.EventClickListener,
 
         if(isItShop.equals("true")&event.getName().equals("Busy")){
             mNewEvents.remove(event);
+            lBusy=null;
+            bDate=null;
+            final Firebase ref = new Firebase("https://unhouse-143417.firebaseio.com/shops/category/"+categ+"/"+shopid+"/");
+
+            com.firebase.client.Query refQ = ref.child("busy").orderByChild("time").equalTo(event.getStartTime().getTime().toString());
+            refQ.addListenerForSingleValueEvent(new com.firebase.client.ValueEventListener() {
+                @Override
+                public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+                    ref.child(dataSnapshot.getKey()).removeValue();
+                }
+
+                @Override
+                public void onCancelled(FirebaseError firebaseError) {
+
+                }
+            });
+
+
             mWeekView.notifyDatasetChanged();
         }
         if(isItShop.equals("true")&event.getColor()==-14186012){
@@ -270,6 +348,7 @@ public class MySchedule extends Activity implements WeekView.EventClickListener,
             startActivity(goToOrderStatus);
 
         }
+
 
     }
 
@@ -333,9 +412,23 @@ public class MySchedule extends Activity implements WeekView.EventClickListener,
                 events.add(event);
             }
 
-            ArrayList<WeekViewEvent> newEvents = getNewEvents(newYear, newMonth);
-            events.addAll(newEvents);
+
+
         }
+        if(bDate!=null){
+
+                Calendar startTime = Calendar.getInstance();
+                startTime.setTime(bDate);
+                startTime.set(Calendar.MONTH, newMonth - 1);
+                Calendar endTime = (Calendar) startTime.clone();
+                endTime.add(Calendar.HOUR, Integer.parseInt(mLong));
+            WeekViewEvent busyevent = new WeekViewEvent(random.nextInt(),"Busy",startTime,endTime);
+            busyevent.setColor(getResources().getColor(R.color.colorAccent));
+            events.add(busyevent);
+            }
+
+        ArrayList<WeekViewEvent> newEvents = getNewEvents(newYear, newMonth);
+        events.addAll(newEvents);
 
 
         return events;
@@ -348,9 +441,9 @@ public class MySchedule extends Activity implements WeekView.EventClickListener,
             showDialog(DIALOG);
 
         }
-        else if(isItShop.equals("false")){
+        else if(isItShop.equals("false")&!categ.equals("house")){
             orders=Hawk.get("orders");
-            final Firebase mRef = new Firebase("https://unlimeted-house.firebaseio.com/orders");
+            final Firebase mRef = new Firebase("https://unhouse-143417.firebaseio.com/orders");
             mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
                 @Override
                 public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
@@ -365,11 +458,21 @@ public class MySchedule extends Activity implements WeekView.EventClickListener,
                             mRef.child(ss).setValue(orders.get(i));
                             mRef.child(ss+"/id").setValue(ss);
                             mRef.child(ss+"/data").setValue(d.toString());
+                            mRef.child(ss+"/customNum").setValue(orders.get(i).getCustomNum());
+
+                            String userNotifIp = Hawk.get("userNotifIp");
+                            String shopNotifIp = Hawk.get("shopNotifIp");
+                            Notification notif = new Notification();
+                            notif.sendNotif("include_player_ids",shopNotifIp,"shop yoba boba");
+                            notif.sendNotif("include_player_ids",userNotifIp,"user yoba boba");
+
+
                         }
                     }
                     Hawk.delete("order");
                     Hawk.delete("numZakaz");
                     mWeekView.notifyDatasetChanged();
+                    onMonthChange(2016, new Date().getMonth());
                     Toast.makeText(getApplicationContext(), "Order added" , Toast.LENGTH_SHORT).show();
                 }
 
@@ -378,6 +481,109 @@ public class MySchedule extends Activity implements WeekView.EventClickListener,
 
                 }
             });
+        }else if(isItShop.equals("false")&categ.equals("house")){   //If hose category, Find nearly shop
+
+            String productname = Hawk.get("productname");
+
+            DatabaseReference nearlyRef = FirebaseDatabase.getInstance().getReference();
+            Query nearlyQuery = nearlyRef.child("products").orderByChild("name").equalTo("Papirony");
+
+
+
+
+            nearlyQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    int i=0;
+                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                        dataSnapshot = postSnapshot.child("shops");
+                        for (DataSnapshot postSnapshot1 : dataSnapshot.getChildren()) {
+                            mOneProsuct = postSnapshot1.getValue(Shops.class);
+
+                            String latitude = postSnapshot1.child("locationlatitude").getValue(String.class);
+                            String longitude = postSnapshot1.child("locationlongitude").getValue(String.class);
+
+                            Location shopLoc = new Location("asd");
+                            shopLoc.setLatitude(Double.parseDouble(latitude));
+                            shopLoc.setLongitude(Double.parseDouble(longitude));
+                            allShopsLocation.add(i,shopLoc);
+                            allShopsName.add(i,postSnapshot1.child("name").getValue(String.class));
+                            allShopsNotifIp.add(i,postSnapshot1.child("shopNotifIp").getValue(String.class));
+                            i++;
+                        }
+
+                        Location userLoc = Hawk.get("userLoc");
+                        for(int j=0;j<allShopsLocation.size();j++){
+                            allDistance.add(j,userLoc.distanceTo(allShopsLocation.get(j)));
+                        }
+                        int n=0;
+                        for (int  k = 0; k < allDistance.size(); k++) {
+                            if (allDistance.get(n)<allDistance.get(k)) n=k;
+                        }
+
+                         orders=Hawk.get("orders");
+                        final Firebase mRef = new Firebase("https://unhouse-143417.firebaseio.com/");
+                        final int finalN = n;
+                        mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
+                            @Override
+                            public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+                                Integer numZakaz= null;
+                                Date d = time.getTime();
+                                numZakaz = Hawk.get("numZakaz");
+                                Long s = dataSnapshot.getChildrenCount()+1;
+                                if (Hawk.get("order")!= null) {
+                                    for (int i = 0; i <= numZakaz; i++) {
+                                        s=s+1;
+                                        String ss = s.toString();
+                                        mRef.child(ss).setValue(orders.get(i));
+                                        mRef.child("/orders/"+ss+"/id").setValue(ss);
+                                        mRef.child("/orders/"+ss+"/data").setValue(d.toString());
+                                        mRef.child("/orders/"+ss+"/customNum").setValue(orders.get(i).getCustomNum());
+                                        mRef.child("/orders/"+ss+"/fromshop").setValue(allShopsName.get(finalN));
+                                        Hawk.put("shopNotifIp",allShopsNotifIp.get(finalN));
+
+                                        String userNotifIp = Hawk.get("userNotifIp");
+                                        String shopNotifIp = Hawk.get("shopNotifIp");
+                                        Notification notif = new Notification();
+                                        notif.sendNotif("include_player_ids",shopNotifIp,"shop yoba boba");
+                                        notif.sendNotif("include_player_ids",userNotifIp,"user yoba boba");
+
+                                    }
+                                }
+                                Hawk.delete("order");
+                                Hawk.delete("numZakaz");
+                                mWeekView.notifyDatasetChanged();
+                                onMonthChange(2016, new Date().getMonth());
+                                Toast.makeText(getApplicationContext(), "Order added" , Toast.LENGTH_SHORT).show();
+
+
+
+                            }
+
+                            @Override
+                            public void onCancelled(FirebaseError firebaseError) {
+
+                            }
+
+                        });
+
+                    }
+
+
+
+
+
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+
+
+            });
+
         }
 
 
@@ -426,16 +632,17 @@ public class MySchedule extends Activity implements WeekView.EventClickListener,
     @Override
     protected Dialog onCreateDialog(int id) {
        if(id==DIALOG) {
-           AlertDialog.Builder adb = new AlertDialog.Builder(this);
-           adb.setTitle("How long you will busy");
+           final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+           builder.setTitle("How long you will busy");
            // создаем view из dialog.xml
            view = (LinearLayout) getLayoutInflater()
                    .inflate(R.layout.dialog, null);
            // устанавливаем ее, как содержимое тела диалога
-           adb.setView(view);
+           builder.setView(view);
            // находим TexView для отображения кол-ва
            tvCount = (TextView) view.findViewById(R.id.tvCount);
            Button sendbtn = (Button) view.findViewById(R.id.sendbtn);
+           final AlertDialog adb =builder.show();
            sendbtn.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View v) {
@@ -448,6 +655,9 @@ public class MySchedule extends Activity implements WeekView.EventClickListener,
                                endTime.add(Calendar.HOUR, Integer.parseInt(tvCount.getText().toString()));
 
 
+                               Firebase ref = new Firebase("https://unhouse-143417.firebaseio.com/shops/category/"+categ+"/"+shopid+"/");
+                               ref.child("busy/time").setValue(ttime.getTime().toString());
+                               ref.child("busy/long").setValue(tvCount.getText().toString());
                                // Create a new event.
                                WeekViewEvent event = new WeekViewEvent(random.nextInt(), "Busy", ttime, endTime);
                                event.setColor(getResources().getColor(R.color.colorAccent));
@@ -455,6 +665,7 @@ public class MySchedule extends Activity implements WeekView.EventClickListener,
 
                                // Refresh the week view. onMonthChange will be called again.
                                mWeekView.notifyDatasetChanged();
+                               adb.cancel();
                            }
 
 
@@ -462,7 +673,7 @@ public class MySchedule extends Activity implements WeekView.EventClickListener,
                    }
                }
            });
-           return adb.create();
+           return null;
        }
         if(id==DIALOG_EXIT){
             AlertDialog.Builder adb = new AlertDialog.Builder(this);
@@ -488,7 +699,7 @@ public class MySchedule extends Activity implements WeekView.EventClickListener,
             switch (which) {
                 // положительная кнопка
                 case Dialog.BUTTON_POSITIVE:
-                    Firebase acceptRef = new Firebase("https://unlimeted-house.firebaseio.com/orders/"+mID);
+                    Firebase acceptRef = new Firebase("https://unhouse-143417.firebaseio.com/orders/"+mID);
                     acceptRef.child("status").setValue("confirmation");
                     acceptRef.child("confirmationdata").setValue(new Date().toString());
                     Toast.makeText(getApplicationContext(), mID, Toast.LENGTH_SHORT).show();
@@ -497,7 +708,7 @@ public class MySchedule extends Activity implements WeekView.EventClickListener,
                     break;
                 // негативная кнопка
                 case Dialog.BUTTON_NEGATIVE:
-                     acceptRef = new Firebase("https://unlimeted-house.firebaseio.com/orders/"+mID);
+                     acceptRef = new Firebase("https://unhouse-143417.firebaseio.com/orders/"+mID);
                     acceptRef.child("status").setValue("canceld");
                     acceptRef.child("canceldata").setValue(new Date().toString());
                     Toast.makeText(getApplicationContext(), mID, Toast.LENGTH_SHORT).show();
@@ -507,6 +718,9 @@ public class MySchedule extends Activity implements WeekView.EventClickListener,
                // case Dialog.BUTTON_NEUTRAL:
                  //   break;
             }
+
+
+
         }
     };
 }

@@ -1,17 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:padding="16dp"
     tools:context=".ShopsCateg.ServiceTypeMenu">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/text"
-        android:layout_weight="1"
-        android:visibility="invisible" />
 
     <android.support.v7.widget.RecyclerView
         android:layout_height="match_parent"
@@ -21,5 +13,16 @@
 
     </android.support.v7.widget.RecyclerView>
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="#000"
+        android:id="@+id/shadow"
+        android:visibility="gone"
 
-</LinearLayout>
+
+
+        />
+
+
+</FrameLayout>

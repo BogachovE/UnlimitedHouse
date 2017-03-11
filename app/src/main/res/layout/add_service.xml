@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/profile_profeile"
-        android:text="ADD YOUR SERVICE"
+        android:text="@string/add_serv"
         android:layout_marginTop="15dp"
         android:textColor="#00aeef"
         android:textSize="@dimen/profile_text_size"
@@ -46,22 +46,22 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="YOURE NAME"
+                android:text="@string/name"
                 android:id="@+id/profile_name_text"
                 android:textColor="#00aeef"
                 android:textSize="@dimen/profile_text_size"
                 />
             <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="   NAME"
+                android:layout_height="40dp"
+                android:text="@string/add_srev_name"
                 android:layout_marginLeft="10dp"
                 android:id="@+id/profile_name_edit"
                 android:textColor="#BBBCBE"
                 android:textColorHint="#BBBCBE"
                 android:backgroundTint="#BBBCBE"
 
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:layout_width="150dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -74,21 +74,21 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="EMAIL"
+                android:text="@string/add_serv_email_v"
                 android:id="@+id/profile_email_text"
                 android:textColor="#00aeef"
                 android:textSize="@dimen/profile_text_size"/>
 
             <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="   EMAIL@EMAIL.COM"
+                android:layout_width="150dp"
+                android:text="@string/add_serv_email_e"
                 android:layout_marginLeft="10dp"
                 android:id="@+id/profile_email_edit"
                 android:textColor="#BBBCBE"
                 android:textColorHint="#BBBCBE"
                 android:backgroundTint="#BBBCBE"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:layout_height="40dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -101,14 +101,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="CHOOSE CATEGORY"
+                android:text="@string/add_serv_categ"
                 android:id="@+id/profile_location_text"
                 android:textColor="#00aeef"
                 android:textSize="@dimen/profile_text_size"/>
-            <EditText
+            <Spinner
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="   SAUDI ARABIA"
                 android:layout_marginLeft="10dp"
                 android:id="@+id/profile_location_edit"
                 android:textColor="#BBBCBE"
@@ -128,21 +127,22 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ENTER SHOP LOCATION"
+                android:text="@string/add_serv_loc"
                 android:id="@+id/profile_adress_text"
                 android:textColor="#00aeef"
                 android:textSize="@dimen/profile_text_size"
                 />
             <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="150dp"
+                android:layout_height="40dp"
                 android:text="   XX"
                 android:layout_marginLeft="10dp"
                 android:id="@+id/profile_adress_edit"
                 android:textColor="#BBBCBE"
                 android:textColorHint="#BBBCBE"
                 android:backgroundTint="#BBBCBE"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:focusable="false"/>
 
         </LinearLayout>
     <LinearLayout
@@ -156,14 +156,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ENTER YOUR LOGO URL"
+            android:text="@string/add_serv_logo"
             android:id="@+id/profile_photo_text"
             android:textColor="#00aeef"
             android:textSize="@dimen/profile_text_size"
             />
         <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
             android:text="   XX"
             android:layout_marginLeft="10dp"
             android:id="@+id/profile_photo_edit"
@@ -179,6 +179,7 @@
             android:id="@+id/signbtn"
             android:layout_below="@id/profile_adress_edit"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
             />
     </LinearLayout>
 

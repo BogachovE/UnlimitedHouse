@@ -17,13 +17,27 @@ public class Order {
     String status;
     String customNum;
     String id;
+    String inprocessdata;
+    String canceldata;
+    String processdata;
+    String  finishingdata;
+    String confirmationdata;
+    String visiting;
+    String fromcateg;
+    String servicetype;
+    String shopNotifIp;
 
     public Order() {
 
     }
 
 
-    public Order(String count, String data, String fromshop, String currency, String p, String sum, String name, String descript, String status, String customNum, String id) {
+    public Order(String count, String data, String fromshop, String currency, String p, String sum, String name, String descript, String status, String customNum, String id,  String inprocessdata,
+            String canceldata,
+            String processdata,
+            String  finishingdata,
+            String confirmationdata, String visiting,String fromcateg,
+                 String servicetype,String shopNotifIp) {
         this.count = count;
         this.name = name;
         this.data = data;
@@ -35,6 +49,16 @@ public class Order {
         this.status = status;
         this.customNum = customNum;
         this.id = id;
+        this.inprocessdata= inprocessdata;
+        this.canceldata = canceldata;
+        this.processdata = processdata;
+        this.finishingdata = finishingdata;
+        this.confirmationdata = confirmationdata;
+        this.visiting = visiting;
+        this.fromcateg = fromcateg;
+        this.servicetype = servicetype;
+        this.shopNotifIp = shopNotifIp;
+
     }
 
     public String getCount() {
@@ -70,6 +94,26 @@ public class Order {
     public String getStatus() {
         return status;
     }
+
+    public String getInprocessdata() {
+        return inprocessdata;
+    }
+    public String getCanceldata() {return canceldata;}
+    public String getProcessdata() {
+        return processdata;
+    }
+    public String getFinishingdata() {
+        return finishingdata;
+    }
+    public String getConfirmationdata() {
+        return confirmationdata;
+    }
+    public String getVisiting(){return visiting;}
+    public String getCustomNum(){return customNum;}
+    public String getFromcateg(){return fromcateg;}
+    public String getServicetype(){return servicetype;}
+    public String getDescript(){return descript;}
+    public String getShopNotifIp(){return shopNotifIp;}
 
 }
 
